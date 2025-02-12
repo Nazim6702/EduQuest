@@ -1,0 +1,82 @@
+x-orbstack:
+  project: eduquest
+
+services:
+  db:
+    image: mysql:8.0
+    platform: linux/arm64
+    container_name: eduquest_db
+    volumes:
+      - "eduquest_db_data:/var/lib/mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    restart: always
+    ports:
+      - "3306:3306"
+    networks:
+      - eduquest_network
+
+  adminer:
+    image: adminer
+    platform: linux/arm64
+    container_name: eduquest_adminer
+    environment:
+      ADMINER_DEFAULT_DB_DRIVER: mysql
+      ADMINER_DEFAULT_DB_HOST: eduquest_db
+      ADMINER_DEFAULT_DB_NAME: ${MYSQL_DATABASE}
+      ADMINER_DEFAULT_SERVER: eduquest_db
+    restart: always
+    ports:
+      - "127.0.0.1:8081:8080"
+    depends_on:
+      - db
+    networks:
+      - eduquest_network
+
+  php:
+    container_name: eduquest_php
+    platform: linux/arm64
+    build:
+      context: ./php
+      args:
+        TIMEZONE: ${TIMEZONE}
+    volumes:
+      - ../:/var/www/eduquest:cached
+    networks:
+      - eduquest_network
+    ports:
+      - "9003:9003"
+
+  nginx:
+    container_name: eduquest_nginx
+    platform: linux/arm64
+    build:
+      context: ./nginx
+    volumes:
+      - ../:/var/www/eduquest:cached
+    ports:
+      - "80:80"
+    networks:
+      - eduquest_network
+    env_file:
+      - .env.nginx
+    depends_on:
+      - php
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: eduquest_mailhog
+    ports:
+      - "2525:1025"
+      - "8090:8025"
+    networks:
+      - eduquest_network
+
+volumes:
+  eduquest_db_data:
+
+networks:
+  eduquest_network:
