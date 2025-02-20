@@ -2,8 +2,8 @@
 
 namespace App\Entity;
 
+use App\Enum\QuestionType;
 use App\Repository\QuestionRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
@@ -14,28 +14,18 @@ class Question
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $Id = null;
-
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(length: 255)]
     private ?string $texte = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $type = null;
+    #[ORM\Column(nullable: true, enumType: QuestionType::class)]
+    private ?QuestionType $type = null;
 
-    #[ORM\Column]
-    private ?int $durée = null;
+    #[ORM\Column(nullable: true)]
+    private ?int $duration = null;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function setId(int $Id): static
-    {
-        $this->Id = $Id;
-
-        return $this;
     }
 
     public function getTexte(): ?string
@@ -50,26 +40,26 @@ class Question
         return $this;
     }
 
-    public function getType(): ?string
+    public function getType(): ?QuestionType
     {
         return $this->type;
     }
 
-    public function setType(string $type): static
+    public function setType(?QuestionType $type): static
     {
         $this->type = $type;
 
         return $this;
     }
 
-    public function getDurée(): ?int
+    public function getDuration(): ?int
     {
-        return $this->durée;
+        return $this->duration;
     }
 
-    public function setDurée(int $durée): static
+    public function setDuration(?int $duration): static
     {
-        $this->durée = $durée;
+        $this->duration = $duration;
 
         return $this;
     }

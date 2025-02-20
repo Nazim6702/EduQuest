@@ -6,29 +6,20 @@ use App\Repository\AdminRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AdminRepository::class)]
-class Admin extends Utilisateur
+#[ORM\Table(name: '`admin`')]
+class Admin extends User
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: 'integer')]
+    private ?int $adminLevel = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $permissions = null;
-
-    public function getId(): ?int
+    public function getAdminLevel(): ?int
     {
-        return $this->id;
+        return $this->adminLevel;
     }
 
-    public function getPermissions(): ?string
+    public function setAdminLevel(int $adminLevel): static
     {
-        return $this->permissions;
-    }
-
-    public function setPermissions(?string $permissions): static
-    {
-        $this->permissions = $permissions;
+        $this->adminLevel = $adminLevel;
 
         return $this;
     }
