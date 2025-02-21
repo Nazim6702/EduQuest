@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EduQuest - Accueil{% endblock %}
+
+{% block body %}
+    <header class="header">
+        <h1 class="logo">EduQuest</h1>
+        <nav class="nav">
+            <ul>
+                <li><a href="#">Question du jour</a></li>
+                <li><a href="#">Quiz</a></li>
+                <li><a href="#">Débat</a></li>
+                <li><a href="#">Progression</a></li>
+                <li><a href="#">Espace utilisateur</a></li>
+            </ul>
+        </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Rechercher">
+            <button>🔍</button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="content">
+            <h2>Le défi éducatif qui fait grandir votre savoir !</h2>
+            <div class="buttons">
+                <a href="#" class="btn btn-yellow">S'inscrire</a>
+                <a href="#" class="btn btn-white">Se connecter</a>
+            </div>
+        </div>
+        <div class="illustration">
+            <img src="{{ asset('images/illustration.png') }}" alt="Illustration">
+        </div>
+    </section>
+
+    <section class="new-quizzes">
+        <h2>Nouveaux Quiz</h2>
+        <div class="quiz-cards">
+            <div class="quiz-card">
+                <span class="category">Géographie</span>
+                <h3>Quiz ville de Paris</h3>
+                <span class="date">Publié le 01/01/2025</span>
+                <img src="{{ asset('images/paris.jpg') }}" alt="Paris">
+            </div>
+            <!-- Ajoutez d'autres cartes de quiz ici -->
+        </div>
+    </section>
+
+    <section class="quiz-themes">
+        <h2>Quiz par thématique</h2>
+        <div class="decorative-line"></div>
+        <div class="themes-grid">
+            <div class="theme">
+                <span class="icon">🔬</span>
+                <span class="title">Physique-Chimie</span>
+            </div>
+            <div class="theme">
+                <span class="icon">📚</span>
+                <span class="title">Histoire</span>
+            </div>
+            <div class="theme">
+                <span class="icon">🌍</span>
+                <span class="title">Géographie</span>
+            </div>
+            <div class="theme">
+                <span class="icon">📕</span>
+                <span class="title">Français</span>
+            </div>
+            <div class="theme">
+                <span class="icon">➗</span>
+                <span class="title">Maths</span>
+            </div>
+            <div class="theme">
+                <span class="icon">🎭</span>
+                <span class="title">Culture Générale</span>
+            </div>
+            <div class="theme">
+                <span class="icon">🇬🇧</span>
+                <span class="title">Anglais</span>
+            </div>
+            <div class="theme">
+                <span class="icon">🌳</span>
+                <span class="title">S.V.T</span>
+            </div>
+            <div class="theme">
+                <span class="icon">🧠</span>
+                <span class="title">Philosophie</span>
+            </div>
+            <div class="theme">
+                <span class="icon">⚽</span>
+                <span class="title">Sports</span>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>EduQuest</h3>
+            <ul>
+                <li><a href="#">À propos</a></li>
+                <li><a href="#">F.A.Q</a></li>
+                <li><a href="#">Classement Général</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Nous Contacter</a></li>
+                <li><a href="#">Laisser un avis</a></li>
+                <li><a href="#">Se connecter / Créer un compte</a></li>
+            </ul>
+            <div class="social-icons">
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+            </div>
+            <div class="legal">
+                <p>EduQuest.com Tous les droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+{% endblock %}

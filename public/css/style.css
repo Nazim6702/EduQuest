@@ -1,0 +1,265 @@
+/* Styles généraux */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 10px 50px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #0044cc;
+}
+
+/* Navigation */
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav ul li a {
+  text-decoration: none;
+  color: #ff9800;
+  font-weight: bold;
+}
+
+/* Barre de recherche */
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.search-bar button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* SECTION HERO */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0044cc;
+  padding: 50px;
+  color: white;
+}
+
+.content {
+  max-width: 50%;
+}
+
+.hero h2 {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.buttons {
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.btn-yellow {
+  background-color: #ff9800;
+  color: white;
+  margin-right: 10px;
+}
+
+.btn-white {
+  background-color: white;
+  color: #0044cc;
+  border: 2px solid #0044cc;
+}
+
+.illustration img {
+  width: 300px;
+  height: auto;
+}
+
+/* SECTION NEW QUIZZES */
+.new-quizzes {
+  background-color: #3949ab;
+  padding: 50px;
+  color: white;
+}
+
+.new-quizzes h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.quiz-cards {
+  display: flex;
+  gap: 20px;
+}
+
+.quiz-card {
+  background-color: #2c387e;
+  padding: 20px;
+  border-radius: 10px;
+  width: 200px;
+  text-align: center;
+}
+
+.quiz-card .category {
+  color: #fbc02d;
+  font-size: 14px;
+}
+
+.quiz-card h3 {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.quiz-card .date {
+  color: #fbc02d;
+  font-size: 12px;
+}
+
+.quiz-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+/* SECTION QUIZ THEMES */
+.quiz-themes {
+  background-color: #3949ab;
+  padding: 50px;
+  color: white;
+  position: relative;
+}
+
+.quiz-themes h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.quiz-themes h2::before {
+  content: url('path/to/book-icon.svg'); /* Chemin vers l'icône du livre ouvert */
+  margin-right: 10px;
+}
+
+.quiz-themes .decorative-line {
+  width: 100%;
+  height: 2px;
+  background-color: white;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+.themes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+.theme {
+  background-color: white;
+  color: #3949ab;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.theme:hover {
+  transform: scale(1.05);
+}
+
+.theme .icon {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.theme .title {
+  font-size: 14px;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .themes-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* FOOTER */
+.footer {
+  background-color: #3949ab;
+  padding: 50px;
+  color: white;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-content h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.footer-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.footer-content ul li a {
+  text-decoration: none;
+  color: white;
+}
+
+.social-icons {
+  margin-top: 20px;
+}
+
+.social-icons a {
+  text-decoration: none;
+  color: white;
+  margin: 0 10px;
+}
+
+.legal {
+  margin-top: 20px;
+  font-size: 12px;
+}
