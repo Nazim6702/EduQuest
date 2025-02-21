@@ -26,10 +26,26 @@ class Quiz
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
+#[ORM\OneToMany(mappedBy: 'quiz', targetEntity: Question::class, cascade: ['persist', 'remove'])]
+private Collection $questions;
+
+public function __construct()
+{
+    $this->questions = new ArrayCollection();
+}
+
+public function getQuestions(): Collection
+{
+    return $this->questions;
+}
+
+
     public function getId(): ?int
     {
         return $this->id;
     }
+
+
 
     public function getTitle(): ?string
     {

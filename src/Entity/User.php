@@ -11,6 +11,20 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\DiscriminatorMap(['user' => User::class, 'admin' => Admin::class, 'student'=>Student::class, 'teacher'=>Teacher::class])]
 class User
 {
+
+#[ORM\OneToMany(mappedBy: 'user', targetEntity: Participation::class, cascade: ['persist', 'remove'])]
+private Collection $participations;
+
+public function __construct()
+{
+    $this->participations = new ArrayCollection();
+}
+
+public function getParticipations(): Collection
+{
+    return $this->participations;
+}
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
