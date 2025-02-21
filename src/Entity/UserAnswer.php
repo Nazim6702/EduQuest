@@ -16,6 +16,11 @@ class UserAnswer
     #[ORM\Column]
     private ?bool $isCorrect = null;
 
+    #[ORM\ManyToOne(targetEntity: Question::class, inversedBy: 'userAnswers')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Question $question = null;
+
+
     public function getId(): ?int
     {
         return $this->id;

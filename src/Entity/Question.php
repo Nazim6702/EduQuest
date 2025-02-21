@@ -23,6 +23,10 @@ class Question
     #[ORM\Column(nullable: true)]
     private ?int $duration = null;
 
+    #[ORM\OneToMany(mappedBy: 'question', targetEntity: UserAnswer::class, cascade: ['persist', 'remove'])]
+    private Collection $userAnswers;
+
+
     public function getId(): ?int
     {
         return $this->id;
