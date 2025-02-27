@@ -17,43 +17,67 @@ body {
 }
 
 .logo {
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 35px;
+  font-weight: 900;
   color: #0044cc;
+  margin-right: 80px; /* Ajout d'une marge à droite pour espacer la barre de recherche */
+  text-shadow: 3px 2px 0px rgba(255, 152, 0, 0.7);
 }
 
-/* Navigation */
+.nav {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
 .nav ul {
   list-style: none;
   display: flex;
-  gap: 20px;
+  gap: 40px; /* Ajustez cet écart pour un espacement homogène */
+}
+
+.nav ul li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .nav ul li a {
   text-decoration: none;
-  color: #ff9800;
-  font-weight: bold;
+  color: #ff9800; /* Même couleur que le logo */
+  font-weight: 800;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  text-align: center; /* Centrer le texte */
 }
 
-/* Barre de recherche */
+.nav ul li a svg {
+  stroke: #0044cc; /* Même couleur que le logo */
+}
+
 .search-bar {
   display: flex;
   align-items: center;
+  margin-left: 40px; /* Ajout d'une marge à gauche pour espacer la barre de recherche */
+  margin-right: auto; /* Assurez-vous que la barre de recherche prend de l'espace disponible */
 }
 
 .search-bar input {
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 13px;
+  border: 1px solid #000000;
+  border-radius: 15px;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 1);
+  width: 250px; /* Définir une longueur fixe pour la barre de recherche */
 }
 
 .search-bar button {
   background: none;
   border: none;
-  font-size: 18px;
+  font-size: 30px;
   cursor: pointer;
 }
-
 /* SECTION HERO */
 .hero {
   display: flex;
@@ -85,15 +109,15 @@ body {
   font-weight: bold;
 }
 
-.btn-yellow {
-  background-color: #ff9800;
+.btn-inscrire {
+  background-color: #ffd858;
   color: white;
   margin-right: 10px;
 }
 
-.btn-white {
-  background-color: white;
-  color: #0044cc;
+.btn-connecter {
+  background-color: #ffd858;
+  color: white;
   border: 2px solid #0044cc;
 }
 
@@ -150,7 +174,7 @@ body {
 
 /* SECTION QUIZ THEMES */
 .quiz-themes {
-  background-color: #3949ab;
+  background-color: #0044cc; /* Même couleur que la section HERO */
   padding: 50px;
   color: white;
   position: relative;
@@ -164,7 +188,7 @@ body {
 }
 
 .quiz-themes h2::before {
-  content: url('path/to/book-icon.svg'); /* Chemin vers l'icône du livre ouvert */
+  content: url("path/to/book-icon.svg"); /* Chemin vers l'icône du livre ouvert */
   margin-right: 10px;
 }
 
@@ -241,7 +265,9 @@ body {
   padding: 0;
   margin: 0;
   display: flex;
-  gap: 20px;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 .footer-content ul li a {
@@ -251,15 +277,29 @@ body {
 
 .social-icons {
   margin-top: 20px;
+  display: flex;
+  gap: 10px;
 }
 
 .social-icons a {
   text-decoration: none;
   color: white;
   margin: 0 10px;
+  font-size: 24px;
 }
 
 .legal {
-  margin-top: 20px;
+  background-color: black;
+  color: white;
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 12px;
+  padding: 10px 50px;
+}
+
+.legal a {
+  color: white;
+  text-decoration: none;
 }
