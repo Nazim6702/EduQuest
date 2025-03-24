@@ -10,6 +10,16 @@
     {% endblock %}
 </head>
 <body>
+    {# Messages flash temporaires #}
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash-message alert alert-{{ type }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    
     <header class="header">
         <a href="{{ path('app_home') }}" class="logo-link">
             <h1 class="logo">EduQuest</h1>
@@ -65,3 +75,14 @@
     </footer>
 </body>
 </html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const flashMessages = document.querySelectorAll('.flash-message');
+        flashMessages.forEach(message => {
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 5000);
+        });
+    });
+</script>

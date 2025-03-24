@@ -532,3 +532,23 @@ body {
 .login-link:hover {
   text-decoration: underline;
 }
+
+.alert {
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.alert-success {
+  background-color: #4CAF50; 
+}
+
+.alert-error {
+  background-color: #f44336; 
+}
+
+.alert-info {
+  background-color: #2196F3; 
+}

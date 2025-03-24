@@ -41,7 +41,7 @@ class LoginController extends AbstractController
         if ($request->isMethod('POST')) {
             $role = $request->request->get('role');
             $user = null;
-
+    
             switch ($role) {
                 case 'student':
                     $user = new Student();
@@ -56,18 +56,18 @@ class LoginController extends AbstractController
                     $this->addFlash('error', 'Rôle invalide.');
                     return $this->redirectToRoute('app_register');
             }
-
+    
             $user->setName($request->request->get('username'));
             $user->setEmail($request->request->get('email'));
             $user->setPassword($passwordHasher->hashPassword($user, $request->request->get('password')));
-
+    
             $entityManager->persist($user);
             $entityManager->flush();
-
+    
             $this->addFlash('success', 'Inscription réussie. Vous pouvez maintenant vous connecter.');
             return $this->redirectToRoute('app_login');
         }
-
+    
         return $this->render('security/register.html.twig');
     }
 }
