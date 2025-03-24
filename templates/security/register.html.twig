@@ -28,6 +28,7 @@
                 <label>Vous êtes :</label>
                 <button type="button" class="role-button" id="student-button">Étudiant</button>
                 <button type="button" class="role-button" id="admin-button">Administrateur</button>
+                <button type="button" class="role-button" id="professor-button">professeur</button>
             </div>
             <button type="submit" class="register-button">
                 VALIDER <span class="check-icon">✔️</span>
@@ -43,15 +44,24 @@
 document.addEventListener('DOMContentLoaded', function() {
     const studentButton = document.getElementById('student-button');
     const adminButton = document.getElementById('admin-button');
+    const professorButton = document.getElementById('professor-button'); // Bouton Professeur
 
     studentButton.addEventListener('click', function() {
         studentButton.classList.add('selected');
         adminButton.classList.remove('selected');
+        professorButton.classList.remove('selected'); // Désélectionner Professeur
     });
 
     adminButton.addEventListener('click', function() {
         adminButton.classList.add('selected');
         studentButton.classList.remove('selected');
+        professorButton.classList.remove('selected'); // Désélectionner Professeur
+    });
+
+    professorButton.addEventListener('click', function() {
+        professorButton.classList.add('selected'); // Sélectionner Professeur
+        studentButton.classList.remove('selected');
+        adminButton.classList.remove('selected');
     });
 });
 </script>
