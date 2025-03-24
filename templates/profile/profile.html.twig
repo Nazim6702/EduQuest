@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+<h1>Bienvenue, {{ user.name }}</h1>
+<p>Email : {{ user.email }}</p>
+<p>Type d'utilisateur : {{ user.userType }}</p>
+
+{% if user.userType == 'admin' %}
+    <button>Supprimer des utilisateurs</button>
+    <button>Supprimer des quiz</button>
+{% elseif user.userType == 'professor' %}
+    <button>Créer un quiz</button>
+    <button>Créer un débat</button>
+    <button>Analyser les résultats</button>
+{% endif %}
+{% endblock %}

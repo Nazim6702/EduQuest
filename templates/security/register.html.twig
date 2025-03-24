@@ -7,7 +7,7 @@
     <h1 class="register-title">Espace EduQuest</h1>
     <div class="register-box">
         <h2 class="register-subtitle">Inscription</h2>
-        <form class="register-form">
+        <form class="register-form" method="POST" action="{{ path('app_register') }}">
             <div class="form-group">
                 <label for="username">*Nom d’utilisateur</label>
                 <input type="text" id="username" name="username" required>
@@ -26,9 +26,10 @@
             </div>
             <div class="form-group role-selection">
                 <label>Vous êtes :</label>
+                <input type="hidden" id="role" name="role" value="student">
                 <button type="button" class="role-button" id="student-button">Étudiant</button>
                 <button type="button" class="role-button" id="admin-button">Administrateur</button>
-                <button type="button" class="role-button" id="professor-button">professeur</button>
+                <button type="button" class="role-button" id="professor-button">Professeur</button>
             </div>
             <button type="submit" class="register-button">
                 VALIDER <span class="check-icon">✔️</span>
@@ -44,22 +45,26 @@
 document.addEventListener('DOMContentLoaded', function() {
     const studentButton = document.getElementById('student-button');
     const adminButton = document.getElementById('admin-button');
-    const professorButton = document.getElementById('professor-button'); // Bouton Professeur
+    const professorButton = document.getElementById('professor-button');
+    const roleInput = document.getElementById('role');
 
     studentButton.addEventListener('click', function() {
+        roleInput.value = 'student';
         studentButton.classList.add('selected');
         adminButton.classList.remove('selected');
-        professorButton.classList.remove('selected'); // Désélectionner Professeur
+        professorButton.classList.remove('selected');
     });
 
     adminButton.addEventListener('click', function() {
+        roleInput.value = 'admin';
         adminButton.classList.add('selected');
         studentButton.classList.remove('selected');
-        professorButton.classList.remove('selected'); // Désélectionner Professeur
+        professorButton.classList.remove('selected');
     });
 
     professorButton.addEventListener('click', function() {
-        professorButton.classList.add('selected'); // Sélectionner Professeur
+        roleInput.value = 'professor';
+        professorButton.classList.add('selected');
         studentButton.classList.remove('selected');
         adminButton.classList.remove('selected');
     });

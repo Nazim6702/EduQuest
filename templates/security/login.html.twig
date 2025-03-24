@@ -7,7 +7,7 @@
     <h1 class="login-title">Espace EduQuest</h1>
     <div class="login-box">
         <h2 class="login-subtitle">Connexion</h2>
-        <form class="login-form">
+        <form class="login-form" method="POST" action="{{ path('app_login') }}">
             <div class="form-group">
                 <label for="email">*Email</label>
                 <input type="email" id="email" name="email" required>
@@ -19,6 +19,7 @@
             <button type="submit" class="login-button">
                 VALIDER <span class="check-icon">✔️</span>
             </button>
+        </form>
         </form>
         <p class="signup-text">Pas encore inscrit ? <a href="{{ path('app_register') }}" class="signup-link">S’inscrire</a></p>
     </div>
