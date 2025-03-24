@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quiz - {{ slug | capitalize }}{% endblock %}
+
+{% block body %}
+    <section class="quiz-theme">
+        <h2>Quiz pour le thème : {{ slug | capitalize }}</h2>
+        <p>Contenu spécifique pour le thème "{{ slug }}".</p>
+    </section>
+{% endblock %}

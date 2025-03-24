@@ -11,9 +11,9 @@
                 <a href="#" class="btn btn-connecter">Se connecter</a>
             </div>
         </div>
-        <div class="illustration">
+        {# <div class="illustration">
             <img src="{{ asset('images/illustration.png') }}" alt="Illustration">
-        </div>
+        </div> #}
     </section>
 
     <section class="new-quizzes">
@@ -23,56 +23,24 @@
                 <span class="category">Géographie</span>
                 <h3>Quiz ville de Paris</h3>
                 <span class="date">Publié le 01/01/2025</span>
-                <img src="{{ asset('images/paris.jpg') }}" alt="Paris">
+                {# <img src="{{ asset('images/paris.jpg') }}" alt="Paris"> #}
             </div>
             <!-- Ajoutez d'autres cartes de quiz ici -->
         </div>
-    </section>
+    </section> 
 
-    <section class="quiz-themes">
-        <h2>Quiz par thématique</h2>
-        <div class="decorative-line"></div>
-        <div class="themes-grid">
+   <section class="quiz-themes">
+    <h2>Quiz par thématique</h2>
+    <div class="decorative-line"></div>
+    <div class="themes-grid">
+        {% for theme in themes %}
             <div class="theme">
-                <span class="icon">🔬</span>
-                <span class="title">Physique-Chimie</span>
+                <a href="{{ path('app_quiz_theme', { slug: theme.slug }) }}">
+                    <span class="icon">{{ theme.icon }}</span>
+                    <span class="title">{{ theme.title }}</span>
+                </a>
             </div>
-            <div class="theme">
-                <span class="icon">📚</span>
-                <span class="title">Histoire</span>
-            </div>
-            <div class="theme">
-                <span class="icon">🌍</span>
-                <span class="title">Géographie</span>
-            </div>
-            <div class="theme">
-                <span class="icon">📕</span>
-                <span class="title">Français</span>
-            </div>
-            <div class="theme">
-                <span class="icon">➗</span>
-                <span class="title">Maths</span>
-            </div>
-            <div class="theme">
-                <span class="icon">🎭</span>
-                <span class="title">Culture Générale</span>
-            </div>
-            <div class="theme">
-                <span class="icon">🇬🇧</span>
-                <span class="title">Anglais</span>
-            </div>
-            <div class="theme">
-                <span class="icon">🌳</span>
-                <span class="title">S.V.T</span>
-            </div>
-            <div class="theme">
-                <span class="icon">🧠</span>
-                <span class="title">Philosophie</span>
-            </div>
-            <div class="theme">
-                <span class="icon">⚽</span>
-                <span class="title">Sports</span>
-            </div>
-        </div>
+        {% endfor %}
+    </div>
     </section>
 {% endblock %}
