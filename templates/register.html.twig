@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Espace EduQuest - Inscription{% endblock %}
+
+{% block body %}
+<div class="register-container">
+    <h1 class="register-title">Espace EduQuest</h1>
+    <div class="register-box">
+        <h2 class="register-subtitle">Inscription</h2>
+        <form class="register-form">
+            <div class="form-group">
+                <label for="username">*Nom d’utilisateur</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">*Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">*Mot de passe</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="pseudo">*Pseudo</label>
+                <input type="text" id="pseudo" name="pseudo" required>
+            </div>
+            <div class="form-group role-selection">
+                <label>Vous êtes :</label>
+                <button type="button" class="role-button" id="student-button">Étudiant</button>
+                <button type="button" class="role-button" id="admin-button">Administrateur</button>
+            </div>
+            <button type="submit" class="register-button">
+                VALIDER <span class="check-icon">✔️</span>
+            </button>
+        </form>
+        <p class="login-text">Vous avez déjà un compte ? <a href="{{ path('app_login') }}" class="login-link">Se connecter</a></p>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const studentButton = document.getElementById('student-button');
+    const adminButton = document.getElementById('admin-button');
+
+    studentButton.addEventListener('click', function() {
+        studentButton.classList.add('selected');
+        adminButton.classList.remove('selected');
+    });
+
+    adminButton.addEventListener('click', function() {
+        adminButton.classList.add('selected');
+        studentButton.classList.remove('selected');
+    });
+});
+</script>
+{% endblock %}
