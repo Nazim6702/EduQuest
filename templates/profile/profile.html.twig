@@ -5,14 +5,49 @@
 {% block body %}
 <h1>Bienvenue, {{ user.name }}</h1>
 <p>Email : {{ user.email }}</p>
-<p>Type d'utilisateur : {{ user.userType }}</p>
+<p>Type d'utilisateur : {{ user.user_type  }}</p>
 
-{% if user.userType == 'admin' %}
-    <button>Supprimer des utilisateurs</button>
-    <button>Supprimer des quiz</button>
-{% elseif user.userType == 'professor' %}
-    <button>Créer un quiz</button>
-    <button>Créer un débat</button>
-    <button>Analyser les résultats</button>
+<!-- Bouton "Modifier infos profil" pour tous les utilisateurs -->
+<a href="#" class="btn btn-primary">Modifier infos profil</a>
+
+<!-- Fonctionnalités spécifiques en fonction du type d'utilisateur -->
+{% if user.user_type  == 'student' %}
+    <!-- Fonctionnalités Apprenant -->
+    <h2>Quiz</h2>
+    <a href="#" class="btn btn-success">Participer aux quiz</a>
+
+    <h2>Débats</h2>
+    <a href="#" class="btn btn-success">Participer aux débats</a>
+
+    <h2>Progression</h2>
+    <a href="#" class="btn btn-info">Voir scores et badges</a>
+
+{% elseif user.user_type  == 'professor' %}
+    <!-- Fonctionnalités Enseignant -->
+    <h2>Quiz</h2>
+    <a href="#" class="btn btn-warning">Créer/gérer les quiz</a>
+
+    <h2>Débats</h2>
+    <a href="#" class="btn btn-warning">Créer/modérer les débats</a>
+
+    <h2>Progression</h2>
+    <a href="#" class="btn btn-info">Voir résultats apprenants</a>
+
+    <h2>Modération</h2>
+    <a href="#" class="btn btn-danger">Modérer les réponses</a>
+
+{% elseif user.user_type  == 'admin' %}
+    <!-- Fonctionnalités Administrateur -->
+    <h2>Quiz</h2>
+    <a href="#" class="btn btn-danger">Valider/supprimer quiz</a>
+
+    <h2>Débats</h2>
+    <a href="#" class="btn btn-danger">Valider/supprimer débats</a>
+
+    <h2>Progression</h2>
+    <a href="#" class="btn btn-info">Tableau de bord global</a>
+
+    <h2>Modération</h2>
+    <a href="#" class="btn btn-danger">Modérer utilisateurs/contenu</a>
 {% endif %}
 {% endblock %}

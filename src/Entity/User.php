@@ -30,7 +30,7 @@ class User implements PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
-    private ?string $userType = null;
+    private ?string $user_type  = null;
 
     public function __construct()
     {
@@ -86,14 +86,14 @@ class User implements PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getUserType(): ?string
+    public function getuser_type (): ?string
     {
-        return $this->userType;
+        return $this->user_type ;
     }
 
-    public function setUserType(string $userType): self
+    public function setuser_type (string $user_type ): self
     {
-        $this->userType = $userType;
+        $this->user_type  = $user_type ;
         return $this;
     }
 }
