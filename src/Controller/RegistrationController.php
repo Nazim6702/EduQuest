@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Admin;
+use App\Entity\Student;
+use App\Entity\Teacher;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,28 +22,37 @@ final class RegistrationController extends AbstractController
         UserPasswordHasherInterface $passwordHasher,
         EntityManagerInterface $entityManager
     ): Response {
-        $form = $this->createForm(RegistrationFormType::class, new User());
+        $formUser = new User();
+        $form = $this->createForm(RegistrationFormType::class, $formUser);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->handleUserRegistration($form->getData(), $passwordHasher, $entityManager);
+            $userType = $form->get('userType')->getData();
+            
+            $user = match ($userType) {
+                'admin' => (new Admin())->setAdminLevel(1),
+                'student' => (new Student())->setGradeLevel('Première année'),
+                'teacher' => (new Teacher())->setSubject('Non défini'),
+                default => $formUser
+            };
+            
+            if ($user !== $formUser) {
+                $user->setName($formUser->getName())
+                     ->setEmail($formUser->getEmail())
+                     ->setPseudo($formUser->getPseudo());
+            }
+            
+            $user->setPassword($passwordHasher->hashPassword($user, $form->get('password')->getData()))
+                 ->setCreatedAt(new \DateTime());
+                
+            $entityManager->persist($user);
+            $entityManager->flush();
+            
             return $this->redirectToRoute('app_home');
         }
 
         return $this->render('registration/register.html.twig', [
             'form' => $form->createView(),
         ]);
-    }
-
-    private function handleUserRegistration(
-        User $user,
-        UserPasswordHasherInterface $passwordHasher,
-        EntityManagerInterface $entityManager
-    ): void {
-        $hashedPassword = $passwordHasher->hashPassword($user, $user->getPassword());
-        $user->setPassword($hashedPassword);
-
-        $entityManager->persist($user);
-        $entityManager->flush();
     }
 }
