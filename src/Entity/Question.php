@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Enum\QuestionType;
 use App\Repository\QuestionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
@@ -29,6 +31,7 @@ class Question
     public function __construct()
 {
     $this->answers = new ArrayCollection();
+    $this->userAnswers = new ArrayCollection();
 }
 
 public function getAnswers(): Collection
@@ -88,6 +91,36 @@ public function setQuiz(?Quiz $quiz): static
     public function setDuration(?int $duration): static
     {
         $this->duration = $duration;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserAnswer>
+     */
+    public function getUserAnswers(): Collection
+    {
+        return $this->userAnswers;
+    }
+
+    public function addUserAnswer(UserAnswer $userAnswer): static
+    {
+        if (!$this->userAnswers->contains($userAnswer)) {
+            $this->userAnswers->add($userAnswer);
+            $userAnswer->setQuestion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserAnswer(UserAnswer $userAnswer): static
+    {
+        if ($this->userAnswers->removeElement($userAnswer)) {
+            // set the owning side to null (unless already changed)
+            if ($userAnswer->getQuestion() === $this) {
+                $userAnswer->setQuestion(null);
+            }
+        }
 
         return $this;
     }

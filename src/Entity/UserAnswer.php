@@ -37,4 +37,16 @@ class UserAnswer
 
         return $this;
     }
+
+    public function getQuestion(): ?Question
+    {
+        return $this->question;
+    }
+
+    public function setQuestion(?Question $question): static
+    {
+        $this->question = $question;
+
+        return $this;
+    }
 }
