@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+    <h1>Connexion</h1>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+    <p>Vous n'avez pas encore de compte ? 
+        <a href="{{ path('app_register') }}">Inscrivez-vous ici</a>.
+    </p>
+{% endblock %}
