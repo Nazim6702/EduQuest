@@ -7,26 +7,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\InheritanceType('SINGLE_TABLE')]
 #[ORM\DiscriminatorColumn(name: 'user_type', type: 'string')]
-#[ORM\DiscriminatorMap(['user' => User::class, 'admin' => Admin::class, 'student'=>Student::class, 'teacher'=>Teacher::class])]
-class User
+#[ORM\DiscriminatorMap(['user' => User::class, 'admin' => Admin::class, 'student' => Student::class, 'teacher' => Teacher::class])]
+class User implements PasswordAuthenticatedUserInterface
 {
-
-#[ORM\OneToMany(mappedBy: 'user', targetEntity: Participation::class, cascade: ['persist', 'remove'])]
-private Collection $participations;
-
-public function __construct()
-{
-    $this->participations = new ArrayCollection();
-}
-
-public function getParticipations(): Collection
-{
-    return $this->participations;
-}
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -41,8 +29,21 @@ public function getParticipations(): Collection
     #[ORM\Column(length: 255)]
     private ?string $password = null;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $pseudo = null;
+
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
+
+    private ?string $userType = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Participation::class, cascade: ['persist', 'remove'])]
+    private Collection $participations;
+
+    public function __construct()
+    {
+        $this->participations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -85,6 +86,18 @@ public function getParticipations(): Collection
         return $this;
     }
 
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(?string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
@@ -95,6 +108,23 @@ public function getParticipations(): Collection
         $this->createdAt = $createdAt;
 
         return $this;
+    }
+
+    public function getUserType(): ?string
+    {
+        return $this->userType;
+    }
+
+    public function setUserType(string $userType): self
+    {
+        $this->userType = $userType;
+
+        return $this;
+    }
+
+    public function getParticipations(): Collection
+    {
+        return $this->participations;
     }
 
     public function addParticipation(Participation $participation): static
@@ -118,6 +148,4 @@ public function getParticipations(): Collection
 
         return $this;
     }
-
-    
 }
