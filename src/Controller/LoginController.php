@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class LoginController extends AbstractController
 {
-    #[Route('/login', name: 'app_login')]
+    #[Route('/auth', name: 'app_login')]
     public function login(Request $request): Response
     {
         $form = $this->createForm(LoginFormType::class);
@@ -21,7 +21,7 @@ final class LoginController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        return $this->render('login/login.html.twig', [
+        return $this->render('auth/login.html.twig', [
             'form' => $form->createView(),
         ]);
     }
