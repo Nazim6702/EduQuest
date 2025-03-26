@@ -1,4 +1,4 @@
-/* Styles généraux */
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -20,8 +20,12 @@ body {
   font-size: 35px;
   font-weight: 900;
   color: #0044cc;
-  margin-right: 80px; /* Ajout d'une marge à droite pour espacer la barre de recherche */
+  margin-right: 80px; 
   text-shadow: 3px 2px 0px rgba(255, 152, 0, 0.7);
+}
+.logo-link {
+  text-decoration: none;
+  color: inherit; 
 }
 
 .nav {
@@ -33,7 +37,7 @@ body {
 .nav ul {
   list-style: none;
   display: flex;
-  gap: 40px; /* Ajustez cet écart pour un espacement homogène */
+  gap: 40px;
 }
 
 .nav ul li {
@@ -44,24 +48,38 @@ body {
 
 .nav ul li a {
   text-decoration: none;
-  color: #ff9800; /* Même couleur que le logo */
+  color: #ff9800;
   font-weight: 800;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 5px;
-  text-align: center; /* Centrer le texte */
+  text-align: center;
 }
 
 .nav ul li a svg {
-  stroke: #0044cc; /* Même couleur que le logo */
+  stroke: #0044cc; 
 }
+
+.nav-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: #0044cc;
+  transform: scale(1.2);
+}
+
+
 
 .search-bar {
   display: flex;
   align-items: center;
-  margin-left: 40px; /* Ajout d'une marge à gauche pour espacer la barre de recherche */
-  margin-right: auto; /* Assurez-vous que la barre de recherche prend de l'espace disponible */
+  margin-left: 40px; 
+  margin-right: auto;
 }
 
 .search-bar input {
@@ -69,7 +87,7 @@ body {
   border: 1px solid #000000;
   border-radius: 15px;
   box-shadow: 4px 4px 0px rgba(0, 0, 0, 1);
-  width: 250px; /* Définir une longueur fixe pour la barre de recherche */
+  width: 250px; 
 }
 
 .search-bar button {
@@ -174,22 +192,11 @@ body {
 
 /* SECTION QUIZ THEMES */
 .quiz-themes {
-  background-color: #0044cc; /* Même couleur que la section HERO */
+  background-color: #0044cc; 
   padding: 50px;
   color: white;
   position: relative;
-}
 
-.quiz-themes h2 {
-  font-size: 28px;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-}
-
-.quiz-themes h2::before {
-  content: url("path/to/book-icon.svg"); /* Chemin vers l'icône du livre ouvert */
-  margin-right: 10px;
 }
 
 .quiz-themes .decorative-line {
@@ -207,33 +214,41 @@ body {
   justify-items: center;
 }
 
+
+.theme a {
+  text-decoration: none;
+}
+
+
+.theme:hover {
+  transform: scale(1.05);
+}
+
 .theme {
   background-color: white;
   color: #3949ab;
   padding: 20px;
   border-radius: 10px;
   width: 100px;
-  height: 100px;
+  height: 120px; 
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s;
-}
-
-.theme:hover {
-  transform: scale(1.05);
+  text-align: center; 
 }
 
 .theme .icon {
-  font-size: 24px;
-  margin-bottom: 10px;
+  font-size: 32px; 
+  margin-bottom: 10px; 
 }
 
 .theme .title {
   font-size: 14px;
-  text-align: center;
+  text-align: center; /* Centre le texte */
+  margin: 0; /* Supprimez les marges par défaut */
 }
 
 @media (min-width: 768px) {
@@ -303,3 +318,4 @@ body {
   color: white;
   text-decoration: none;
 }
+
