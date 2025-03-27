@@ -25,13 +25,12 @@ class Question
     #[ORM\Column(nullable: true)]
     private ?int $duration = null;
 
-    #[ORM\OneToMany(mappedBy: 'question', targetEntity: UserAnswer::class, cascade: ['persist', 'remove'])]
-    private Collection $userAnswers;
+    #[ORM\OneToMany(mappedBy: 'question', targetEntity: Answer::class, cascade: ['persist', 'remove'])]
+    private Collection $answers;
 
     public function __construct()
 {
     $this->answers = new ArrayCollection();
-    $this->userAnswers = new ArrayCollection();
 }
 
 public function getAnswers(): Collection
@@ -95,30 +94,21 @@ public function setQuiz(?Quiz $quiz): static
         return $this;
     }
 
-    /**
-     * @return Collection<int, UserAnswer>
-     */
-    public function getUserAnswers(): Collection
+    public function addAnswer(Answer $answer): static
     {
-        return $this->userAnswers;
-    }
-
-    public function addUserAnswer(UserAnswer $userAnswer): static
-    {
-        if (!$this->userAnswers->contains($userAnswer)) {
-            $this->userAnswers->add($userAnswer);
-            $userAnswer->setQuestion($this);
+        if (!$this->answers->contains($answer)) {
+            $this->answers->add($answer);
         }
 
         return $this;
     }
 
-    public function removeUserAnswer(UserAnswer $userAnswer): static
+    public function removeAnswer(UserAnswer $answer): static
     {
-        if ($this->userAnswers->removeElement($userAnswer)) {
+        if ($this->answers->removeElement($answer)) {
             // set the owning side to null (unless already changed)
-            if ($userAnswer->getQuestion() === $this) {
-                $userAnswer->setQuestion(null);
+            if ($answer->getQuestion() === $this) {
+                $answer->setQuestion(null);
             }
         }
 
