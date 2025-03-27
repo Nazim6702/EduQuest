@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+{% block title %}Question {{ step + 1 }} / {{ total }}{% endblock %}
+{% block body %}
+    <section class="question-container">
+        <h2>{{ question.texte }}</h2>
+
+        <form method="post" action="{{ path('app_quiz_submit', {id: quiz.id, step: step}) }}">
+            {% if question.type == constant('App\\Enum\\QuestionType::QCM') %}
+                {% for answer in question.answers %}
+                    <div>
+                        <input type="radio" name="answer" value="{{ answer.id }}" required>
+                        {{ answer.texte }}
+                    </div>
+                {% endfor %}
+            {% elseif question.type == constant('App\\Enum\\QuestionType::TRUE_FALSE') %}
+                {% for answer in question.answers %}
+                    <div>
+                        <input type="radio" name="answer" value="{{ answer.id }}" required>
+                        {{ answer.texte }}
+                    </div>
+                {% endfor %}
+            {% elseif question.type == constant('App\\Enum\\QuestionType::OPEN') %}
+                <textarea name="answer_text" required rows="3" cols="50"></textarea>
+            {% endif %}
+
+            <button type="submit">Valider</button>
+        </form>
+
+        <div id="timer">Temps restant : <span id="countdown"></span> sec</div>
+    </section>
+
+    <script>
+        let timeLeft = {{ question.duration|default(30) }};
+        let countdown = document.getElementById('countdown');
+        countdown.innerText = timeLeft;
+        let timer = setInterval(() => {
+            timeLeft--;
+            countdown.innerText = timeLeft;
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                document.querySelector('form').submit();
+            }
+        }, 1000);
+    </script>
+{% endblock %}

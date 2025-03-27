@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block title %}Résultat{% endblock %}
+{% block body %}
+    <section style="text-align:center; padding:40px;">
+        {% if result %}
+            <h2 style="color:green;">✅ Bonne réponse !</h2>
+        {% else %}
+            <h2 style="color:red;">❌ Mauvaise réponse</h2>
+        {% endif %}
+
+        {% if isLast %}
+            <a href="{{ path('app_quiz_results', { id: quizId }) }}" class="btn">Voir les résultats</a>
+        {% else %}
+            <a href="{{ path('app_quiz_play', { id: quizId, step: nextStep }) }}" class="btn">Question suivante</a>
+        {% endif %}
+    </section>
+{% endblock %}

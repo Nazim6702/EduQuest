@@ -9,18 +9,19 @@
         <p><strong>Durée :</strong> {{ quiz.duration }} minutes</p>
         <p><strong>Thème :</strong> {{ quiz.category }}</p>
 
-        <a href="#" class="btn-play" style="
-        display:inline-block;
-        background-color:#ffd858;
-        color:#0044cc;
-        padding: 20px 40px;
-        font-size: 24px;
-        font-weight: bold;
-        border-radius: 15px;
-        text-decoration: none;
-        margin-top: 30px;
-        box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.6);
-        transition: transform 0.2s ease;
-    ">▶️ Jouer au quiz</a>
+        <a href="{{ path('app_quiz_play', { id: quiz.id, step: 0 }) }}"
+            class="btn-play" style="
+            display:inline-block;
+            background-color:#ffd858;
+            color:#0044cc;
+            padding: 20px 40px;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 15px;
+            text-decoration: none;
+            margin-top: 30px;
+            box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.6);
+            transition: transform 0.2s ease;
+        ">▶️ Jouer au quiz</a>
     </section>
 {% endblock %}
