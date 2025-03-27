@@ -22,6 +22,7 @@ return [
         '/profile/student' => [[['_route' => 'app_profile_student', '_controller' => 'App\\Controller\\ProfileController::student'], null, null, null, false, false, null]],
         '/profile/teacher' => [[['_route' => 'app_profile_teacher', '_controller' => 'App\\Controller\\ProfileController::teacher'], null, null, null, false, false, null]],
         '/profile/admin' => [[['_route' => 'app_profile_admin', '_controller' => 'App\\Controller\\ProfileController::admin'], null, null, null, false, false, null]],
+        '/profile/edit' => [[['_route' => 'app_profile_edit', '_controller' => 'App\\Controller\\ProfileController::edit'], null, null, null, false, false, null]],
         '/register' => [[['_route' => 'app_register', '_controller' => 'App\\Controller\\RegistrationController::register'], null, null, null, false, false, null]],
     ],
     [ // $regexpList

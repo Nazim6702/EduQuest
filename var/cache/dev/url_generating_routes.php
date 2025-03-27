@@ -25,6 +25,7 @@ return [
     'app_profile_student' => [[], ['_controller' => 'App\\Controller\\ProfileController::student'], [], [['text', '/profile/student']], [], [], []],
     'app_profile_teacher' => [[], ['_controller' => 'App\\Controller\\ProfileController::teacher'], [], [['text', '/profile/teacher']], [], [], []],
     'app_profile_admin' => [[], ['_controller' => 'App\\Controller\\ProfileController::admin'], [], [['text', '/profile/admin']], [], [], []],
+    'app_profile_edit' => [[], ['_controller' => 'App\\Controller\\ProfileController::edit'], [], [['text', '/profile/edit']], [], [], []],
     'app_register' => [[], ['_controller' => 'App\\Controller\\RegistrationController::register'], [], [['text', '/register']], [], [], []],
     'App\Controller\HomeController::index' => [[], ['_controller' => 'App\\Controller\\HomeController::index'], [], [['text', '/']], [], [], []],
     'App\Controller\LoginController::login' => [[], ['_controller' => 'App\\Controller\\LoginController::login'], [], [['text', '/login']], [], [], []],
@@ -33,5 +34,6 @@ return [
     'App\Controller\ProfileController::student' => [[], ['_controller' => 'App\\Controller\\ProfileController::student'], [], [['text', '/profile/student']], [], [], []],
     'App\Controller\ProfileController::teacher' => [[], ['_controller' => 'App\\Controller\\ProfileController::teacher'], [], [['text', '/profile/teacher']], [], [], []],
     'App\Controller\ProfileController::admin' => [[], ['_controller' => 'App\\Controller\\ProfileController::admin'], [], [['text', '/profile/admin']], [], [], []],
+    'App\Controller\ProfileController::edit' => [[], ['_controller' => 'App\\Controller\\ProfileController::edit'], [], [['text', '/profile/edit']], [], [], []],
     'App\Controller\RegistrationController::register' => [[], ['_controller' => 'App\\Controller\\RegistrationController::register'], [], [['text', '/register']], [], [], []],
 ];
