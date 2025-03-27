@@ -20,4 +20,10 @@ class HomeController extends AbstractController
         ]);
 
     }
+
+    #[Route('/coming-soon', name: 'app_undone')]
+    public function undone(): Response
+    {
+        return $this->render('components/undone.html.twig');
+    }
 }
