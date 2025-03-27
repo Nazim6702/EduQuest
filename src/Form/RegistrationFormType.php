@@ -36,8 +36,9 @@ class RegistrationFormType extends AbstractType
                     'Administrateur' => 'admin',
                     'Professeur' => 'teacher',
                 ],
-                'expanded' => true, 
-                'multiple' => false, 
+                'expanded' => true,
+                'multiple' => false,
+                'mapped' => false, 
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'S’inscrire',

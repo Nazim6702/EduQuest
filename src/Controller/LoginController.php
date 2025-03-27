@@ -4,25 +4,30 @@ namespace App\Controller;
 
 use App\Form\LoginFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 final class LoginController extends AbstractController
 {
-    #[Route('/auth', name: 'app_login')]
-    public function login(Request $request): Response
+    #[Route('/login', name: 'app_login')]
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        $form = $this->createForm(LoginFormType::class);
-        $form->handleRequest($request);
+        $error = $authenticationUtils->getLastAuthenticationError();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Symfony Security gère l'authentification automatiquement
-            return $this->redirectToRoute('app_home');
-        }
+        $lastEmail = $authenticationUtils->getLastUsername();
+
+        $form = $this->createForm(LoginFormType::class, [
+            'email' => $lastEmail,
+        ]);
 
         return $this->render('auth/login.html.twig', [
             'form' => $form->createView(),
+            'error' => $error,
         ]);
+    }
+
+    #[Route('/logout', name: 'app_logout')]
+    public function logout(): void {    
     }
 }

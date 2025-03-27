@@ -17,6 +17,11 @@ return [
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
         '/' => [[['_route' => 'app_home', '_controller' => 'App\\Controller\\HomeController::index'], null, null, null, false, false, null]],
         '/login' => [[['_route' => 'app_login', '_controller' => 'App\\Controller\\LoginController::login'], null, null, null, false, false, null]],
+        '/logout' => [[['_route' => 'app_logout', '_controller' => 'App\\Controller\\LoginController::logout'], null, null, null, false, false, null]],
+        '/profile' => [[['_route' => 'app_profile', '_controller' => 'App\\Controller\\ProfileController::index'], null, null, null, false, false, null]],
+        '/profile/student' => [[['_route' => 'app_profile_student', '_controller' => 'App\\Controller\\ProfileController::student'], null, null, null, false, false, null]],
+        '/profile/teacher' => [[['_route' => 'app_profile_teacher', '_controller' => 'App\\Controller\\ProfileController::teacher'], null, null, null, false, false, null]],
+        '/profile/admin' => [[['_route' => 'app_profile_admin', '_controller' => 'App\\Controller\\ProfileController::admin'], null, null, null, false, false, null]],
         '/register' => [[['_route' => 'app_register', '_controller' => 'App\\Controller\\RegistrationController::register'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
