@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+{% block title %}Gérer les utilisateurs{% endblock %}
+
+{% block body %}
+<h1>Liste des utilisateurs</h1>
+
+<input type="text" id="user-filter" placeholder="Filtrer par nom, pseudo ou email..." style="margin-bottom: 10px; padding: 8px; width: 300px;">
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Pseudo</th>
+            <th>Email</th>
+            <th>Rôle</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="user-table-body">
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td data-filter="{{ user.name ~ user.pseudo ~ user.email | lower }}">
+                    {{ user.name }}
+                </td>
+                <td>{{ user.pseudo }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.userType }}</td>
+                <td>
+                    <a href="{{ path('admin_user_edit', {'id': user.id}) }}">Modifier</a>
+                    <form method="post" action="{{ path('admin_user_delete', {'id': user.id}) }}" onsubmit="return confirm('⚠️ Êtes-vous sûr de vouloir supprimer {{ user.pseudo }} ?');" style="display:inline">
+                        <button type="submit" style="background:none; border:none; color:crimson; cursor:pointer;">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr><td colspan="6">Aucun utilisateur trouvé.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script>
+document.getElementById('user-filter').addEventListener('input', function () {
+    const value = this.value.toLowerCase();
+    const rows = document.querySelectorAll('#user-table-body tr');
+
+    rows.forEach(row => {
+        const text = row.querySelector('[data-filter]').dataset.filter;
+        row.style.display = text.includes(value) ? '' : 'none';
+    });
+});
+</script>
+{% endblock %}
