@@ -27,9 +27,18 @@
         </form>
 
         <div id="timer">Temps restant : <span id="countdown"></span> sec</div>
+        <div id="global-timer">Temps global restant : <span id="global-countdown"></span> sec</div>
     </section>
 
     <script>
+
+        function formatTime(seconds) {
+            const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+            const s = (seconds % 60).toString().padStart(2, '0');
+            return `${m}:${s}`;
+        }
+
+        //temps restant propre à chaque question
         let timeLeft = {{ question.duration|default(30) }};
         let countdown = document.getElementById('countdown');
         countdown.innerText = timeLeft;
@@ -39,6 +48,20 @@
             if (timeLeft <= 0) {
                 clearInterval(timer);
                 document.querySelector('form').submit();
+            }
+        }, 1000);
+
+        //temps restant pour completer le quiz
+        let globalTimeLeft = {{ globalRemaining }};
+        let globalCountdown = document.getElementById('global-countdown');
+        globalCountdown.innerText = formatTime(globalTimeLeft);
+        let globalTimer = setInterval(() => {
+            globalTimeLeft--;
+            globalCountdown.innerText = formatTime(globalTimeLeft);
+            if (globalTimeLeft <= 0) {
+                clearInterval(globalTimer);
+                alert("Temps global écoulé !");
+                window.location.href = "{{ path('app_quiz_results', { id: quiz.id }) }}";
             }
         }, 1000);
     </script>

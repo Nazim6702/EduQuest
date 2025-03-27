@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block title %}Résultat du Quiz{% endblock %}
+{% block body %}
+    <section class="result-summary" style="text-align:center; padding:40px;">
+        <h1>🎉 Bravo, vous avez terminé le quiz "{{ quiz.title }}" !</h1>
+        <p>Un récapitulatif et un score pourront s'afficher ici plus tard.</p>
+        <a href="{{ path('app_home') }}" class="btn">Retour à l'accueil</a>
+    </section>
+{% endblock %}

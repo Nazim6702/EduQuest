@@ -35,6 +35,19 @@ final class PlayQuizController extends AbstractController
             throw $this->createNotFoundException();
         }
 
+        $session = $request->getSession();
+
+        if (!$session->has('quiz_start_time_'.$quiz->getId())) {
+            $session->set('quiz_start_time_'.$quiz->getId(), time());
+        }
+
+        $startTime = $session->get('quiz_start_time_'.$quiz->getId());
+        $now = time();
+        $elapsed = $now - $startTime;
+        $totalTime = $quiz->getDuration() * 60; // en secondes
+        $remainingTime = max(0, $totalTime - $elapsed);
+
+
         $questions = $quiz->getQuestions()->toArray();
         if (!isset($questions[$step])) {
             return $this->redirectToRoute('app_quiz_results', ['id' => $id]);
@@ -46,7 +59,8 @@ final class PlayQuizController extends AbstractController
             'quiz' => $quiz,
             'question' => $question,
             'step' => $step,
-            'total' => count($questions)
+            'total' => count($questions),
+            'globalRemaining' => $remainingTime
         ]);
     }
 
@@ -80,6 +94,20 @@ final class PlayQuizController extends AbstractController
             'nextStep' => $step + 1,
             'quizId' => $id,
             'isLast' => !isset($questions[$step + 1])
+        ]);
+    }
+
+    #[Route('/quiz/{id}/results', name: 'app_quiz_results')]
+    public function results(int $id, EntityManagerInterface $em): Response
+    {
+        $quiz = $em->getRepository(Quiz::class)->find($id);
+
+        if (!$quiz) {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->render('play_quiz/results.html.twig', [
+            'quiz' => $quiz,
         ]);
     }
 
