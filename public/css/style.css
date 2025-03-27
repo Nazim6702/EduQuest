@@ -319,3 +319,47 @@ body {
   text-decoration: none;
 }
 
+
+
+/* -----   Quiz Cards   ----- */
+
+.quiz-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.quiz-card-link:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.quiz-card {
+  background-color: white;
+  color: #2c387e;
+  padding: 20px;
+  border-radius: 15px;
+  width: 220px;
+  height: 160px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.quiz-card .category {
+  font-weight: bold;
+  color: #fbc02d;
+  font-size: 14px;
+}
+
+.quiz-card h3 {
+  margin: 12px 0 8px 0;
+  font-size: 18px;
+  color: #0044cc;
+}
+
+.quiz-card .date {
+  font-size: 12px;
+  color: #555;
+}
