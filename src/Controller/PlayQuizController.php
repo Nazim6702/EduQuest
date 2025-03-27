@@ -55,12 +55,23 @@ final class PlayQuizController extends AbstractController
 
         $question = $questions[$step];
 
+        $sessionKey = 'quiz_progress_'.$quiz->getId();
+
+        // Si on est à la première question, on supprime toutes les données de session lié au quizz
+        //C'est quand on fait plusieurs fois le même quizz, pour que les résultats soient remis à 0
+        if ($step === 0) {
+            $session->remove($sessionKey);
+            $session->set('quiz_start_time_'.$quiz->getId(), time());
+        }
+
+
         return $this->render('play_quiz/play.html.twig', [
             'quiz' => $quiz,
             'question' => $question,
             'step' => $step,
             'total' => count($questions),
-            'globalRemaining' => $remainingTime
+            'globalRemaining' => $remainingTime,
+            'progress' => $session->get('quiz_progress_'.$quiz->getId(), [])
         ]);
     }
 
@@ -89,6 +100,12 @@ final class PlayQuizController extends AbstractController
             }
         }
 
+        $session = $request->getSession();
+        $progress = $session->get('quiz_progress_'.$quiz->getId(), []);
+        $progress[$question->getId()] = $result ? 'correct' : 'wrong';
+        $session->set('quiz_progress_'.$quiz->getId(), $progress);
+
+
         return $this->render('play_quiz/result.html.twig', [
             'result' => $result,
             'nextStep' => $step + 1,
@@ -98,7 +115,7 @@ final class PlayQuizController extends AbstractController
     }
 
     #[Route('/quiz/{id}/results', name: 'app_quiz_results')]
-    public function results(int $id, EntityManagerInterface $em): Response
+    public function results(int $id, Request $request, EntityManagerInterface $em): Response
     {
         $quiz = $em->getRepository(Quiz::class)->find($id);
 
@@ -106,9 +123,14 @@ final class PlayQuizController extends AbstractController
             throw $this->createNotFoundException();
         }
 
+        $session = $request->getSession();
+        $progress = $session->get('quiz_progress_'.$quiz->getId(), []);
+
         return $this->render('play_quiz/results.html.twig', [
             'quiz' => $quiz,
+            'progress' => $progress
         ]);
     }
+
 
 }
