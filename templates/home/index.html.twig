@@ -32,15 +32,16 @@
    <section class="quiz-themes">
     <h2>Quiz par thématique</h2>
     <div class="decorative-line"></div>
-    <div class="themes-grid">
-        {% for theme in themes %}
-            <div class="theme">
-                <a href="{{ path('app_quiz_theme', { slug: theme.slug }) }}">
-                    <span class="icon">{{ theme.icon }}</span>
-                    <span class="title">{{ theme.title }}</span>
-                </a>
-            </div>
-        {% endfor %}
-    </div>
-    </section>
+       <div class="themes-grid">
+           {% for theme in themes %}
+               <div class="theme">
+                   <a href="{{ path('app_quiz_theme', { slug: theme.slug }) }}">
+                       <span class="icon">{{ theme.icon }}</span>
+                       <span class="title">{{ theme.title }}</span>
+                   </a>
+               </div>
+           {% endfor %}
+       </div>
+
+   </section>
 {% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\QuizRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,20 +10,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(): Response
+    public function index(QuizRepository $quizRepository): Response
     {
-        $themes = [
-            ['icon' => '🔬', 'title' => 'Physique-Chimie', 'slug' => 'physique-chimie'],
-            ['icon' => '📚', 'title' => 'Histoire', 'slug' => 'histoire'],
-            ['icon' => '🌍', 'title' => 'Géographie', 'slug' => 'geographie'],
-            ['icon' => '📕', 'title' => 'Français', 'slug' => 'francais'],
-            ['icon' => '➗', 'title' => 'Maths', 'slug' => 'maths'],
-            ['icon' => '🎭', 'title' => 'Culture Générale', 'slug' => 'culture-generale'],
-            ['icon' => '🇬🇧', 'title' => 'Anglais', 'slug' => 'anglais'],
-            ['icon' => '🌳', 'title' => 'S.V.T', 'slug' => 'svt'],
-            ['icon' => '🧠', 'title' => 'Philosophie', 'slug' => 'philosophie'],
-            ['icon' => '⚽', 'title' => 'Sports', 'slug' => 'sports'],
-        ];
+        $themes = $quizRepository->findAll();
 
         return $this->render('home/index.html.twig', [
             'themes' => $themes,

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\QuizRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -26,7 +28,14 @@ class Quiz
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
-#[ORM\OneToMany(mappedBy: 'quiz', targetEntity: Question::class, cascade: ['persist', 'remove'])]
+    #[ORM\Column(type: 'string', length: 255, unique: true)]
+    private ?string $slug = null;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $icon = null; // Peut contenir un emoji ou un nom de classe CSS
+
+
+    #[ORM\OneToMany(mappedBy: 'quiz', targetEntity: Question::class, cascade: ['persist', 'remove'])]
 private Collection $questions;
 
 public function __construct()
@@ -93,5 +102,25 @@ public function getQuestions(): Collection
         $this->createdAt = $createdAt;
 
         return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function getIcon(): ?string
+    {
+        return $this->icon;
+    }
+
+    public function setSlug(string $slug)
+    {
+        return $this->slug = $slug;
+    }
+
+    public function setIcon(string $icon)
+    {
+        return $this->icon = $icon;
     }
 }
