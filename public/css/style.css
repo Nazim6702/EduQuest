@@ -401,3 +401,13 @@ button:hover {
   justify-content: space-between;
   gap: 10px;
 }
+
+
+.custom-input {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  border: 2px solid #0044cc;
+  border-radius: 8px;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 1);
+}
