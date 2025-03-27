@@ -98,8 +98,8 @@ public function setQuiz(?Quiz $quiz): static
     {
         if (!$this->answers->contains($answer)) {
             $this->answers->add($answer);
+            $answer->setQuestion($this);
         }
-
         return $this;
     }
 
