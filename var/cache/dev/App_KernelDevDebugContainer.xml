@@ -144,9 +144,7 @@
     </parameter>
     <parameter key="validator.mapping.cache.file">/var/www/eduquest/var/cache/dev/validation.php</parameter>
     <parameter key="validator.translation_domain">validators</parameter>
-    <parameter key="profiler_listener.only_exceptions">false</parameter>
-    <parameter key="profiler_listener.only_main_requests">false</parameter>
-    <parameter key="profiler.storage.dsn">file:/var/www/eduquest/var/cache/dev/profiler</parameter>
+    <parameter key="data_collector.templates" type="collection"/>
     <parameter key="doctrine.dbal.configuration.class">Doctrine\DBAL\Configuration</parameter>
     <parameter key="doctrine.data_collector.class">Doctrine\Bundle\DoctrineBundle\DataCollector\DoctrineDataCollector</parameter>
     <parameter key="doctrine.dbal.connection.event_manager.class">Symfony\Bridge\Doctrine\ContainerAwareEventManager</parameter>
@@ -221,8 +219,6 @@
       <parameter>form_div_layout.html.twig</parameter>
     </parameter>
     <parameter key="twig.default_path">/var/www/eduquest/templates</parameter>
-    <parameter key="web_profiler.debug_toolbar.intercept_redirects">false</parameter>
-    <parameter key="web_profiler.debug_toolbar.mode">2</parameter>
     <parameter key="security.role_hierarchy.roles" type="collection"/>
     <parameter key="security.access.denied_url">null</parameter>
     <parameter key="security.authentication.manager.erase_credentials">true</parameter>
@@ -248,100 +244,6 @@
         <parameter key="elements" type="collection">
           <parameter>event</parameter>
         </parameter>
-      </parameter>
-    </parameter>
-    <parameter key="data_collector.templates" type="collection">
-      <parameter key="data_collector.request" type="collection">
-        <parameter>request</parameter>
-        <parameter>@WebProfiler/Collector/request.html.twig</parameter>
-      </parameter>
-      <parameter key=".data_collector.command" type="collection">
-        <parameter>command</parameter>
-        <parameter>@WebProfiler/Collector/command.html.twig</parameter>
-      </parameter>
-      <parameter key="data_collector.time" type="collection">
-        <parameter>time</parameter>
-        <parameter>@WebProfiler/Collector/time.html.twig</parameter>
-      </parameter>
-      <parameter key="data_collector.memory" type="collection">
-        <parameter>memory</parameter>
-        <parameter>@WebProfiler/Collector/memory.html.twig</parameter>
-      </parameter>
-      <parameter key="data_collector.validator" type="collection">
-        <parameter>validator</parameter>
-        <parameter>@WebProfiler/Collector/validator.html.twig</parameter>
-      </parameter>
-      <parameter key="data_collector.ajax" type="collection">
-        <parameter>ajax</parameter>
-        <parameter>@WebProfiler/Collector/ajax.html.twig</parameter>
-      </parameter>
-      <parameter key="data_collector.form" type="collection">
-        <parameter>form</parameter>
-        <parameter>@WebProfiler/Collector/form.html.twig</parameter>
-      </parameter>
-      <parameter key="data_collector.exception" type="collection">
-        <parameter>exception</parameter>
-        <parameter>@WebProfiler/Collector/exception.html.twig</parameter>
-      </parameter>
-      <parameter key="data_collector.logger" type="collection">
-        <parameter>logger</parameter>
-        <parameter>@WebProfiler/Collector/logger.html.twig</parameter>
-      </parameter>
-      <parameter key="data_collector.events" type="collection">
-        <parameter>events</parameter>
-        <parameter>@WebProfiler/Collector/events.html.twig</parameter>
-      </parameter>
-      <parameter key="data_collector.router" type="collection">
-        <parameter>router</parameter>
-        <parameter>@WebProfiler/Collector/router.html.twig</parameter>
-      </parameter>
-      <parameter key="data_collector.cache" type="collection">
-        <parameter>cache</parameter>
-        <parameter>@WebProfiler/Collector/cache.html.twig</parameter>
-      </parameter>
-      <parameter key="data_collector.translation" type="collection">
-        <parameter>translation</parameter>
-        <parameter>@WebProfiler/Collector/translation.html.twig</parameter>
-      </parameter>
-      <parameter key="data_collector.security" type="collection">
-        <parameter>security</parameter>
-        <parameter>@Security/Collector/security.html.twig</parameter>
-      </parameter>
-      <parameter key="data_collector.twig" type="collection">
-        <parameter>twig</parameter>
-        <parameter>@WebProfiler/Collector/twig.html.twig</parameter>
-      </parameter>
-      <parameter key="data_collector.http_client" type="collection">
-        <parameter>http_client</parameter>
-        <parameter>@WebProfiler/Collector/http_client.html.twig</parameter>
-      </parameter>
-      <parameter key="data_collector.doctrine" type="collection">
-        <parameter>db</parameter>
-        <parameter>@Doctrine/Collector/db.html.twig</parameter>
-      </parameter>
-      <parameter key="data_collector.dump" type="collection">
-        <parameter>dump</parameter>
-        <parameter>@Debug/Profiler/dump.html.twig</parameter>
-      </parameter>
-      <parameter key="data_collector.messenger" type="collection">
-        <parameter>messenger</parameter>
-        <parameter>@WebProfiler/Collector/messenger.html.twig</parameter>
-      </parameter>
-      <parameter key="mailer.data_collector" type="collection">
-        <parameter>mailer</parameter>
-        <parameter>@WebProfiler/Collector/mailer.html.twig</parameter>
-      </parameter>
-      <parameter key="notifier.data_collector" type="collection">
-        <parameter>notifier</parameter>
-        <parameter>@WebProfiler/Collector/notifier.html.twig</parameter>
-      </parameter>
-      <parameter key="serializer.data_collector" type="collection">
-        <parameter>serializer</parameter>
-        <parameter>@WebProfiler/Collector/serializer.html.twig</parameter>
-      </parameter>
-      <parameter key="data_collector.config" type="collection">
-        <parameter>config</parameter>
-        <parameter>@WebProfiler/Collector/config.html.twig</parameter>
       </parameter>
     </parameter>
     <parameter key="console.command.ids" type="collection"/>
@@ -382,6 +284,9 @@
       <call method="setContainer">
         <argument type="service" id=".service_locator.ZyP9f7K.App\Controller\RegistrationController"/>
       </call>
+    </service>
+    <service id="App\Form\EditProfileFormType" class="App\Form\EditProfileFormType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
     </service>
     <service id="App\Form\LoginFormType" class="App\Form\LoginFormType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
@@ -440,9 +345,9 @@
       <tag name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestPayloadValueResolver">controller.targeted_value_resolver</tag>
       <tag name="kernel.event_subscriber"/>
       <tag name="container.hot_path"/>
-      <argument type="service" id="debug.serializer"/>
-      <argument type="service" id="debug.validator" on-invalid="null"/>
-      <argument type="service" id="translator.data_collector" on-invalid="null"/>
+      <argument type="service" id="serializer"/>
+      <argument type="service" id="validator" on-invalid="null"/>
+      <argument type="service" id="translator.default" on-invalid="null"/>
       <argument>validators</argument>
     </service>
     <service id="argument_resolver.request_attribute" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestAttributeValueResolver">
@@ -456,7 +361,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.Y_GIjb9"/>
+      <argument type="service" id=".service_locator.7RtjwWN"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -583,7 +488,7 @@
         <argument key="cache.asset_mapper" type="service" id="cache.asset_mapper" on-invalid="ignore_uninitialized"/>
         <argument key="cache.messenger.restart_workers_signal" type="service" id="cache.messenger.restart_workers_signal" on-invalid="ignore_uninitialized"/>
         <argument key="http_client.transport" type="service" id="http_client.transport" on-invalid="ignore_uninitialized"/>
-        <argument key="http_client" type="service" id=".debug.http_client" on-invalid="ignore_uninitialized"/>
+        <argument key="http_client" type="service" id="http_client.uri_template" on-invalid="ignore_uninitialized"/>
         <argument key="mailer.message_logger_listener" type="service" id="mailer.message_logger_listener" on-invalid="ignore_uninitialized"/>
         <argument key="translation.locale_switcher" type="service" id="translation.locale_switcher" on-invalid="ignore_uninitialized"/>
         <argument key="debug.stopwatch" type="service" id="debug.stopwatch" on-invalid="ignore_uninitialized"/>
@@ -593,8 +498,6 @@
         <argument key="form.choice_list_factory.cached" type="service" id="form.choice_list_factory.cached" on-invalid="ignore_uninitialized"/>
         <argument key="cache.validator_expression_language" type="service" id="cache.validator_expression_language" on-invalid="ignore_uninitialized"/>
         <argument key="messenger.transport.in_memory.factory" type="service" id="messenger.transport.in_memory.factory" on-invalid="ignore_uninitialized"/>
-        <argument key="profiler" type="service" id="profiler" on-invalid="ignore_uninitialized"/>
-        <argument key="debug.validator" type="service" id="debug.validator" on-invalid="ignore_uninitialized"/>
         <argument key="doctrine" type="service" id="doctrine" on-invalid="ignore_uninitialized"/>
         <argument key="doctrine.debug_data_holder" type="service" id="doctrine.debug_data_holder" on-invalid="ignore_uninitialized"/>
         <argument key="form.type.entity" type="service" id="form.type.entity" on-invalid="ignore_uninitialized"/>
@@ -609,7 +512,6 @@
         <argument key="monolog.handler.main" type="service" id="monolog.handler.main" on-invalid="ignore_uninitialized"/>
         <argument key="monolog.handler.console" type="service" id="monolog.handler.console" on-invalid="ignore_uninitialized"/>
         <argument key="debug.security.event_dispatcher.main" type="service" id="debug.security.event_dispatcher.main" on-invalid="ignore_uninitialized"/>
-        <argument key=".debug.http_client" type="service" id=".debug.http_client" on-invalid="ignore_uninitialized"/>
       </argument>
       <argument type="collection">
         <argument key="request_stack" type="collection">
@@ -672,12 +574,6 @@
         <argument key="messenger.transport.in_memory.factory" type="collection">
           <argument>reset</argument>
         </argument>
-        <argument key="profiler" type="collection">
-          <argument>reset</argument>
-        </argument>
-        <argument key="debug.validator" type="collection">
-          <argument>reset</argument>
-        </argument>
         <argument key="doctrine" type="collection">
           <argument>reset</argument>
         </argument>
@@ -719,9 +615,6 @@
           <argument>reset</argument>
         </argument>
         <argument key="debug.security.event_dispatcher.main" type="collection">
-          <argument>reset</argument>
-        </argument>
-        <argument key=".debug.http_client" type="collection">
           <argument>reset</argument>
         </argument>
       </argument>
@@ -1273,7 +1166,7 @@
     <service id="console.command.translation_debug" class="Symfony\Bundle\FrameworkBundle\Command\TranslationDebugCommand">
       <tag name="console.command"/>
       <tag name="container.no_preload"/>
-      <argument type="service" id="translator.data_collector"/>
+      <argument type="service" id="translator.default"/>
       <argument type="service" id="translation.reader"/>
       <argument type="service" id="translation.extractor"/>
       <argument>/var/www/eduquest/translations</argument>
@@ -1324,7 +1217,7 @@
     <service id="console.command.validator_debug" class="Symfony\Component\Validator\Command\DebugCommand">
       <tag name="console.command"/>
       <tag name="container.no_preload"/>
-      <argument type="service" id="debug.validator"/>
+      <argument type="service" id="validator"/>
       <call method="setName">
         <argument>debug:validator</argument>
       </call>
@@ -1385,7 +1278,7 @@
     <service id="console.command.translation_lint" class="Symfony\Component\Translation\Command\TranslationLintCommand">
       <tag name="console.command"/>
       <tag name="container.no_preload"/>
-      <argument type="service" id="translator.data_collector"/>
+      <argument type="service" id="translator.default"/>
       <argument type="collection"/>
       <call method="setName">
         <argument>lint:translations</argument>
@@ -1404,6 +1297,7 @@
         <argument>Symfony\Bridge\Doctrine\Form\Type</argument>
       </argument>
       <argument type="collection">
+        <argument>App\Form\EditProfileFormType</argument>
         <argument>App\Form\LoginFormType</argument>
         <argument>App\Form\RegistrationFormType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FormType</argument>
@@ -1420,7 +1314,6 @@
         <argument>Symfony\Component\Form\Extension\Validator\Type\SubmitTypeValidatorExtension</argument>
         <argument>Symfony\Component\Form\Extension\Validator\Type\UploadValidatorExtension</argument>
         <argument>Symfony\Component\Form\Extension\Csrf\Type\FormTypeCsrfExtension</argument>
-        <argument>Symfony\Component\Form\Extension\DataCollector\Type\DataCollectorTypeExtension</argument>
         <argument>Symfony\Component\Form\Extension\PasswordHasher\Type\FormTypePasswordHasherExtension</argument>
         <argument>Symfony\Component\Form\Extension\PasswordHasher\Type\PasswordTypePasswordHasherExtension</argument>
       </argument>
@@ -1530,44 +1423,81 @@
       <tag name="messenger.message_handler"/>
       <argument type="service" id="console.messenger.application"/>
     </service>
-    <service id="cache.app" class="Symfony\Component\Cache\Adapter\TraceableAdapter" public="true">
+    <service id="cache.app" class="Symfony\Component\Cache\Adapter\FilesystemAdapter" public="true">
       <tag name="cache.pool"/>
       <tag name="kernel.reset" method="reset"/>
-      <argument type="service" id="cache.app.recorder_inner"/>
+      <argument>N-vpL8a6gn</argument>
+      <argument>0</argument>
+      <argument>/var/www/eduquest/var/cache/dev/pools/app</argument>
+      <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
+      <call method="setLogger">
+        <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
+      </call>
     </service>
     <service id="cache.app.taggable" class="Symfony\Component\Cache\Adapter\TagAwareAdapter">
       <tag name="cache.taggable" pool="cache.app"/>
       <argument type="service" id="cache.app"/>
     </service>
-    <service id="cache.system" class="Symfony\Component\Cache\Adapter\TraceableAdapter" public="true">
+    <service id="cache.system" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="true">
       <tag name="cache.pool"/>
       <tag name="kernel.reset" method="reset"/>
-      <argument type="service" id="cache.system.recorder_inner"/>
+      <argument>ugq5a3yNsv</argument>
+      <argument>0</argument>
+      <argument>%container.build_id%</argument>
+      <argument>/var/www/eduquest/var/cache/dev/pools/system</argument>
+      <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
+      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
-    <service id="cache.validator" class="Symfony\Component\Cache\Adapter\TraceableAdapter">
+    <service id="cache.validator" class="Symfony\Component\Cache\Adapter\AdapterInterface">
       <tag name="cache.pool"/>
       <tag name="kernel.reset" method="reset"/>
-      <argument type="service" id="cache.validator.recorder_inner"/>
+      <argument>+WfNs4W8NZ</argument>
+      <argument>0</argument>
+      <argument>%container.build_id%</argument>
+      <argument>/var/www/eduquest/var/cache/dev/pools/system</argument>
+      <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
+      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
-    <service id="cache.serializer" class="Symfony\Component\Cache\Adapter\TraceableAdapter">
+    <service id="cache.serializer" class="Symfony\Component\Cache\Adapter\AdapterInterface">
       <tag name="cache.pool"/>
       <tag name="kernel.reset" method="reset"/>
-      <argument type="service" id="cache.serializer.recorder_inner"/>
+      <argument>xIV83sf4Ik</argument>
+      <argument>0</argument>
+      <argument>%container.build_id%</argument>
+      <argument>/var/www/eduquest/var/cache/dev/pools/system</argument>
+      <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
+      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
-    <service id="cache.property_info" class="Symfony\Component\Cache\Adapter\TraceableAdapter">
+    <service id="cache.property_info" class="Symfony\Component\Cache\Adapter\AdapterInterface">
       <tag name="cache.pool"/>
       <tag name="kernel.reset" method="reset"/>
-      <argument type="service" id="cache.property_info.recorder_inner"/>
+      <argument>mYxpoYJyxc</argument>
+      <argument>0</argument>
+      <argument>%container.build_id%</argument>
+      <argument>/var/www/eduquest/var/cache/dev/pools/system</argument>
+      <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
+      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
-    <service id="cache.asset_mapper" class="Symfony\Component\Cache\Adapter\TraceableAdapter">
+    <service id="cache.asset_mapper" class="Symfony\Component\Cache\Adapter\AdapterInterface">
       <tag name="cache.pool"/>
       <tag name="kernel.reset" method="reset"/>
-      <argument type="service" id="cache.asset_mapper.recorder_inner"/>
+      <argument>icRXmgZJob</argument>
+      <argument>0</argument>
+      <argument>%container.build_id%</argument>
+      <argument>/var/www/eduquest/var/cache/dev/pools/system</argument>
+      <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
+      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
-    <service id="cache.messenger.restart_workers_signal" class="Symfony\Component\Cache\Adapter\TraceableAdapter">
+    <service id="cache.messenger.restart_workers_signal" class="Symfony\Component\Cache\Adapter\FilesystemAdapter">
       <tag name="cache.pool"/>
       <tag name="kernel.reset" method="reset"/>
-      <argument type="service" id="cache.messenger.restart_workers_signal.recorder_inner"/>
+      <argument>MLDkwqOmi6</argument>
+      <argument>0</argument>
+      <argument>/var/www/eduquest/var/cache/dev/pools/app</argument>
+      <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
+      <call method="setLogger">
+        <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
+      </call>
     </service>
     <service id="cache.adapter.system" class="Symfony\Component\Cache\Adapter\AdapterInterface" abstract="true">
       <tag name="cache.pool" clearer="cache.system_clearer" reset="reset"/>
@@ -1752,7 +1682,7 @@
     <service id="assets.empty_version_strategy" class="Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy"/>
     <service id="assets.json_manifest_version_strategy" class="Symfony\Component\Asset\VersionStrategy\JsonManifestVersionStrategy" abstract="true">
       <argument type="abstract">manifest path</argument>
-      <argument type="service" id=".debug.http_client" on-invalid="null"/>
+      <argument type="service" id="http_client.uri_template" on-invalid="null"/>
       <argument>false</argument>
     </service>
     <service id="asset_mapper" class="Symfony\Component\AssetMapper\AssetMapper">
@@ -1802,7 +1732,7 @@
       <argument>/assets/</argument>
       <argument type="collection"/>
       <argument type="service" id="cache.asset_mapper"/>
-      <argument type="service" id="profiler" on-invalid="null"/>
+      <argument>null</argument>
     </service>
     <service id="asset_mapper.command.compile" class="Symfony\Component\AssetMapper\Command\AssetMapperCompileCommand">
       <tag name="console.command"/>
@@ -1882,7 +1812,7 @@
       <argument type="service" id="asset_mapper.importmap.remote_package_downloader"/>
     </service>
     <service id="asset_mapper.importmap.resolver" class="Symfony\Component\AssetMapper\ImportMap\Resolver\JsDelivrEsmResolver">
-      <argument type="service" id=".debug.http_client"/>
+      <argument type="service" id="http_client.uri_template"/>
     </service>
     <service id="asset_mapper.importmap.renderer" class="Symfony\Component\AssetMapper\ImportMap\ImportMapRenderer">
       <argument type="service" id="asset_mapper.importmap.generator"/>
@@ -1896,11 +1826,11 @@
     </service>
     <service id="asset_mapper.importmap.auditor" class="Symfony\Component\AssetMapper\ImportMap\ImportMapAuditor">
       <argument type="service" id="asset_mapper.importmap.config_reader"/>
-      <argument type="service" id=".debug.http_client"/>
+      <argument type="service" id="http_client.uri_template"/>
     </service>
     <service id="asset_mapper.importmap.update_checker" class="Symfony\Component\AssetMapper\ImportMap\ImportMapUpdateChecker">
       <argument type="service" id="asset_mapper.importmap.config_reader"/>
-      <argument type="service" id=".debug.http_client"/>
+      <argument type="service" id="http_client.uri_template"/>
     </service>
     <service id="asset_mapper.importmap.command.require" class="Symfony\Component\AssetMapper\Command\ImportMapRequireCommand">
       <tag name="console.command"/>
@@ -1989,6 +1919,9 @@
       <argument type="abstract">jitter</argument>
     </service>
     <service id="http_client.uri_template" class="Symfony\Component\HttpClient\UriTemplateHttpClient">
+      <tag name="http_client.client"/>
+      <tag name="kernel.reset" method="reset" on_invalid="ignore"/>
+      <tag name="container.decorator" id="http_client" inner="http_client.uri_template.inner"/>
       <argument type="service" id="http_client.uri_template.inner"/>
       <argument>null</argument>
       <argument type="collection"/>
@@ -2011,11 +1944,11 @@
     </service>
     <service id="http_client.messenger.ping_webhook_handler" class="Symfony\Component\HttpClient\Messenger\PingWebhookMessageHandler">
       <tag name="messenger.message_handler"/>
-      <argument type="service" id=".debug.http_client"/>
+      <argument type="service" id="http_client.uri_template"/>
     </service>
     <service id="mailer.mailer" class="Symfony\Component\Mailer\Mailer">
       <argument type="service" id="mailer.transports"/>
-      <argument type="service" id="debug.traced.messenger.bus.default" on-invalid="null"/>
+      <argument type="service" id="messenger.bus.default" on-invalid="null"/>
       <argument type="service" id="debug.event_dispatcher" on-invalid="ignore"/>
     </service>
     <service id="mailer.transports" class="Symfony\Component\Mailer\Transport\Transports">
@@ -2062,31 +1995,31 @@
     <service id="mailer.transport_factory.abstract" class="Symfony\Component\Mailer\Transport\AbstractTransportFactory" abstract="true">
       <tag name="monolog.logger" channel="mailer"/>
       <argument type="service" id="debug.event_dispatcher"/>
-      <argument type="service" id=".debug.http_client" on-invalid="ignore"/>
+      <argument type="service" id="http_client.uri_template" on-invalid="ignore"/>
       <argument type="service" id="monolog.logger.mailer" on-invalid="ignore"/>
     </service>
     <service id="mailer.transport_factory.native" class="Symfony\Component\Mailer\Transport\NativeTransportFactory">
       <tag name="mailer.transport_factory"/>
       <argument type="service" id="debug.event_dispatcher"/>
-      <argument type="service" id=".debug.http_client" on-invalid="ignore"/>
+      <argument type="service" id="http_client.uri_template" on-invalid="ignore"/>
       <argument type="service" id="monolog.logger.mailer" on-invalid="ignore"/>
     </service>
     <service id="mailer.transport_factory.null" class="Symfony\Component\Mailer\Transport\NullTransportFactory">
       <tag name="mailer.transport_factory"/>
       <argument type="service" id="debug.event_dispatcher"/>
-      <argument type="service" id=".debug.http_client" on-invalid="ignore"/>
+      <argument type="service" id="http_client.uri_template" on-invalid="ignore"/>
       <argument type="service" id="monolog.logger.mailer" on-invalid="ignore"/>
     </service>
     <service id="mailer.transport_factory.sendmail" class="Symfony\Component\Mailer\Transport\SendmailTransportFactory">
       <tag name="mailer.transport_factory"/>
       <argument type="service" id="debug.event_dispatcher"/>
-      <argument type="service" id=".debug.http_client" on-invalid="ignore"/>
+      <argument type="service" id="http_client.uri_template" on-invalid="ignore"/>
       <argument type="service" id="monolog.logger.mailer" on-invalid="ignore"/>
     </service>
     <service id="mailer.transport_factory.smtp" class="Symfony\Component\Mailer\Transport\Smtp\EsmtpTransportFactory">
       <tag name="mailer.transport_factory"/>
       <argument type="service" id="debug.event_dispatcher"/>
-      <argument type="service" id=".debug.http_client" on-invalid="ignore"/>
+      <argument type="service" id="http_client.uri_template" on-invalid="ignore"/>
       <argument type="service" id="monolog.logger.mailer" on-invalid="ignore"/>
     </service>
     <service id="translator.default" class="Symfony\Bundle\FrameworkBundle\Translation\Translator">
@@ -2808,20 +2741,12 @@
       <argument type="service" id="debug.event_dispatcher.inner"/>
       <argument type="service" id="debug.stopwatch"/>
       <argument type="service" id="monolog.logger.event" on-invalid="null"/>
-      <argument type="service" id=".virtual_request_stack" on-invalid="null"/>
+      <argument type="service" id="request_stack" on-invalid="null"/>
       <call method="addListener">
         <argument>kernel.response</argument>
         <argument type="collection">
           <argument type="service_closure" id="security.csrf.same_origin_token_manager"/>
           <argument>onKernelResponse</argument>
-        </argument>
-        <argument>0</argument>
-      </call>
-      <call method="addListener">
-        <argument>kernel.controller</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="data_collector.router"/>
-          <argument>onKernelController</argument>
         </argument>
         <argument>0</argument>
       </call>
@@ -3170,70 +3095,6 @@
         <argument>-255</argument>
       </call>
       <call method="addListener">
-        <argument>kernel.response</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="profiler_listener"/>
-          <argument>onKernelResponse</argument>
-        </argument>
-        <argument>-100</argument>
-      </call>
-      <call method="addListener">
-        <argument>kernel.exception</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="profiler_listener"/>
-          <argument>onKernelException</argument>
-        </argument>
-        <argument>0</argument>
-      </call>
-      <call method="addListener">
-        <argument>kernel.terminate</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="profiler_listener"/>
-          <argument>onKernelTerminate</argument>
-        </argument>
-        <argument>-1024</argument>
-      </call>
-      <call method="addListener">
-        <argument>console.command</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="console_profiler_listener"/>
-          <argument>initialize</argument>
-        </argument>
-        <argument>4096</argument>
-      </call>
-      <call method="addListener">
-        <argument>console.error</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="console_profiler_listener"/>
-          <argument>catch</argument>
-        </argument>
-        <argument>-2048</argument>
-      </call>
-      <call method="addListener">
-        <argument>console.terminate</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="console_profiler_listener"/>
-          <argument>profile</argument>
-        </argument>
-        <argument>-4096</argument>
-      </call>
-      <call method="addListener">
-        <argument>kernel.controller</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="data_collector.request"/>
-          <argument>onKernelController</argument>
-        </argument>
-        <argument>0</argument>
-      </call>
-      <call method="addListener">
-        <argument>kernel.response</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="data_collector.request"/>
-          <argument>onKernelResponse</argument>
-        </argument>
-        <argument>0</argument>
-      </call>
-      <call method="addListener">
         <argument>kernel.request</argument>
         <argument type="collection">
           <argument type="service_closure" id="doctrine.dbal.idle_connection_listener"/>
@@ -3280,14 +3141,6 @@
           <argument>onMessage</argument>
         </argument>
         <argument>0</argument>
-      </call>
-      <call method="addListener">
-        <argument>kernel.response</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="web_profiler.debug_toolbar"/>
-          <argument>onKernelResponse</argument>
-        </argument>
-        <argument>-128</argument>
       </call>
       <call method="addListener">
         <argument>kernel.controller_arguments</argument>
@@ -3415,11 +3268,11 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.Y_GIjb9"/>
+      <argument type="service" id=".service_locator.7RtjwWN"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
-      <argument type="service" id=".virtual_request_stack"/>
+      <argument type="service" id="request_stack"/>
     </service>
     <service id="debug.debug_logger_configurator" class="Symfony\Component\HttpKernel\Log\DebugLoggerConfigurator">
       <argument type="service" id="debug.log_processor"/>
@@ -3609,6 +3462,33 @@
     <service id="secrets.local_vault" class="Symfony\Bundle\FrameworkBundle\Secrets\DotenvVault">
       <argument>/var/www/eduquest/.env.dev.local</argument>
     </service>
+    <service id="serializer" class="Symfony\Component\Serializer\Serializer">
+      <argument type="collection">
+        <argument type="service" id="serializer.denormalizer.unwrapping"/>
+        <argument type="service" id="serializer.normalizer.flatten_exception"/>
+        <argument type="service" id="serializer.normalizer.problem"/>
+        <argument type="service" id="serializer.normalizer.uid"/>
+        <argument type="service" id="serializer.normalizer.datetime"/>
+        <argument type="service" id="serializer.normalizer.constraint_violation_list"/>
+        <argument type="service" id="serializer.normalizer.mime_message"/>
+        <argument type="service" id="serializer.normalizer.datetimezone"/>
+        <argument type="service" id="serializer.normalizer.dateinterval"/>
+        <argument type="service" id="serializer.normalizer.form_error"/>
+        <argument type="service" id="serializer.normalizer.backed_enum"/>
+        <argument type="service" id="serializer.normalizer.data_uri"/>
+        <argument type="service" id="serializer.normalizer.translatable"/>
+        <argument type="service" id="serializer.normalizer.json_serializable"/>
+        <argument type="service" id="serializer.denormalizer.array"/>
+        <argument type="service" id="serializer.normalizer.object"/>
+      </argument>
+      <argument type="collection">
+        <argument type="service" id="serializer.encoder.xml"/>
+        <argument type="service" id="serializer.encoder.json"/>
+        <argument type="service" id="serializer.encoder.yaml"/>
+        <argument type="service" id="serializer.encoder.csv"/>
+      </argument>
+      <argument type="collection"/>
+    </service>
     <service id="serializer.mapping.class_discriminator_resolver" class="Symfony\Component\Serializer\Mapping\ClassDiscriminatorFromClassMetadata">
       <argument type="service" id="serializer.mapping.class_metadata_factory"/>
     </service>
@@ -3650,7 +3530,7 @@
       <tag name="serializer.normalizer" built_in="1" priority="-890"/>
       <tag name="serializer.normalizer.default" priority="-890"/>
       <argument key="0">true</argument>
-      <argument key="translator" type="service" id="translator.data_collector" on-invalid="null"/>
+      <argument key="translator" type="service" id="translator.default" on-invalid="null"/>
     </service>
     <service id="serializer.denormalizer.unwrapping" class="Symfony\Component\Serializer\Normalizer\UnwrappingDenormalizer">
       <tag name="serializer.normalizer" built_in="1" priority="1000"/>
@@ -3664,7 +3544,7 @@
     <service id="serializer.normalizer.translatable" class="Symfony\Component\Serializer\Normalizer\TranslatableNormalizer">
       <tag name="serializer.normalizer" built_in="1" priority="-920"/>
       <tag name="serializer.normalizer.default" priority="-920"/>
-      <argument type="service" id="translator.data_collector"/>
+      <argument type="service" id="translator.default"/>
     </service>
     <service id="serializer.normalizer.form_error" class="Symfony\Component\Serializer\Normalizer\FormErrorNormalizer">
       <tag name="serializer.normalizer" built_in="1" priority="-915"/>
@@ -3751,7 +3631,7 @@
       <argument type="service" id="serializer.mapping.class_metadata_factory"/>
     </service>
     <service id="error_handler.error_renderer.serializer" class="Symfony\Component\ErrorHandler\ErrorRenderer\SerializerErrorRenderer">
-      <argument type="service" id="debug.serializer"/>
+      <argument type="service" id="serializer"/>
       <argument type="service">
         <service>
           <argument type="service" id="request_stack"/>
@@ -3959,12 +3839,7 @@
       <argument>false</argument>
       <argument>csrf-token</argument>
     </service>
-    <service id="form.resolved_type_factory" class="Symfony\Component\Form\Extension\DataCollector\Proxy\ResolvedTypeFactoryDataCollectorProxy">
-      <argument type="service">
-        <service class="Symfony\Component\Form\ResolvedFormTypeFactory"/>
-      </argument>
-      <argument type="service" id="data_collector.form"/>
-    </service>
+    <service id="form.resolved_type_factory" class="Symfony\Component\Form\ResolvedFormTypeFactory"/>
     <service id="form.registry" class="Symfony\Component\Form\FormRegistry">
       <argument type="collection">
         <argument type="service" id="form.extension"/>
@@ -3975,7 +3850,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator.xzA68SY"/>
+      <argument type="service" id=".service_locator.hK.lrpd"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -3983,7 +3858,6 @@
           <argument type="service" id="form.type_extension.form.validator"/>
           <argument type="service" id="form.type_extension.upload.validator"/>
           <argument type="service" id="form.type_extension.csrf"/>
-          <argument type="service" id="form.type_extension.form.data_collector"/>
           <argument type="service" id="form.type_extension.form.password_hasher"/>
         </argument>
         <argument key="Symfony\Component\Form\Extension\Core\Type\RepeatedType" type="iterator">
@@ -4003,7 +3877,7 @@
     </service>
     <service id="form.type_guesser.validator" class="Symfony\Component\Form\Extension\Validator\ValidatorTypeGuesser">
       <tag name="form.type_guesser"/>
-      <argument type="service" id="debug.validator"/>
+      <argument type="service" id="validator"/>
     </service>
     <service id="form.choice_list_factory.default" class="Symfony\Component\Form\ChoiceList\Factory\DefaultChoiceListFactory"/>
     <service id="form.choice_list_factory.property_access" class="Symfony\Component\Form\ChoiceList\Factory\PropertyAccessDecorator">
@@ -4021,19 +3895,19 @@
     <service id="form.type.choice" class="Symfony\Component\Form\Extension\Core\Type\ChoiceType">
       <tag name="form.type"/>
       <argument type="service" id="form.choice_list_factory.cached"/>
-      <argument type="service" id="translator.data_collector" on-invalid="ignore"/>
+      <argument type="service" id="translator.default" on-invalid="ignore"/>
     </service>
     <service id="form.type.file" class="Symfony\Component\Form\Extension\Core\Type\FileType">
       <tag name="form.type"/>
-      <argument type="service" id="translator.data_collector" on-invalid="ignore"/>
+      <argument type="service" id="translator.default" on-invalid="ignore"/>
     </service>
     <service id="form.type.color" class="Symfony\Component\Form\Extension\Core\Type\ColorType">
       <tag name="form.type"/>
-      <argument type="service" id="translator.data_collector" on-invalid="ignore"/>
+      <argument type="service" id="translator.default" on-invalid="ignore"/>
     </service>
     <service id="form.type_extension.form.transformation_failure_handling" class="Symfony\Component\Form\Extension\Core\Type\TransformationFailureExtension">
       <tag name="form.type_extension" extended-type="Symfony\Component\Form\Extension\Core\Type\FormType"/>
-      <argument type="service" id="translator.data_collector" on-invalid="ignore"/>
+      <argument type="service" id="translator.default" on-invalid="ignore"/>
     </service>
     <service id="form.type_extension.form.http_foundation" class="Symfony\Component\Form\Extension\HttpFoundation\Type\FormTypeHttpFoundationExtension">
       <tag name="form.type_extension"/>
@@ -4047,10 +3921,10 @@
     </service>
     <service id="form.type_extension.form.validator" class="Symfony\Component\Form\Extension\Validator\Type\FormTypeValidatorExtension">
       <tag name="form.type_extension" extended-type="Symfony\Component\Form\Extension\Core\Type\FormType"/>
-      <argument type="service" id="debug.validator"/>
+      <argument type="service" id="validator"/>
       <argument>false</argument>
       <argument type="service" id="twig.form.renderer" on-invalid="ignore"/>
-      <argument type="service" id="translator.data_collector" on-invalid="ignore"/>
+      <argument type="service" id="translator.default" on-invalid="ignore"/>
     </service>
     <service id="form.type_extension.repeated.validator" class="Symfony\Component\Form\Extension\Validator\Type\RepeatedTypeValidatorExtension">
       <tag name="form.type_extension"/>
@@ -4060,7 +3934,7 @@
     </service>
     <service id="form.type_extension.upload.validator" class="Symfony\Component\Form\Extension\Validator\Type\UploadValidatorExtension">
       <tag name="form.type_extension"/>
-      <argument type="service" id="translator.data_collector"/>
+      <argument type="service" id="translator.default"/>
       <argument>validators</argument>
     </service>
     <service id="form.type_extension.csrf" class="Symfony\Component\Form\Extension\Csrf\Type\FormTypeCsrfExtension">
@@ -4068,11 +3942,14 @@
       <argument type="service" id="security.csrf.same_origin_token_manager"/>
       <argument>true</argument>
       <argument>_token</argument>
-      <argument type="service" id="translator.data_collector" on-invalid="null"/>
+      <argument type="service" id="translator.default" on-invalid="null"/>
       <argument>validators</argument>
       <argument type="service" id="form.server_params"/>
       <argument>%form.type_extension.csrf.field_attr%</argument>
       <argument>submit</argument>
+    </service>
+    <service id="validator" class="Symfony\Component\Validator\Validator\ValidatorInterface">
+      <factory service="validator.builder" method="getValidator"/>
     </service>
     <service id="validator.builder" class="Symfony\Component\Validator\ValidatorBuilder">
       <call method="setConstraintValidatorFactory">
@@ -4082,7 +3959,7 @@
         <argument type="service" id=".service_locator.GIuJv7e"/>
       </call>
       <call method="setTranslator">
-        <argument type="service" id="translator.data_collector" on-invalid="ignore"/>
+        <argument type="service" id="translator.default" on-invalid="ignore"/>
       </call>
       <call method="setTranslationDomain">
         <argument>validators</argument>
@@ -4395,10 +4272,15 @@
         <argument type="service" id="validator.expression_language_provider" on-invalid="ignore"/>
       </call>
     </service>
-    <service id="cache.validator_expression_language" class="Symfony\Component\Cache\Adapter\TraceableAdapter" public="true">
+    <service id="cache.validator_expression_language" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="true">
       <tag name="cache.pool"/>
       <tag name="kernel.reset" method="reset"/>
-      <argument type="service" id="cache.validator_expression_language.recorder_inner"/>
+      <argument>tjqX6SlmOi</argument>
+      <argument>0</argument>
+      <argument>%container.build_id%</argument>
+      <argument>/var/www/eduquest/var/cache/dev/pools/system</argument>
+      <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
+      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="validator.expression_language_provider" class="Symfony\Component\Validator\Constraints\ExpressionLanguageProvider"/>
     <service id="validator.email" class="Symfony\Component\Validator\Constraints\EmailValidator">
@@ -4407,7 +4289,7 @@
     </service>
     <service id="validator.not_compromised_password" class="Symfony\Component\Validator\Constraints\NotCompromisedPasswordValidator">
       <tag name="validator.constraint_validator"/>
-      <argument type="service" id=".debug.http_client" on-invalid="null"/>
+      <argument type="service" id="http_client.uri_template" on-invalid="null"/>
       <argument>UTF-8</argument>
       <argument>true</argument>
       <argument>null</argument>
@@ -4450,7 +4332,7 @@
       </call>
     </service>
     <service id="messenger.transport.symfony_serializer" class="Symfony\Component\Messenger\Transport\Serialization\Serializer">
-      <argument type="service" id="debug.serializer"/>
+      <argument type="service" id="serializer"/>
       <argument>json</argument>
       <argument type="collection"/>
     </service>
@@ -4469,7 +4351,7 @@
     <service id="messenger.middleware.add_bus_name_stamp_middleware" class="Symfony\Component\Messenger\Middleware\AddBusNameStampMiddleware" abstract="true"/>
     <service id="messenger.middleware.dispatch_after_current_bus" class="Symfony\Component\Messenger\Middleware\DispatchAfterCurrentBusMiddleware"/>
     <service id="messenger.middleware.validation" class="Symfony\Component\Messenger\Middleware\ValidationMiddleware">
-      <argument type="service" id="debug.validator"/>
+      <argument type="service" id="validator"/>
     </service>
     <service id="messenger.middleware.reject_redelivered_message_middleware" class="Symfony\Component\Messenger\Middleware\RejectRedeliveredMessageMiddleware"/>
     <service id="messenger.middleware.failed_message_processing_middleware" class="Symfony\Component\Messenger\Middleware\FailedMessageProcessingMiddleware"/>
@@ -4556,11 +4438,23 @@
     </service>
     <service id="messenger.routable_message_bus" class="Symfony\Component\Messenger\RoutableMessageBus">
       <argument type="service" id=".service_locator.IlGSE9J"/>
-      <argument type="service" id="debug.traced.messenger.bus.default"/>
+      <argument type="service" id="messenger.bus.default"/>
     </service>
     <service id="messenger.redispatch_message_handler" class="Symfony\Component\Messenger\Handler\RedispatchMessageHandler">
       <tag name="messenger.message_handler"/>
-      <argument type="service" id="debug.traced.messenger.bus.default"/>
+      <argument type="service" id="messenger.bus.default"/>
+    </service>
+    <service id="messenger.bus.default" class="Symfony\Component\Messenger\MessageBus">
+      <tag name="messenger.bus"/>
+      <argument type="iterator">
+        <argument type="service" id="messenger.bus.default.middleware.traceable"/>
+        <argument type="service" id="messenger.bus.default.middleware.add_bus_name_stamp_middleware"/>
+        <argument type="service" id="messenger.middleware.reject_redelivered_message_middleware"/>
+        <argument type="service" id="messenger.middleware.dispatch_after_current_bus"/>
+        <argument type="service" id="messenger.middleware.failed_message_processing_middleware"/>
+        <argument type="service" id="messenger.bus.default.middleware.send_message"/>
+        <argument type="service" id="messenger.bus.default.middleware.handle_message"/>
+      </argument>
     </service>
     <service id="messenger.transport.async" class="Symfony\Component\Messenger\Transport\TransportInterface">
       <tag name="messenger.receiver" alias="async" is_failure_transport=""/>
@@ -4646,28 +4540,28 @@
     <service id="notifier.channel.chat" class="Symfony\Component\Notifier\Channel\ChatChannel">
       <tag name="notifier.channel" channel="chat"/>
       <argument>null</argument>
-      <argument type="service" id="debug.traced.messenger.bus.default" on-invalid="null"/>
+      <argument type="service" id="messenger.bus.default" on-invalid="null"/>
     </service>
     <service id="notifier.channel.sms" class="Symfony\Component\Notifier\Channel\SmsChannel">
       <tag name="notifier.channel" channel="sms"/>
       <argument>null</argument>
-      <argument type="service" id="debug.traced.messenger.bus.default" on-invalid="null"/>
+      <argument type="service" id="messenger.bus.default" on-invalid="null"/>
     </service>
     <service id="notifier.channel.email" class="Symfony\Component\Notifier\Channel\EmailChannel">
       <tag name="notifier.channel" channel="email"/>
       <argument>null</argument>
-      <argument type="service" id="debug.traced.messenger.bus.default" on-invalid="null"/>
+      <argument type="service" id="messenger.bus.default" on-invalid="null"/>
       <argument>null</argument>
     </service>
     <service id="notifier.channel.push" class="Symfony\Component\Notifier\Channel\PushChannel">
       <tag name="notifier.channel" channel="push"/>
       <argument>null</argument>
-      <argument type="service" id="debug.traced.messenger.bus.default" on-invalid="null"/>
+      <argument type="service" id="messenger.bus.default" on-invalid="null"/>
     </service>
     <service id="notifier.channel.desktop" class="Symfony\Component\Notifier\Channel\DesktopChannel">
       <tag name="notifier.channel" channel="desktop"/>
       <argument>null</argument>
-      <argument type="service" id="debug.traced.messenger.bus.default" on-invalid="null"/>
+      <argument type="service" id="messenger.bus.default" on-invalid="null"/>
     </service>
     <service id="notifier.monolog_handler" class="Symfony\Bridge\Monolog\Handler\NotifierHandler">
       <argument type="service" id="notifier"/>
@@ -4710,298 +4604,17 @@
     </service>
     <service id="notifier.transport_factory.abstract" class="Symfony\Component\Notifier\Transport\AbstractTransportFactory" abstract="true">
       <argument type="service" id="debug.event_dispatcher"/>
-      <argument type="service" id=".debug.http_client" on-invalid="ignore"/>
+      <argument type="service" id="http_client.uri_template" on-invalid="ignore"/>
     </service>
     <service id="notifier.transport_factory.null" class="Symfony\Component\Notifier\Transport\NullTransportFactory">
       <tag name="chatter.transport_factory"/>
       <tag name="texter.transport_factory"/>
       <argument type="service" id="debug.event_dispatcher"/>
-      <argument type="service" id=".debug.http_client" on-invalid="ignore"/>
+      <argument type="service" id="http_client.uri_template" on-invalid="ignore"/>
     </service>
     <service id="notifier.admin_recipient.0" class="Symfony\Component\Notifier\Recipient\Recipient">
       <argument>admin@example.com</argument>
       <argument></argument>
-    </service>
-    <service id="profiler" class="Symfony\Component\HttpKernel\Profiler\Profiler" public="true">
-      <tag name="monolog.logger" channel="profiler"/>
-      <tag name="container.private" package="symfony/framework-bundle" version="5.4"/>
-      <tag name="kernel.reset" method="reset"/>
-      <argument type="service" id="profiler.storage"/>
-      <argument type="service" id="monolog.logger.profiler" on-invalid="null"/>
-      <argument>true</argument>
-      <call method="add">
-        <argument type="service" id="data_collector.request"/>
-      </call>
-      <call method="add">
-        <argument type="service" id=".data_collector.command"/>
-      </call>
-      <call method="add">
-        <argument type="service" id="data_collector.time"/>
-      </call>
-      <call method="add">
-        <argument type="service" id="data_collector.memory"/>
-      </call>
-      <call method="add">
-        <argument type="service" id="data_collector.validator"/>
-      </call>
-      <call method="add">
-        <argument type="service" id="data_collector.ajax"/>
-      </call>
-      <call method="add">
-        <argument type="service" id="data_collector.form"/>
-      </call>
-      <call method="add">
-        <argument type="service" id="data_collector.exception"/>
-      </call>
-      <call method="add">
-        <argument type="service" id="data_collector.logger"/>
-      </call>
-      <call method="add">
-        <argument type="service" id="data_collector.events"/>
-      </call>
-      <call method="add">
-        <argument type="service" id="data_collector.router"/>
-      </call>
-      <call method="add">
-        <argument type="service" id="data_collector.cache"/>
-      </call>
-      <call method="add">
-        <argument type="service" id="data_collector.translation"/>
-      </call>
-      <call method="add">
-        <argument type="service" id="data_collector.security"/>
-      </call>
-      <call method="add">
-        <argument type="service" id="data_collector.twig"/>
-      </call>
-      <call method="add">
-        <argument type="service" id="data_collector.http_client"/>
-      </call>
-      <call method="add">
-        <argument type="service" id="data_collector.doctrine"/>
-      </call>
-      <call method="add">
-        <argument type="service" id="data_collector.dump"/>
-      </call>
-      <call method="add">
-        <argument type="service" id="data_collector.messenger"/>
-      </call>
-      <call method="add">
-        <argument type="service" id="mailer.data_collector"/>
-      </call>
-      <call method="add">
-        <argument type="service" id="notifier.data_collector"/>
-      </call>
-      <call method="add">
-        <argument type="service" id="serializer.data_collector"/>
-      </call>
-      <call method="add">
-        <argument type="service" id="data_collector.config"/>
-      </call>
-    </service>
-    <service id="profiler.storage" class="Symfony\Component\HttpKernel\Profiler\FileProfilerStorage">
-      <argument>file:/var/www/eduquest/var/cache/dev/profiler</argument>
-    </service>
-    <service id="profiler_listener" class="Symfony\Component\HttpKernel\EventListener\ProfilerListener">
-      <tag name="kernel.event_subscriber"/>
-      <tag name="container.hot_path"/>
-      <argument type="service" id="profiler"/>
-      <argument type="service" id="request_stack"/>
-      <argument>null</argument>
-      <argument>false</argument>
-      <argument>false</argument>
-      <argument>null</argument>
-    </service>
-    <service id="console_profiler_listener" class="Symfony\Bundle\FrameworkBundle\EventListener\ConsoleProfilerListener">
-      <tag name="kernel.event_subscriber"/>
-      <tag name="container.no_preload"/>
-      <argument type="service" id=".lazy_profiler"/>
-      <argument type="service" id=".virtual_request_stack"/>
-      <argument type="service" id="debug.stopwatch"/>
-      <argument>%env(not:default:kernel.runtime_mode.web:)%</argument>
-      <argument type="service" id="router.default" on-invalid="null"/>
-    </service>
-    <service id=".lazy_profiler" class="Symfony\Component\HttpKernel\Profiler\Profiler" lazy="true">
-      <argument type="collection">
-        <argument type="service" id="profiler"/>
-      </argument>
-      <factory function="current"/>
-    </service>
-    <service id=".virtual_request_stack" class="Symfony\Component\HttpKernel\Debug\VirtualRequestStack" public="true">
-      <argument type="service" id="request_stack"/>
-    </service>
-    <service id="data_collector.config" class="Symfony\Component\HttpKernel\DataCollector\ConfigDataCollector">
-      <tag name="data_collector" template="@WebProfiler/Collector/config.html.twig" id="config" priority="-255"/>
-      <call method="setKernel">
-        <argument type="service" id="kernel" on-invalid="ignore"/>
-      </call>
-    </service>
-    <service id="data_collector.request" class="Symfony\Component\HttpKernel\DataCollector\RequestDataCollector">
-      <tag name="data_collector" template="@WebProfiler/Collector/request.html.twig" id="request" priority="335"/>
-      <tag name="kernel.event_subscriber"/>
-      <tag name="container.hot_path"/>
-      <tag name="container.hot_path"/>
-      <argument type="service" id=".virtual_request_stack" on-invalid="ignore"/>
-    </service>
-    <service id="data_collector.request.session_collector" class="Closure">
-      <argument type="collection">
-        <argument type="service" id="data_collector.request"/>
-        <argument>collectSessionUsage</argument>
-      </argument>
-      <factory class="Closure" method="fromCallable"/>
-    </service>
-    <service id="data_collector.ajax" class="Symfony\Component\HttpKernel\DataCollector\AjaxDataCollector">
-      <tag name="data_collector" template="@WebProfiler/Collector/ajax.html.twig" id="ajax" priority="315"/>
-    </service>
-    <service id="data_collector.exception" class="Symfony\Component\HttpKernel\DataCollector\ExceptionDataCollector">
-      <tag name="data_collector" template="@WebProfiler/Collector/exception.html.twig" id="exception" priority="305"/>
-    </service>
-    <service id="data_collector.events" class="Symfony\Component\HttpKernel\DataCollector\EventDataCollector">
-      <tag name="data_collector" template="@WebProfiler/Collector/events.html.twig" id="events" priority="290"/>
-      <argument type="tagged_iterator" tag="event_dispatcher.dispatcher" index-by="name" default-index-method="getDefaultNameName" default-priority-method="getDefaultNamePriority"/>
-      <argument type="service" id=".virtual_request_stack" on-invalid="ignore"/>
-    </service>
-    <service id="data_collector.logger" class="Symfony\Component\HttpKernel\DataCollector\LoggerDataCollector">
-      <tag name="monolog.logger" channel="profiler"/>
-      <tag name="data_collector" template="@WebProfiler/Collector/logger.html.twig" id="logger" priority="300"/>
-      <argument type="service" id="monolog.logger.profiler" on-invalid="ignore"/>
-      <argument>/var/www/eduquest/var/cache/dev/App_KernelDevDebugContainer</argument>
-      <argument type="service" id=".virtual_request_stack" on-invalid="ignore"/>
-    </service>
-    <service id="data_collector.time" class="Symfony\Component\HttpKernel\DataCollector\TimeDataCollector">
-      <tag name="data_collector" template="@WebProfiler/Collector/time.html.twig" id="time" priority="330"/>
-      <argument type="service" id="kernel" on-invalid="ignore"/>
-      <argument type="service" id="debug.stopwatch" on-invalid="ignore"/>
-    </service>
-    <service id="data_collector.memory" class="Symfony\Component\HttpKernel\DataCollector\MemoryDataCollector">
-      <tag name="data_collector" template="@WebProfiler/Collector/memory.html.twig" id="memory" priority="325"/>
-    </service>
-    <service id="data_collector.router" class="Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector">
-      <tag name="data_collector" template="@WebProfiler/Collector/router.html.twig" id="router" priority="285"/>
-      <tag name="kernel.event_listener" event="kernel.controller" method="onKernelController"/>
-      <tag name="container.hot_path"/>
-    </service>
-    <service id=".data_collector.command" class="Symfony\Component\Console\DataCollector\CommandDataCollector">
-      <tag name="data_collector" template="@WebProfiler/Collector/command.html.twig" id="command" priority="335"/>
-    </service>
-    <service id="data_collector.cache" class="Symfony\Component\Cache\DataCollector\CacheDataCollector" public="true">
-      <tag name="data_collector" template="@WebProfiler/Collector/cache.html.twig" id="cache" priority="275"/>
-      <call method="addInstance">
-        <argument>cache.app</argument>
-        <argument type="service" id="cache.app"/>
-      </call>
-      <call method="addInstance">
-        <argument>cache.system</argument>
-        <argument type="service" id="cache.system"/>
-      </call>
-      <call method="addInstance">
-        <argument>cache.validator</argument>
-        <argument type="service" id="cache.validator"/>
-      </call>
-      <call method="addInstance">
-        <argument>cache.serializer</argument>
-        <argument type="service" id="cache.serializer"/>
-      </call>
-      <call method="addInstance">
-        <argument>cache.property_info</argument>
-        <argument type="service" id="cache.property_info"/>
-      </call>
-      <call method="addInstance">
-        <argument>cache.asset_mapper</argument>
-        <argument type="service" id="cache.asset_mapper"/>
-      </call>
-      <call method="addInstance">
-        <argument>cache.messenger.restart_workers_signal</argument>
-        <argument type="service" id="cache.messenger.restart_workers_signal"/>
-      </call>
-      <call method="addInstance">
-        <argument>cache.validator_expression_language</argument>
-        <argument type="service" id="cache.validator_expression_language"/>
-      </call>
-      <call method="addInstance">
-        <argument>cache.doctrine.orm.default.result</argument>
-        <argument type="service" id="cache.doctrine.orm.default.result"/>
-      </call>
-      <call method="addInstance">
-        <argument>cache.doctrine.orm.default.query</argument>
-        <argument type="service" id="cache.doctrine.orm.default.query"/>
-      </call>
-      <call method="addInstance">
-        <argument>cache.security_expression_language</argument>
-        <argument type="service" id="cache.security_expression_language"/>
-      </call>
-      <call method="addInstance">
-        <argument>cache.security_is_granted_attribute_expression_language</argument>
-        <argument type="service" id="cache.security_is_granted_attribute_expression_language"/>
-      </call>
-      <call method="addInstance">
-        <argument>cache.security_is_csrf_token_valid_attribute_expression_language</argument>
-        <argument type="service" id="cache.security_is_csrf_token_valid_attribute_expression_language"/>
-      </call>
-    </service>
-    <service id="cache_pool_clearer.cache_warmer" class="Symfony\Bundle\FrameworkBundle\CacheWarmer\CachePoolClearerCacheWarmer">
-      <tag name="kernel.cache_warmer" priority="64"/>
-      <argument type="service" id="cache.system_clearer"/>
-      <argument type="collection">
-        <argument>cache.validator</argument>
-        <argument>cache.serializer</argument>
-      </argument>
-    </service>
-    <service id="form.type_extension.form.data_collector" class="Symfony\Component\Form\Extension\DataCollector\Type\DataCollectorTypeExtension">
-      <tag name="form.type_extension"/>
-      <argument type="service" id="data_collector.form"/>
-    </service>
-    <service id="data_collector.form.extractor" class="Symfony\Component\Form\Extension\DataCollector\FormDataExtractor"/>
-    <service id="data_collector.form" class="Symfony\Component\Form\Extension\DataCollector\FormDataCollector">
-      <tag name="data_collector" template="@WebProfiler/Collector/form.html.twig" id="form" priority="310"/>
-      <argument type="service" id="data_collector.form.extractor"/>
-    </service>
-    <service id="debug.validator" class="Symfony\Component\Validator\Validator\TraceableValidator">
-      <tag name="kernel.reset" method="reset"/>
-      <tag name="container.decorator" id="validator" inner="debug.validator.inner"/>
-      <argument type="service" id="debug.validator.inner"/>
-    </service>
-    <service id="data_collector.validator" class="Symfony\Component\Validator\DataCollector\ValidatorDataCollector">
-      <tag name="data_collector" template="@WebProfiler/Collector/validator.html.twig" id="validator" priority="320"/>
-      <argument type="service" id="debug.validator"/>
-    </service>
-    <service id="translator.data_collector" class="Symfony\Component\Translation\DataCollectorTranslator">
-      <argument type="service" id="translator.default"/>
-    </service>
-    <service id="data_collector.translation" class="Symfony\Component\Translation\DataCollector\TranslationDataCollector">
-      <tag name="data_collector" template="@WebProfiler/Collector/translation.html.twig" id="translation" priority="275"/>
-      <argument type="service" id="translator.data_collector"/>
-    </service>
-    <service id="data_collector.messenger" class="Symfony\Component\Messenger\DataCollector\MessengerDataCollector">
-      <tag name="data_collector" template="@WebProfiler/Collector/messenger.html.twig" id="messenger" priority="100"/>
-      <call method="registerBus">
-        <argument>messenger.bus.default</argument>
-        <argument type="service" id="debug.traced.messenger.bus.default"/>
-      </call>
-    </service>
-    <service id="mailer.data_collector" class="Symfony\Component\Mailer\DataCollector\MessageDataCollector">
-      <tag name="data_collector" template="@WebProfiler/Collector/mailer.html.twig" id="mailer"/>
-      <argument type="service" id="mailer.message_logger_listener"/>
-    </service>
-    <service id="data_collector.http_client" class="Symfony\Component\HttpClient\DataCollector\HttpClientDataCollector">
-      <tag name="data_collector" template="@WebProfiler/Collector/http_client.html.twig" id="http_client" priority="250"/>
-      <call method="registerClient">
-        <argument>http_client</argument>
-        <argument type="service" id=".debug.http_client"/>
-      </call>
-    </service>
-    <service id="notifier.data_collector" class="Symfony\Component\Notifier\DataCollector\NotificationDataCollector">
-      <tag name="data_collector" template="@WebProfiler/Collector/notifier.html.twig" id="notifier"/>
-      <argument type="service" id="notifier.notification_logger_listener"/>
-    </service>
-    <service id="debug.serializer" class="Symfony\Component\Serializer\Debug\TraceableSerializer">
-      <tag name="container.decorator" id="serializer" inner="debug.serializer.inner"/>
-      <argument type="service" id="debug.serializer.inner"/>
-      <argument type="service" id="serializer.data_collector"/>
-      <argument>default</argument>
-    </service>
-    <service id="serializer.data_collector" class="Symfony\Component\Serializer\DataCollector\SerializerDataCollector">
-      <tag name="data_collector" template="@WebProfiler/Collector/serializer.html.twig" id="serializer"/>
     </service>
     <service id="mime_types" class="Symfony\Component\Mime\MimeTypes">
       <call method="setDefault">
@@ -5084,12 +4697,6 @@
       <call method="setName">
         <argument>dbal:run-sql</argument>
       </call>
-    </service>
-    <service id="Doctrine\Bundle\DoctrineBundle\Controller\ProfilerController" class="Doctrine\Bundle\DoctrineBundle\Controller\ProfilerController" public="true">
-      <tag name="controller.service_arguments"/>
-      <argument type="service" id="twig"/>
-      <argument type="service" id="doctrine"/>
-      <argument type="service" id="profiler"/>
     </service>
     <service id="doctrine.dbal.idle_connection_listener" class="Symfony\Bridge\Doctrine\Middleware\IdleConnection\Listener">
       <tag name="kernel.event_subscriber"/>
@@ -5513,13 +5120,11 @@
       <argument>true</argument>
     </service>
     <service id="cache.doctrine.orm.default.metadata" class="Symfony\Component\Cache\Adapter\ArrayAdapter"/>
-    <service id="cache.doctrine.orm.default.result" class="Symfony\Component\Cache\Adapter\TraceableAdapter">
+    <service id="cache.doctrine.orm.default.result" class="Symfony\Component\Cache\Adapter\ArrayAdapter">
       <tag name="cache.pool"/>
-      <argument type="service" id="cache.doctrine.orm.default.result.recorder_inner"/>
     </service>
-    <service id="cache.doctrine.orm.default.query" class="Symfony\Component\Cache\Adapter\TraceableAdapter">
+    <service id="cache.doctrine.orm.default.query" class="Symfony\Component\Cache\Adapter\ArrayAdapter">
       <tag name="cache.pool"/>
-      <argument type="service" id="cache.doctrine.orm.default.query.recorder_inner"/>
     </service>
     <service id="doctrine.orm.default_entity_listener_resolver" class="Doctrine\Bundle\DoctrineBundle\Mapping\ContainerEntityListenerResolver">
       <argument type="service" id="service_container"/>
@@ -5763,7 +5368,7 @@
       <argument type="service" id="debug.stopwatch" on-invalid="ignore"/>
       <argument type="service" id="debug.file_link_formatter" on-invalid="ignore"/>
       <argument>UTF-8</argument>
-      <argument type="service" id=".virtual_request_stack"/>
+      <argument>null</argument>
       <argument type="service" id="var_dumper.server_connection"/>
     </service>
     <service id="debug.dump_listener" class="Symfony\Component\HttpKernel\EventListener\DumpListener">
@@ -5882,10 +5487,10 @@
       <tag name="kernel.reset" method="resetGlobals"/>
       <argument type="service" id="twig.loader.native_filesystem"/>
       <argument type="collection">
-        <argument key="cache">/var/www/eduquest/var/cache/dev/twig</argument>
-        <argument key="charset">UTF-8</argument>
         <argument key="debug">true</argument>
-        <argument key="strict_variables">true</argument>
+        <argument key="strict_variables">false</argument>
+        <argument key="cache">false</argument>
+        <argument key="charset">UTF-8</argument>
         <argument key="autoescape">name</argument>
       </argument>
       <call method="addExtension">
@@ -6011,15 +5616,7 @@
         <argument key="/var/www/eduquest/vendor/symfony/twig-bridge/Resources/views/Form">null</argument>
       </argument>
       <argument>/var/www/eduquest/templates</argument>
-      <argument type="collection">
-        <argument>*.twig</argument>
-      </argument>
-    </service>
-    <service id="twig.template_cache_warmer" class="Symfony\Bundle\TwigBundle\CacheWarmer\TemplateCacheWarmer">
-      <tag name="kernel.cache_warmer"/>
-      <tag name="container.service_subscriber" id="twig"/>
-      <argument type="service" id=".service_locator.lMv3Dwi.twig.template_cache_warmer"/>
-      <argument type="service" id="twig.template_iterator"/>
+      <argument type="collection"/>
     </service>
     <service id="twig.loader.native_filesystem" class="Twig\Loader\FilesystemLoader">
       <tag name="twig.loader"/>
@@ -6110,7 +5707,7 @@
     </service>
     <service id="twig.extension.trans" class="Symfony\Bridge\Twig\Extension\TranslationExtension">
       <tag name="twig.extension"/>
-      <argument type="service" id="translator.data_collector" on-invalid="null"/>
+      <argument type="service" id="translator.default" on-invalid="null"/>
     </service>
     <service id="twig.extension.assets" class="Symfony\Bridge\Twig\Extension\AssetExtension">
       <tag name="twig.extension"/>
@@ -6179,7 +5776,7 @@
     </service>
     <service id="twig.runtime.serializer" class="Symfony\Bridge\Twig\Extension\SerializerRuntime">
       <tag name="twig.runtime"/>
-      <argument type="service" id="debug.serializer"/>
+      <argument type="service" id="serializer"/>
     </service>
     <service id="twig.extension.serializer" class="Symfony\Bridge\Twig\Extension\SerializerExtension">
       <tag name="twig.extension"/>
@@ -6190,7 +5787,7 @@
     </service>
     <service id="twig.extension.form" class="Symfony\Bridge\Twig\Extension\FormExtension">
       <tag name="twig.extension"/>
-      <argument type="service" id="translator.data_collector" on-invalid="null"/>
+      <argument type="service" id="translator.default" on-invalid="null"/>
     </service>
     <service id="twig.form.engine" class="Symfony\Bridge\Twig\Form\TwigRendererEngine">
       <tag name="kernel.reset" method="reset"/>
@@ -6249,14 +5846,14 @@
     </service>
     <service id="web_profiler.controller.profiler" class="Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController" public="true">
       <argument type="service" id="router.default" on-invalid="null"/>
-      <argument type="service" id="profiler" on-invalid="null"/>
+      <argument>null</argument>
       <argument type="service" id="twig"/>
-      <argument>%data_collector.templates%</argument>
+      <argument type="collection"/>
       <argument type="service" id="web_profiler.csp.handler"/>
       <argument>/var/www/eduquest</argument>
     </service>
     <service id="web_profiler.controller.router" class="Symfony\Bundle\WebProfilerBundle\Controller\RouterController" public="true">
-      <argument type="service" id="profiler" on-invalid="null"/>
+      <argument>null</argument>
       <argument type="service" id="twig"/>
       <argument type="service" id="router.default" on-invalid="null"/>
       <argument>null</argument>
@@ -6264,7 +5861,7 @@
     </service>
     <service id="web_profiler.controller.exception_panel" class="Symfony\Bundle\WebProfilerBundle\Controller\ExceptionPanelController" public="true">
       <argument type="service" id="error_handler.error_renderer.html"/>
-      <argument type="service" id="profiler" on-invalid="null"/>
+      <argument>null</argument>
     </service>
     <service id="web_profiler.csp.handler" class="Symfony\Bundle\WebProfilerBundle\Csp\ContentSecurityPolicyHandler">
       <argument type="service">
@@ -6298,17 +5895,6 @@
       <argument type="service" id="debug.file_link_formatter"/>
       <argument>/var/www/eduquest</argument>
       <argument>UTF-8</argument>
-    </service>
-    <service id="web_profiler.debug_toolbar" class="Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener">
-      <tag name="kernel.event_subscriber"/>
-      <tag name="container.hot_path"/>
-      <argument type="service" id="twig"/>
-      <argument>false</argument>
-      <argument>2</argument>
-      <argument type="service" id="router.default" on-invalid="ignore"/>
-      <argument>^/((index|app(_[\w]+)?)\.php/)?_wdt</argument>
-      <argument type="service" id="web_profiler.csp.handler"/>
-      <argument type="service" id="data_collector.dump" on-invalid="ignore"/>
     </service>
     <service id="stimulus.helper" class="Symfony\UX\StimulusBundle\Helper\StimulusHelper">
       <argument type="service" id="twig" on-invalid="null"/>
@@ -6519,10 +6105,15 @@
       <argument type="service" id="security.token_storage"/>
       <argument type="service" id="security.password_hasher_factory"/>
     </service>
-    <service id="cache.security_expression_language" class="Symfony\Component\Cache\Adapter\TraceableAdapter">
+    <service id="cache.security_expression_language" class="Symfony\Component\Cache\Adapter\AdapterInterface">
       <tag name="cache.pool"/>
       <tag name="kernel.reset" method="reset"/>
-      <argument type="service" id="cache.security_expression_language.recorder_inner"/>
+      <argument>ErG4-3gCf5</argument>
+      <argument>0</argument>
+      <argument>%container.build_id%</argument>
+      <argument>/var/www/eduquest/var/cache/dev/pools/system</argument>
+      <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
+      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="controller.is_granted_attribute_listener" class="Symfony\Component\Security\Http\EventListener\IsGrantedAttributeListener">
       <tag name="kernel.event_subscriber"/>
@@ -6533,18 +6124,28 @@
     <service id="security.is_granted_attribute_expression_language" class="Symfony\Component\ExpressionLanguage\ExpressionLanguage">
       <argument type="service" id="cache.security_is_granted_attribute_expression_language" on-invalid="null"/>
     </service>
-    <service id="cache.security_is_granted_attribute_expression_language" class="Symfony\Component\Cache\Adapter\TraceableAdapter" public="true">
+    <service id="cache.security_is_granted_attribute_expression_language" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="true">
       <tag name="cache.pool"/>
       <tag name="kernel.reset" method="reset"/>
-      <argument type="service" id="cache.security_is_granted_attribute_expression_language.recorder_inner"/>
+      <argument>7vA7TYxJFc</argument>
+      <argument>0</argument>
+      <argument>%container.build_id%</argument>
+      <argument>/var/www/eduquest/var/cache/dev/pools/system</argument>
+      <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
+      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="security.is_csrf_token_valid_attribute_expression_language" class="Symfony\Component\ExpressionLanguage\ExpressionLanguage">
       <argument type="service" id="cache.security_is_csrf_token_valid_attribute_expression_language" on-invalid="null"/>
     </service>
-    <service id="cache.security_is_csrf_token_valid_attribute_expression_language" class="Symfony\Component\Cache\Adapter\TraceableAdapter" public="true">
+    <service id="cache.security_is_csrf_token_valid_attribute_expression_language" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="true">
       <tag name="cache.pool"/>
       <tag name="kernel.reset" method="reset"/>
-      <argument type="service" id="cache.security_is_csrf_token_valid_attribute_expression_language.recorder_inner"/>
+      <argument>6yXSPBjU-7</argument>
+      <argument>0</argument>
+      <argument>%container.build_id%</argument>
+      <argument>/var/www/eduquest/var/cache/dev/pools/system</argument>
+      <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
+      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="security.password_hasher_factory" class="Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactory">
       <argument type="collection">
@@ -6771,7 +6372,7 @@
       <argument type="abstract">options</argument>
       <argument type="service" id="property_accessor" on-invalid="null"/>
       <call method="setTranslator">
-        <argument type="service" id="translator.data_collector" on-invalid="ignore"/>
+        <argument type="service" id="translator.default" on-invalid="ignore"/>
       </call>
     </service>
     <service id="security.authenticator.x509" class="Symfony\Component\Security\Http\Authenticator\X509Authenticator" abstract="true">
@@ -6808,7 +6409,7 @@
     </service>
     <service id="security.access_token_handler.oidc_user_info.http_client" class="Symfony\Contracts\HttpClient\HttpClientInterface" abstract="true">
       <argument type="abstract">http client options</argument>
-      <factory service=".debug.http_client" method="withOptions"/>
+      <factory service="http_client.uri_template" method="withOptions"/>
     </service>
     <service id="security.access_token_handler.oidc_user_info" class="Symfony\Component\Security\Http\AccessToken\Oidc\OidcUserInfoTokenHandler" abstract="true">
       <argument type="abstract">http client</argument>
@@ -7137,11 +6738,9 @@
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
-      <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger_prototype" class="Monolog\Logger" abstract="true">
       <argument></argument>
-      <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.activation_strategy.not_found" class="Symfony\Bridge\Monolog\Handler\FingersCrossed\NotFoundActivationStrategy" abstract="true"/>
     <service id="monolog.handler.fingers_crossed.error_level_activation_strategy" class="Monolog\Handler\FingersCrossed\ErrorLevelActivationStrategy" abstract="true"/>
@@ -7397,6 +6996,8 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\RegistrationController" class="App\Controller\RegistrationController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\RegistrationController" class="App\Controller\RegistrationController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\RegistrationController" class="App\Controller\RegistrationController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\EditProfileFormType" class="App\Form\EditProfileFormType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\EditProfileFormType" class="App\Form\EditProfileFormType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\LoginFormType" class="App\Form\LoginFormType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\LoginFormType" class="App\Form\LoginFormType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\RegistrationFormType" class="App\Form\RegistrationFormType" autowire="true" abstract="true"/>
@@ -7977,6 +7578,20 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.5FanY8e" method="withContext"/>
     </service>
+    <service id=".service_locator.2GhnQGe" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="user" type="service_closure" id=".errored..service_locator.2GhnQGe.Symfony\Component\Security\Core\User\UserInterface"/>
+        <argument key="passwordHasher" type="service_closure" id="security.user_password_hasher"/>
+        <argument key="em" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
+    <service id=".service_locator.2GhnQGe.App\Controller\ProfileController::edit()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\ProfileController::edit()"/>
+      <argument>App\Controller\ProfileController::edit()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.2GhnQGe" method="withContext"/>
+    </service>
     <service id=".service_locator.5SuUxla" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7990,7 +7605,7 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.5SuUxla" method="withContext"/>
     </service>
-    <service id=".service_locator.Y_GIjb9" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.7RtjwWN" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.zHyJIs5.kernel::registerContainerConfiguration()"/>
@@ -7999,11 +7614,13 @@
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.zHyJIs5.kernel::loadRoutes()"/>
         <argument key="App\Controller\LoginController::login" type="service_closure" id=".service_locator.3QECKYg.App\Controller\LoginController::login()"/>
         <argument key="App\Controller\ProfileController::index" type="service_closure" id=".service_locator.5FanY8e.App\Controller\ProfileController::index()"/>
+        <argument key="App\Controller\ProfileController::edit" type="service_closure" id=".service_locator.2GhnQGe.App\Controller\ProfileController::edit()"/>
         <argument key="App\Controller\RegistrationController::register" type="service_closure" id=".service_locator.5SuUxla.App\Controller\RegistrationController::register()"/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.zHyJIs5.kernel::registerContainerConfiguration()"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.zHyJIs5.kernel::loadRoutes()"/>
         <argument key="App\Controller\LoginController:login" type="service_closure" id=".service_locator.3QECKYg.App\Controller\LoginController::login()"/>
         <argument key="App\Controller\ProfileController:index" type="service_closure" id=".service_locator.5FanY8e.App\Controller\ProfileController::index()"/>
+        <argument key="App\Controller\ProfileController:edit" type="service_closure" id=".service_locator.2GhnQGe.App\Controller\ProfileController::edit()"/>
         <argument key="App\Controller\RegistrationController:register" type="service_closure" id=".service_locator.5SuUxla.App\Controller\RegistrationController::register()"/>
       </argument>
     </service>
@@ -8027,106 +7644,6 @@
       <argument type="collection">
         <argument key="inline" type="service_closure" id="fragment.renderer.inline"/>
       </argument>
-    </service>
-    <service id=".debug.serializer.normalizer.serializer.denormalizer.unwrapping" class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-      <argument type="service" id="serializer.denormalizer.unwrapping"/>
-      <argument type="service" id="serializer.data_collector"/>
-      <argument>default</argument>
-    </service>
-    <service id=".debug.serializer.normalizer.serializer.normalizer.flatten_exception" class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-      <argument type="service" id="serializer.normalizer.flatten_exception"/>
-      <argument type="service" id="serializer.data_collector"/>
-      <argument>default</argument>
-    </service>
-    <service id=".debug.serializer.normalizer.serializer.normalizer.problem" class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-      <argument type="service" id="serializer.normalizer.problem"/>
-      <argument type="service" id="serializer.data_collector"/>
-      <argument>default</argument>
-    </service>
-    <service id=".debug.serializer.normalizer.serializer.normalizer.uid" class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-      <argument type="service" id="serializer.normalizer.uid"/>
-      <argument type="service" id="serializer.data_collector"/>
-      <argument>default</argument>
-    </service>
-    <service id=".debug.serializer.normalizer.serializer.normalizer.datetime" class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-      <argument type="service" id="serializer.normalizer.datetime"/>
-      <argument type="service" id="serializer.data_collector"/>
-      <argument>default</argument>
-    </service>
-    <service id=".debug.serializer.normalizer.serializer.normalizer.constraint_violation_list" class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-      <argument type="service" id="serializer.normalizer.constraint_violation_list"/>
-      <argument type="service" id="serializer.data_collector"/>
-      <argument>default</argument>
-    </service>
-    <service id=".debug.serializer.normalizer.serializer.normalizer.mime_message" class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-      <argument type="service" id="serializer.normalizer.mime_message"/>
-      <argument type="service" id="serializer.data_collector"/>
-      <argument>default</argument>
-    </service>
-    <service id=".debug.serializer.normalizer.serializer.normalizer.datetimezone" class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-      <argument type="service" id="serializer.normalizer.datetimezone"/>
-      <argument type="service" id="serializer.data_collector"/>
-      <argument>default</argument>
-    </service>
-    <service id=".debug.serializer.normalizer.serializer.normalizer.dateinterval" class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-      <argument type="service" id="serializer.normalizer.dateinterval"/>
-      <argument type="service" id="serializer.data_collector"/>
-      <argument>default</argument>
-    </service>
-    <service id=".debug.serializer.normalizer.serializer.normalizer.form_error" class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-      <argument type="service" id="serializer.normalizer.form_error"/>
-      <argument type="service" id="serializer.data_collector"/>
-      <argument>default</argument>
-    </service>
-    <service id=".debug.serializer.normalizer.serializer.normalizer.backed_enum" class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-      <argument type="service" id="serializer.normalizer.backed_enum"/>
-      <argument type="service" id="serializer.data_collector"/>
-      <argument>default</argument>
-    </service>
-    <service id=".debug.serializer.normalizer.serializer.normalizer.data_uri" class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-      <argument type="service" id="serializer.normalizer.data_uri"/>
-      <argument type="service" id="serializer.data_collector"/>
-      <argument>default</argument>
-    </service>
-    <service id=".debug.serializer.normalizer.serializer.normalizer.translatable" class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-      <argument type="service" id="serializer.normalizer.translatable"/>
-      <argument type="service" id="serializer.data_collector"/>
-      <argument>default</argument>
-    </service>
-    <service id=".debug.serializer.normalizer.serializer.normalizer.json_serializable" class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-      <argument type="service" id="serializer.normalizer.json_serializable"/>
-      <argument type="service" id="serializer.data_collector"/>
-      <argument>default</argument>
-    </service>
-    <service id=".debug.serializer.normalizer.serializer.denormalizer.array" class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-      <argument type="service" id="serializer.denormalizer.array"/>
-      <argument type="service" id="serializer.data_collector"/>
-      <argument>default</argument>
-    </service>
-    <service id=".debug.serializer.normalizer.serializer.normalizer.object" class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-      <argument type="service" id="serializer.normalizer.object"/>
-      <argument type="service" id="serializer.data_collector"/>
-      <argument>default</argument>
-    </service>
-    <service id=".debug.serializer.encoder.serializer.encoder.xml" class="Symfony\Component\Serializer\Debug\TraceableEncoder">
-      <argument type="service" id="serializer.encoder.xml"/>
-      <argument type="service" id="serializer.data_collector"/>
-      <argument>default</argument>
-    </service>
-    <service id=".debug.serializer.encoder.serializer.encoder.json" class="Symfony\Component\Serializer\Debug\TraceableEncoder">
-      <argument type="service" id="serializer.encoder.json"/>
-      <argument type="service" id="serializer.data_collector"/>
-      <argument>default</argument>
-    </service>
-    <service id=".debug.serializer.encoder.serializer.encoder.yaml" class="Symfony\Component\Serializer\Debug\TraceableEncoder">
-      <argument type="service" id="serializer.encoder.yaml"/>
-      <argument type="service" id="serializer.data_collector"/>
-      <argument>default</argument>
-    </service>
-    <service id=".debug.serializer.encoder.serializer.encoder.csv" class="Symfony\Component\Serializer\Debug\TraceableEncoder">
-      <argument type="service" id="serializer.encoder.csv"/>
-      <argument type="service" id="serializer.data_collector"/>
-      <argument>default</argument>
     </service>
     <service id=".debug.value_resolver.security.user_value_resolver" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\TraceableValueResolver">
       <argument type="service" id="security.user_value_resolver"/>
@@ -8184,9 +7701,10 @@
       <argument type="service" id="argument_resolver.query_parameter_value_resolver"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.xzA68SY" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.hK.lrpd" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Form\EditProfileFormType" type="service_closure" id="App\Form\EditProfileFormType"/>
         <argument key="App\Form\LoginFormType" type="service_closure" id="App\Form\LoginFormType"/>
         <argument key="App\Form\RegistrationFormType" type="service_closure" id="App\Form\RegistrationFormType"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="service_closure" id="form.type.form"/>
@@ -8218,15 +7736,10 @@
         <argument type="service" id="monolog.logger.messenger" on-invalid="ignore"/>
       </call>
     </service>
-    <service id="debug.traced.messenger.bus.default" class="Symfony\Component\Messenger\TraceableMessageBus">
-      <tag name="messenger.bus"/>
-      <tag name="container.decorator" id="messenger.bus.default" inner="debug.traced.messenger.bus.default.inner"/>
-      <argument type="service" id="debug.traced.messenger.bus.default.inner"/>
-    </service>
     <service id=".service_locator.IlGSE9J" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="messenger.bus.default" type="service_closure" id="debug.traced.messenger.bus.default"/>
+        <argument key="messenger.bus.default" type="service_closure" id="messenger.bus.default"/>
       </argument>
     </service>
     <service id=".service_locator.l.c9cDr" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -8301,13 +7814,6 @@
           <argument type="service" id=".messenger.handler_descriptor.Dkv9sRY"/>
         </argument>
       </argument>
-    </service>
-    <service id=".debug.http_client" class="Symfony\Component\HttpClient\TraceableHttpClient">
-      <tag name="http_client.client"/>
-      <tag name="kernel.reset" method="reset"/>
-      <tag name="container.decorator" id="http_client" inner="http_client.uri_template.inner"/>
-      <argument type="service" id="http_client.uri_template"/>
-      <argument type="service" id="debug.stopwatch" on-invalid="ignore"/>
     </service>
     <service id=".service_locator.wy_sXIY" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
@@ -8409,14 +7915,12 @@
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
-      <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger.console" class="Monolog\Logger">
       <argument>console</argument>
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
-      <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger.messenger" class="Monolog\Logger">
       <argument>messenger</argument>
@@ -8426,7 +7930,6 @@
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
-      <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger.cache" class="Monolog\Logger">
       <argument>cache</argument>
@@ -8436,7 +7939,6 @@
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
-      <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger.asset_mapper" class="Monolog\Logger">
       <argument>asset_mapper</argument>
@@ -8446,7 +7948,6 @@
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
-      <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger.http_client" class="Monolog\Logger">
       <argument>http_client</argument>
@@ -8456,7 +7957,6 @@
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
-      <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger.mailer" class="Monolog\Logger">
       <argument>mailer</argument>
@@ -8466,7 +7966,6 @@
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
-      <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger.translation" class="Monolog\Logger">
       <argument>translation</argument>
@@ -8476,7 +7975,6 @@
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
-      <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger.php" class="Monolog\Logger">
       <argument>php</argument>
@@ -8486,14 +7984,12 @@
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
-      <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger.event" class="Monolog\Logger">
       <argument>event</argument>
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.null_internal"/>
       </call>
-      <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger.router" class="Monolog\Logger">
       <argument>router</argument>
@@ -8503,24 +7999,12 @@
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
-      <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
-    </service>
-    <service id="monolog.logger.profiler" class="Monolog\Logger">
-      <argument>profiler</argument>
-      <call method="pushHandler">
-        <argument type="service" id="monolog.handler.console"/>
-      </call>
-      <call method="pushHandler">
-        <argument type="service" id="monolog.handler.main"/>
-      </call>
-      <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger.doctrine" class="Monolog\Logger">
       <argument>doctrine</argument>
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
-      <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger.debug" class="Monolog\Logger">
       <argument>debug</argument>
@@ -8530,7 +8014,6 @@
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
-      <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger.security" class="Monolog\Logger">
       <argument>security</argument>
@@ -8540,7 +8023,6 @@
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
-      <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger.deprecation" class="Monolog\Logger" public="true">
       <argument>deprecation</argument>
@@ -8550,7 +8032,6 @@
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
-      <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.handler.null_internal" class="Monolog\Handler\NullHandler"/>
     <service id=".service_locator.ILdUWIS" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -8575,7 +8056,7 @@
         <argument key="router" type="service_closure" id="router.default" on-invalid="ignore"/>
         <argument key="request_stack" type="service_closure" id="request_stack" on-invalid="ignore"/>
         <argument key="http_kernel" type="service_closure" id="http_kernel" on-invalid="ignore"/>
-        <argument key="serializer" type="service_closure" id="debug.serializer" on-invalid="ignore"/>
+        <argument key="serializer" type="service_closure" id="serializer" on-invalid="ignore"/>
         <argument key="security.authorization_checker" type="service_closure" id="security.authorization_checker" on-invalid="ignore"/>
         <argument key="twig" type="service_closure" id="twig" on-invalid="ignore"/>
         <argument key="form.factory" type="service_closure" id="form.factory" on-invalid="ignore"/>
@@ -8612,7 +8093,7 @@
     <service id=".service_locator.7jukgan" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="translator" type="service_closure" id="translator.data_collector"/>
+        <argument key="translator" type="service_closure" id="translator.default"/>
       </argument>
     </service>
     <service id=".service_locator.7jukgan.translation.warmer" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -8644,18 +8125,6 @@
       <argument>router.cache_warmer</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.qXR9Hv0" method="withContext"/>
-    </service>
-    <service id=".service_locator.lMv3Dwi" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="twig" type="service_closure" id="twig"/>
-      </argument>
-    </service>
-    <service id=".service_locator.lMv3Dwi.twig.template_cache_warmer" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="twig.template_cache_warmer"/>
-      <argument>twig.template_cache_warmer</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.lMv3Dwi" method="withContext"/>
     </service>
     <service id=".service_locator.ccTBFaB" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
@@ -8728,7 +8197,6 @@
       <argument type="collection">
         <argument key="session_factory" type="service_closure" id="session.factory" on-invalid="ignore"/>
         <argument key="logger" type="service_closure" id="monolog.logger" on-invalid="ignore"/>
-        <argument key="session_collector" type="service_closure" id="data_collector.request.session_collector" on-invalid="ignore"/>
         <argument key="request_stack" type="service_closure" id="request_stack" on-invalid="ignore"/>
       </argument>
     </service>
@@ -8761,9 +8229,6 @@
         <argument key="security.firewall.event_dispatcher_locator" type="service_closure" id="security.firewall.event_dispatcher_locator"/>
         <argument key="security.csrf.token_manager" type="service_closure" id="security.csrf.same_origin_token_manager" on-invalid="ignore"/>
       </argument>
-    </service>
-    <service id="debug.validator.inner" class="Symfony\Component\Validator\Validator\ValidatorInterface">
-      <factory service="validator.builder" method="getValidator"/>
     </service>
     <service id="http_client.uri_template.inner" class="Symfony\Contracts\HttpClient\HttpClientInterface">
       <argument type="collection">
@@ -8825,153 +8290,6 @@
       <argument type="service" id="security.csrf.token_storage"/>
       <argument type="service" id="request_stack" on-invalid="ignore"/>
     </service>
-    <service id="debug.serializer.inner" class="Symfony\Component\Serializer\Serializer">
-      <argument type="collection">
-        <argument type="service">
-          <service class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-            <argument type="service" id="serializer.denormalizer.unwrapping"/>
-            <argument type="service" id="serializer.data_collector"/>
-            <argument>default</argument>
-          </service>
-        </argument>
-        <argument type="service">
-          <service class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-            <argument type="service" id="serializer.normalizer.flatten_exception"/>
-            <argument type="service" id="serializer.data_collector"/>
-            <argument>default</argument>
-          </service>
-        </argument>
-        <argument type="service">
-          <service class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-            <argument type="service" id="serializer.normalizer.problem"/>
-            <argument type="service" id="serializer.data_collector"/>
-            <argument>default</argument>
-          </service>
-        </argument>
-        <argument type="service">
-          <service class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-            <argument type="service" id="serializer.normalizer.uid"/>
-            <argument type="service" id="serializer.data_collector"/>
-            <argument>default</argument>
-          </service>
-        </argument>
-        <argument type="service">
-          <service class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-            <argument type="service" id="serializer.normalizer.datetime"/>
-            <argument type="service" id="serializer.data_collector"/>
-            <argument>default</argument>
-          </service>
-        </argument>
-        <argument type="service">
-          <service class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-            <argument type="service" id="serializer.normalizer.constraint_violation_list"/>
-            <argument type="service" id="serializer.data_collector"/>
-            <argument>default</argument>
-          </service>
-        </argument>
-        <argument type="service">
-          <service class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-            <argument type="service" id="serializer.normalizer.mime_message"/>
-            <argument type="service" id="serializer.data_collector"/>
-            <argument>default</argument>
-          </service>
-        </argument>
-        <argument type="service">
-          <service class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-            <argument type="service" id="serializer.normalizer.datetimezone"/>
-            <argument type="service" id="serializer.data_collector"/>
-            <argument>default</argument>
-          </service>
-        </argument>
-        <argument type="service">
-          <service class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-            <argument type="service" id="serializer.normalizer.dateinterval"/>
-            <argument type="service" id="serializer.data_collector"/>
-            <argument>default</argument>
-          </service>
-        </argument>
-        <argument type="service">
-          <service class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-            <argument type="service" id="serializer.normalizer.form_error"/>
-            <argument type="service" id="serializer.data_collector"/>
-            <argument>default</argument>
-          </service>
-        </argument>
-        <argument type="service">
-          <service class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-            <argument type="service" id="serializer.normalizer.backed_enum"/>
-            <argument type="service" id="serializer.data_collector"/>
-            <argument>default</argument>
-          </service>
-        </argument>
-        <argument type="service">
-          <service class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-            <argument type="service" id="serializer.normalizer.data_uri"/>
-            <argument type="service" id="serializer.data_collector"/>
-            <argument>default</argument>
-          </service>
-        </argument>
-        <argument type="service">
-          <service class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-            <argument type="service" id="serializer.normalizer.translatable"/>
-            <argument type="service" id="serializer.data_collector"/>
-            <argument>default</argument>
-          </service>
-        </argument>
-        <argument type="service">
-          <service class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-            <argument type="service" id="serializer.normalizer.json_serializable"/>
-            <argument type="service" id="serializer.data_collector"/>
-            <argument>default</argument>
-          </service>
-        </argument>
-        <argument type="service">
-          <service class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-            <argument type="service" id="serializer.denormalizer.array"/>
-            <argument type="service" id="serializer.data_collector"/>
-            <argument>default</argument>
-          </service>
-        </argument>
-        <argument type="service">
-          <service class="Symfony\Component\Serializer\Debug\TraceableNormalizer">
-            <argument type="service" id="serializer.normalizer.object"/>
-            <argument type="service" id="serializer.data_collector"/>
-            <argument>default</argument>
-          </service>
-        </argument>
-      </argument>
-      <argument type="collection">
-        <argument type="service">
-          <service class="Symfony\Component\Serializer\Debug\TraceableEncoder">
-            <argument type="service" id="serializer.encoder.xml"/>
-            <argument type="service" id="serializer.data_collector"/>
-            <argument>default</argument>
-          </service>
-        </argument>
-        <argument type="service">
-          <service class="Symfony\Component\Serializer\Debug\TraceableEncoder">
-            <argument type="service" id="serializer.encoder.json"/>
-            <argument type="service" id="serializer.data_collector"/>
-            <argument>default</argument>
-          </service>
-        </argument>
-        <argument type="service">
-          <service class="Symfony\Component\Serializer\Debug\TraceableEncoder">
-            <argument type="service" id="serializer.encoder.yaml"/>
-            <argument type="service" id="serializer.data_collector"/>
-            <argument>default</argument>
-          </service>
-        </argument>
-        <argument type="service">
-          <service class="Symfony\Component\Serializer\Debug\TraceableEncoder">
-            <argument type="service" id="serializer.encoder.csv"/>
-            <argument type="service" id="serializer.data_collector"/>
-            <argument>default</argument>
-          </service>
-        </argument>
-      </argument>
-      <argument type="collection"/>
-    </service>
     <service id="var_dumper.contextualized_cli_dumper.inner" class="Symfony\Component\VarDumper\Dumper\CliDumper">
       <argument>null</argument>
       <argument>UTF-8</argument>
@@ -9001,17 +8319,6 @@
       <argument type="service" id="security.authenticator.manager.main"/>
     </service>
     <service id="debug.security.event_dispatcher.main.inner" class="Symfony\Component\EventDispatcher\EventDispatcher"/>
-    <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
-      <argument type="iterator">
-        <argument type="service" id="messenger.bus.default.middleware.traceable"/>
-        <argument type="service" id="messenger.bus.default.middleware.add_bus_name_stamp_middleware"/>
-        <argument type="service" id="messenger.middleware.reject_redelivered_message_middleware"/>
-        <argument type="service" id="messenger.middleware.dispatch_after_current_bus"/>
-        <argument type="service" id="messenger.middleware.failed_message_processing_middleware"/>
-        <argument type="service" id="messenger.bus.default.middleware.send_message"/>
-        <argument type="service" id="messenger.bus.default.middleware.handle_message"/>
-      </argument>
-    </service>
     <service id=".doctrine.orm.default_metadata_driver.inner" class="Doctrine\Persistence\Mapping\Driver\MappingDriverChain">
       <call method="addDriver">
         <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
@@ -9023,6 +8330,9 @@
     </service>
     <service id=".errored..service_locator.5FanY8e.Symfony\Component\Security\Core\User\UserInterface" class="Symfony\Component\Security\Core\User\UserInterface">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.5FanY8e&quot;: it references interface &quot;Symfony\Component\Security\Core\User\UserInterface&quot; but no such service exists. Did you create an instantiable class that implements this interface?"/>
+    </service>
+    <service id=".errored..service_locator.2GhnQGe.Symfony\Component\Security\Core\User\UserInterface" class="Symfony\Component\Security\Core\User\UserInterface">
+      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.2GhnQGe&quot;: it references interface &quot;Symfony\Component\Security\Core\User\UserInterface&quot; but no such service exists. Did you create an instantiable class that implements this interface?"/>
     </service>
     <service id=".console.command.about.lazy" class="Symfony\Component\Console\Command\LazyCommand">
       <argument>about</argument>
@@ -9957,98 +9267,6 @@
         <argument key="maker.auto_command.make_webhook" type="service_closure" id=".maker.auto_command.make_webhook.lazy"/>
       </argument>
     </service>
-    <service id="cache.app.recorder_inner" class="Symfony\Component\Cache\Adapter\FilesystemAdapter">
-      <argument>N-vpL8a6gn</argument>
-      <argument>0</argument>
-      <argument>/var/www/eduquest/var/cache/dev/pools/app</argument>
-      <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
-      <call method="setLogger">
-        <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
-      </call>
-    </service>
-    <service id="cache.system.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
-      <argument>ugq5a3yNsv</argument>
-      <argument>0</argument>
-      <argument>%container.build_id%</argument>
-      <argument>/var/www/eduquest/var/cache/dev/pools/system</argument>
-      <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
-      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
-    </service>
-    <service id="cache.validator.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
-      <argument>+WfNs4W8NZ</argument>
-      <argument>0</argument>
-      <argument>%container.build_id%</argument>
-      <argument>/var/www/eduquest/var/cache/dev/pools/system</argument>
-      <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
-      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
-    </service>
-    <service id="cache.serializer.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
-      <argument>xIV83sf4Ik</argument>
-      <argument>0</argument>
-      <argument>%container.build_id%</argument>
-      <argument>/var/www/eduquest/var/cache/dev/pools/system</argument>
-      <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
-      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
-    </service>
-    <service id="cache.property_info.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
-      <argument>mYxpoYJyxc</argument>
-      <argument>0</argument>
-      <argument>%container.build_id%</argument>
-      <argument>/var/www/eduquest/var/cache/dev/pools/system</argument>
-      <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
-      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
-    </service>
-    <service id="cache.asset_mapper.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
-      <argument>icRXmgZJob</argument>
-      <argument>0</argument>
-      <argument>%container.build_id%</argument>
-      <argument>/var/www/eduquest/var/cache/dev/pools/system</argument>
-      <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
-      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
-    </service>
-    <service id="cache.messenger.restart_workers_signal.recorder_inner" class="Symfony\Component\Cache\Adapter\FilesystemAdapter">
-      <argument>MLDkwqOmi6</argument>
-      <argument>0</argument>
-      <argument>/var/www/eduquest/var/cache/dev/pools/app</argument>
-      <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
-      <call method="setLogger">
-        <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
-      </call>
-    </service>
-    <service id="cache.validator_expression_language.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
-      <argument>tjqX6SlmOi</argument>
-      <argument>0</argument>
-      <argument>%container.build_id%</argument>
-      <argument>/var/www/eduquest/var/cache/dev/pools/system</argument>
-      <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
-      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
-    </service>
-    <service id="cache.doctrine.orm.default.result.recorder_inner" class="Symfony\Component\Cache\Adapter\ArrayAdapter"/>
-    <service id="cache.doctrine.orm.default.query.recorder_inner" class="Symfony\Component\Cache\Adapter\ArrayAdapter"/>
-    <service id="cache.security_expression_language.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
-      <argument>ErG4-3gCf5</argument>
-      <argument>0</argument>
-      <argument>%container.build_id%</argument>
-      <argument>/var/www/eduquest/var/cache/dev/pools/system</argument>
-      <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
-      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
-    </service>
-    <service id="cache.security_is_granted_attribute_expression_language.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
-      <argument>7vA7TYxJFc</argument>
-      <argument>0</argument>
-      <argument>%container.build_id%</argument>
-      <argument>/var/www/eduquest/var/cache/dev/pools/system</argument>
-      <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
-      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
-    </service>
-    <service id="cache.security_is_csrf_token_valid_attribute_expression_language.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
-      <argument>6yXSPBjU-7</argument>
-      <argument>0</argument>
-      <argument>%container.build_id%</argument>
-      <argument>/var/www/eduquest/var/cache/dev/pools/system</argument>
-      <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
-      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
-    </service>
     <service id=".service_locator.Nsv4T6i" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -10087,12 +9305,12 @@
     <service id="Psr\Cache\CacheItemPoolInterface" alias="cache.app"/>
     <service id="Symfony\Contracts\Cache\CacheInterface" alias="cache.app"/>
     <service id="Symfony\Contracts\Cache\TagAwareCacheInterface" alias="cache.app.taggable"/>
-    <service id="Symfony\Contracts\Translation\TranslatorInterface" alias="translator.data_collector"/>
+    <service id="Symfony\Contracts\Translation\TranslatorInterface" alias="translator.default"/>
     <service id="Symfony\Component\Asset\Packages" alias="assets.packages"/>
     <service id="Symfony\Component\AssetMapper\AssetMapperInterface" alias="asset_mapper"/>
-    <service id="asset_mapper.http_client" alias=".debug.http_client"/>
+    <service id="asset_mapper.http_client" alias="http_client.uri_template"/>
     <service id="Symfony\Component\AssetMapper\ImportMap\ImportMapManager" alias="asset_mapper.importmap.manager"/>
-    <service id="Symfony\Contracts\HttpClient\HttpClientInterface" alias=".debug.http_client"/>
+    <service id="Symfony\Contracts\HttpClient\HttpClientInterface" alias="http_client.uri_template"/>
     <service id="mailer" alias="mailer.mailer"/>
     <service id="Symfony\Component\Mailer\MailerInterface" alias="mailer.mailer"/>
     <service id="Symfony\Component\Mailer\Transport\TransportInterface" alias="mailer.default_transport"/>
@@ -10101,7 +9319,7 @@
     <service id="Symfony\Component\Translation\Writer\TranslationWriterInterface" alias="translation.writer"/>
     <service id="Symfony\Contracts\Translation\LocaleAwareInterface" alias="translation.locale_switcher"/>
     <service id="Symfony\Component\Translation\LocaleSwitcher" alias="translation.locale_switcher"/>
-    <service id="translator" alias="translator.data_collector" public="true"/>
+    <service id="translator" alias="translator.default" public="true"/>
     <service id="translator.formatter" alias="translator.formatter.default"/>
     <service id="Symfony\Component\ErrorHandler\ErrorRenderer\FileLinkFormatter" alias="debug.file_link_formatter"/>
     <service id="Symfony\Component\Stopwatch\Stopwatch" alias="debug.stopwatch"/>
@@ -10112,11 +9330,11 @@
     <service id="Symfony\Component\Routing\RequestContextAwareInterface" alias="router.default"/>
     <service id="Symfony\Component\Routing\RequestContext" alias="router.request_context"/>
     <service id="Symfony\Component\PropertyAccess\PropertyAccessorInterface" alias="property_accessor"/>
-    <service id="Symfony\Component\Serializer\SerializerInterface" alias="debug.serializer"/>
-    <service id="Symfony\Component\Serializer\Normalizer\NormalizerInterface" alias="debug.serializer"/>
-    <service id="Symfony\Component\Serializer\Normalizer\DenormalizerInterface" alias="debug.serializer"/>
-    <service id="Symfony\Component\Serializer\Encoder\EncoderInterface" alias="debug.serializer"/>
-    <service id="Symfony\Component\Serializer\Encoder\DecoderInterface" alias="debug.serializer"/>
+    <service id="Symfony\Component\Serializer\SerializerInterface" alias="serializer"/>
+    <service id="Symfony\Component\Serializer\Normalizer\NormalizerInterface" alias="serializer"/>
+    <service id="Symfony\Component\Serializer\Normalizer\DenormalizerInterface" alias="serializer"/>
+    <service id="Symfony\Component\Serializer\Encoder\EncoderInterface" alias="serializer"/>
+    <service id="Symfony\Component\Serializer\Encoder\DecoderInterface" alias="serializer"/>
     <service id="serializer.property_accessor" alias="property_accessor"/>
     <service id="Symfony\Component\Serializer\Mapping\ClassDiscriminatorResolverInterface" alias="serializer.mapping.class_discriminator_resolver"/>
     <service id="Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface" alias="serializer.mapping.class_metadata_factory"/>
@@ -10145,12 +9363,12 @@
     <service id="Symfony\Component\Form\FormFactoryInterface" alias="form.factory"/>
     <service id="form.property_accessor" alias="property_accessor"/>
     <service id="form.choice_list_factory" alias="form.choice_list_factory.cached"/>
-    <service id="Symfony\Component\Validator\Validator\ValidatorInterface" alias="debug.validator"/>
-    <service id="validator.mapping.class_metadata_factory" alias="debug.validator"/>
+    <service id="Symfony\Component\Validator\Validator\ValidatorInterface" alias="validator"/>
+    <service id="validator.mapping.class_metadata_factory" alias="validator"/>
     <service id="Symfony\Component\Messenger\Transport\Serialization\SerializerInterface" alias="messenger.transport.native_php_serializer"/>
     <service id="messenger.default_serializer" alias="messenger.transport.native_php_serializer"/>
-    <service id="messenger.default_bus" alias="debug.traced.messenger.bus.default" public="true"/>
-    <service id="Symfony\Component\Messenger\MessageBusInterface" alias="debug.traced.messenger.bus.default"/>
+    <service id="messenger.default_bus" alias="messenger.bus.default" public="true"/>
+    <service id="Symfony\Component\Messenger\MessageBusInterface" alias="messenger.bus.default"/>
     <service id="messenger.failure_transports.default" alias="messenger.transport.failed"/>
     <service id="Symfony\Component\Notifier\NotifierInterface" alias="notifier"/>
     <service id="Symfony\Component\Mime\MimeTypesInterface" alias="mime_types"/>
@@ -10197,7 +9415,7 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.pRu6x_4" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.Y_GIjb9"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.7RtjwWN"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.BxSdgVt"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -10213,7 +9431,6 @@
     <service id="Psr\Log\LoggerInterface $phpLogger" alias="monolog.logger.php"/>
     <service id="Psr\Log\LoggerInterface $eventLogger" alias="monolog.logger.event"/>
     <service id="Psr\Log\LoggerInterface $routerLogger" alias="monolog.logger.router"/>
-    <service id="Psr\Log\LoggerInterface $profilerLogger" alias="monolog.logger.profiler"/>
     <service id="Psr\Log\LoggerInterface $doctrineLogger" alias="monolog.logger.doctrine"/>
     <service id="Psr\Log\LoggerInterface $debugLogger" alias="monolog.logger.debug"/>
     <service id="Psr\Log\LoggerInterface $securityLogger" alias="monolog.logger.security"/>
@@ -10221,28 +9438,24 @@
     <service id=".service_locator.xqODiDp" alias="messenger.receiver_locator"/>
     <service id=".service_locator.kVuTj7R" alias="messenger.retry_strategy_locator"/>
     <service id=".service_locator.hUPzsWO" alias=".service_locator.ea.H0ae"/>
-    <service id="validator" alias="debug.validator"/>
-    <service id="http_client" alias=".debug.http_client"/>
-    <service id=".debug.http_client.inner" alias="http_client.uri_template"/>
+    <service id="http_client" alias="http_client.uri_template"/>
     <service id="asset_mapper.mapped_asset_factory" alias="asset_mapper.cached_mapped_asset_factory"/>
     <service id="assets._default_package" alias="asset_mapper.asset_package"/>
     <service id="event_dispatcher" alias="debug.event_dispatcher" public="true"/>
     <service id="controller_resolver" alias="debug.controller_resolver"/>
     <service id="argument_resolver" alias="debug.argument_resolver"/>
     <service id="security.csrf.token_manager" alias="security.csrf.same_origin_token_manager"/>
-    <service id="translator.data_collector.inner" alias="translator.default"/>
-    <service id="serializer" alias="debug.serializer"/>
     <service id="var_dumper.cli_dumper" alias="var_dumper.contextualized_cli_dumper"/>
     <service id="twig.error_renderer.html.inner" alias="error_handler.error_renderer.html"/>
     <service id="turbo.broadcaster.imux" alias="turbo.broadcaster.action_renderer"/>
     <service id="security.access.decision_manager" alias="debug.security.access.decision_manager"/>
     <service id="security.firewall.authenticator.main" alias="debug.security.firewall.authenticator.main"/>
     <service id="security.event_dispatcher.main" alias="debug.security.event_dispatcher.main"/>
-    <service id="messenger.bus.default" alias="debug.traced.messenger.bus.default"/>
     <service id="doctrine.orm.default_metadata_driver" alias=".doctrine.orm.default_metadata_driver"/>
     <service id=".service_locator.n_ENPtW" alias=".service_locator.zHyJIs5"/>
     <service id=".service_locator.Nrz07Zz" alias=".service_locator.3QECKYg"/>
     <service id=".service_locator.iYcWkcr" alias=".service_locator.5FanY8e"/>
+    <service id=".service_locator.GVS5O0e" alias=".service_locator.2GhnQGe"/>
     <service id=".service_locator.xpyIvFE" alias=".service_locator.5SuUxla"/>
     <service id=".service_locator.9nvaCmp" alias=".service_locator.ZyP9f7K"/>
   </services>

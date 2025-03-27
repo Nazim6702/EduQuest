@@ -3,10 +3,13 @@
 {% block title %}Profil Étudiant{% endblock %}
 
 {% block body %}
+
 <h1>Bienvenue, {{ app.user.name }}</h1>
 
 <p><strong>Email :</strong> {{ app.user.email }}</p>
 <p><strong>Pseudo :</strong> {{ app.user.pseudo }}</p>
+
+<a href="{{ path('app_profile_edit') }}">Modifier mes informations</a>
 
 <h2>Fonctionnalités Étudiant</h2>
 <ul>
