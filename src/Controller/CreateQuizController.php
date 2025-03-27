@@ -29,10 +29,9 @@ class CreateQuizController extends AbstractController
         if ($form->isSubmitted()) {
             $submittedQuestions = $request->request->all('questions');
 
+           //dd($submittedQuestions);
+
             if ($submittedQuestions) {
-
-                //dd($submittedQuestions);
-
                 foreach ($submittedQuestions as $qIndex => $questionData) {
                     if (!isset($questionData['texte'], $questionData['type'])) continue;
 
@@ -41,11 +40,9 @@ class CreateQuizController extends AbstractController
                     $question->setDuration((int) $questionData['duration']);
                     $question->setQuiz($quiz);
 
-                    // Type
                     $type = $questionData['type'];
                     $question->setType(QuestionType::from($type));
 
-                    // Traitement des réponses
                     if ($type === 'Open') {
                         $answerData = $questionData['answers'][0];
                         $answer = new Answer();
@@ -53,8 +50,8 @@ class CreateQuizController extends AbstractController
                         $answer->setIsCorrect(true);
                         $em->persist($answer);
                         $question->addAnswer($answer);
-                    } elseif ($type === 'TRUE_FALSE') {
-                        $correct = $questionData['correct'] === 'true';
+                    } elseif ($type === 'TrueFalse') {
+                        $correct = filter_var($questionData['answers'][1], FILTER_VALIDATE_BOOLEAN);
 
                         $trueAnswer = new Answer();
                         $trueAnswer->setTexte('True');
@@ -68,12 +65,12 @@ class CreateQuizController extends AbstractController
                         $em->persist($falseAnswer);
                         $question->addAnswer($falseAnswer);
                     } elseif ($type === 'QCM') {
-                        $correctIndex = $questionData['correct'];
+                        $correctIndex = $questionData['answers']['correctIndex'] ?? null;
                         foreach ($questionData['answers'] as $index => $answerData) {
-                            if (!is_array($answerData)) continue;
+                            if (!is_numeric($index)) continue;
                             $answer = new Answer();
                             $answer->setTexte($answerData['texte']);
-                            $answer->setIsCorrect((string) $index === (string) $correctIndex);
+                            $answer->setIsCorrect((string)$index === (string)$correctIndex);
                             $em->persist($answer);
                             $question->addAnswer($answer);
                         }
