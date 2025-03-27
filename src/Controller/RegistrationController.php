@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class RegistrationController extends AbstractController
 {
-    #[Route('/auth', name: 'app_register')]
+    #[Route('/register', name: 'app_register')]
     public function register(
         Request $request,
         UserPasswordHasherInterface $passwordHasher,
@@ -48,7 +48,7 @@ final class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
             
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('auth/register.html.twig', [

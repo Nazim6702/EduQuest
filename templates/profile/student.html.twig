@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil Étudiant{% endblock %}
+
+{% block body %}
+<h1>Bienvenue, {{ app.user.name }}</h1>
+
+<p><strong>Email :</strong> {{ app.user.email }}</p>
+<p><strong>Pseudo :</strong> {{ app.user.pseudo }}</p>
+
+<h2>Fonctionnalités Étudiant</h2>
+<ul>
+    <li><a href="#">Participer aux quiz</a></li>
+    <li><a href="#">Participer aux débats</a></li>
+    <li><a href="#">Voir ma progression</a></li>
+</ul>
+
+<a href="{{ path('app_logout') }}">Se déconnecter</a>
+{% endblock %}

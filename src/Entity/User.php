@@ -8,12 +8,18 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\InheritanceType('SINGLE_TABLE')]
 #[ORM\DiscriminatorColumn(name: 'user_type', type: 'string')]
-#[ORM\DiscriminatorMap(['user' => User::class, 'admin' => Admin::class, 'student' => Student::class, 'teacher' => Teacher::class])]
-class User implements PasswordAuthenticatedUserInterface
+#[ORM\DiscriminatorMap([
+    'user' => User::class,
+    'admin' => Admin::class,
+    'student' => Student::class,
+    'teacher' => Teacher::class
+])]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -23,7 +29,7 @@ class User implements PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
@@ -34,8 +40,6 @@ class User implements PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
-
-    private ?string $userType = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Participation::class, cascade: ['persist', 'remove'])]
     private Collection $participations;
@@ -58,7 +62,6 @@ class User implements PasswordAuthenticatedUserInterface
     public function setName(string $name): static
     {
         $this->name = $name;
-
         return $this;
     }
 
@@ -70,7 +73,6 @@ class User implements PasswordAuthenticatedUserInterface
     public function setEmail(string $email): static
     {
         $this->email = $email;
-
         return $this;
     }
 
@@ -82,7 +84,6 @@ class User implements PasswordAuthenticatedUserInterface
     public function setPassword(string $password): static
     {
         $this->password = $password;
-
         return $this;
     }
 
@@ -94,7 +95,6 @@ class User implements PasswordAuthenticatedUserInterface
     public function setPseudo(?string $pseudo): self
     {
         $this->pseudo = $pseudo;
-
         return $this;
     }
 
@@ -106,19 +106,6 @@ class User implements PasswordAuthenticatedUserInterface
     public function setCreatedAt(\DateTimeInterface $createdAt): static
     {
         $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUserType(): ?string
-    {
-        return $this->userType;
-    }
-
-    public function setUserType(string $userType): self
-    {
-        $this->userType = $userType;
-
         return $this;
     }
 
@@ -133,19 +120,47 @@ class User implements PasswordAuthenticatedUserInterface
             $this->participations->add($participation);
             $participation->setUser($this);
         }
-
         return $this;
     }
 
     public function removeParticipation(Participation $participation): static
     {
         if ($this->participations->removeElement($participation)) {
-            // set the owning side to null (unless already changed)
             if ($participation->getUser() === $this) {
                 $participation->setUser(null);
             }
         }
-
         return $this;
+    }
+
+    public function getRoles(): array
+    {
+        return match (true) {
+            $this instanceof Student => ['ROLE_USER', 'ROLE_STUDENT'],
+            $this instanceof Teacher => ['ROLE_USER', 'ROLE_TEACHER'],
+            $this instanceof Admin   => ['ROLE_USER', 'ROLE_ADMIN'],
+            default => ['ROLE_USER'],
+        };
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->email;
+    }
+
+    public function eraseCredentials(): void
+    {
+
+    }
+
+
+    public function getUserType(): string
+    {
+        return match (true) {
+            $this instanceof Student => 'student',
+            $this instanceof Teacher => 'teacher',
+            $this instanceof Admin   => 'admin',
+            default => 'user',
+        };
     }
 }
