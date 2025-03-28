@@ -2,6 +2,105 @@
 
 {% block title %}Inscription{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .registration-container {
+            max-width: 500px;
+            margin: 80px auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .registration-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 900;
+            color: #0044cc;
+            text-shadow: 2px 2px #ff9800;
+            margin-bottom: 20px;
+        }
+
+        .registration-form h2 {
+            font-size: 24px;
+            text-align: center;
+            color: #3949ab;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: #0044cc;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            box-shadow: 2px 2px 0px black;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #0044cc;
+            box-shadow: 0 0 5px rgba(0, 68, 204, 0.5);
+        }
+
+        .role-buttons {
+            margin-top: 10px;
+        }
+
+        button {
+            background-color: #ff9800;
+            color: white;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 4px 4px 0px black;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #e68900;
+            transform: scale(1.05);
+        }
+
+        .already-account {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+        }
+
+        .already-account a {
+            color: #0044cc;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .already-account a:hover {
+            text-decoration: underline;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
     <div class="registration-container">
         <h1 class="registration-title">Espace EduQuest</h1>
@@ -25,6 +124,9 @@
                 <div class="role-buttons">
                     {{ form_widget(form.userType) }}
                 </div>
+            </div>
+            <div class="form-group">
+                <button type="submit">Créer mon compte</button>
             </div>
             {{ form_end(form) }}
             <p class="already-account">Vous avez déjà un compte ? <a href="{{ path('app_login') }}">Se connecter</a></p>
