@@ -29,7 +29,6 @@
             font-weight: 800;
             color: #ff9800;
             -webkit-text-stroke: 1px white;
-            text-stroke: 1px white;
             margin: 0;
         }
 
@@ -58,7 +57,6 @@
             margin-top: 40px;
             margin-bottom: 30px;
             -webkit-text-stroke: 1px white;
-            text-stroke: 1px white;
         }
 
         .logout-btn {
@@ -135,6 +133,7 @@
             justify-content: center;
             margin-bottom: 30px;
             flex-direction: row;
+            flex-wrap: wrap;
         }
 
         .student-profile ul li a {
@@ -159,13 +158,15 @@
 
 {% block body %}
 <div class="student-profile">
-    <!-- Titre + avatar -->
     <div class="welcome-header">
         <img src="/images/avatar-etudiant.png" alt="avatar admin" class="welcome-image">
         <h1>Bienvenue, {{ app.user.name }}</h1>
     </div>
 
-    <!-- Infos personnelles -->
+    <div style="text-align: center; margin-bottom: 20px;">
+        <a href="{{ path('app_profile_edit') }}" style="color: white; font-weight: bold;">Modifier mes informations</a>
+    </div>
+
     <div class="info-box">
         <h3>Informations personnelles</h3>
         <div style="text-align: left;">
@@ -175,17 +176,18 @@
         </div>
     </div>
 
-    <!-- Fonctions admin -->
     <div class="features-box">
         <h3>Fonctionnalités Admin</h3>
         <ul>
-            <li><a href="#">Gérer les utilisateurs</a></li>
+            <li><a href="{{ path('admin_user_list') }}">Gérer les utilisateurs</a></li>
+            <li><a href="{{ path('admin_user_create') }}">Ajouter un utilisateur</a></li>
             <li><a href="#">Créer un quiz</a></li>
+            <li><a href="#">Supprimer des quiz</a></li>
+            <li><a href="#">Supprimer des débats</a></li>
             <li><a href="#">Analyser les statistiques</a></li>
         </ul>
     </div>
 
-    <!-- Déconnexion -->
     <a href="{{ path('app_logout') }}" class="logout-btn">Se déconnecter</a>
 </div>
 {% endblock %}

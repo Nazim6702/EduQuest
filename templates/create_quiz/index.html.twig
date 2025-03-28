@@ -1,0 +1,30 @@
+{# templates/create_quiz/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un Quiz{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Création d'un nouveau Quiz</h1>
+
+        {{ form_start(form) }}
+        <div class="form-section">
+            {{ form_row(form.title) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.duration) }}
+        </div>
+
+        <button type="button" id="validate-quiz-info">Créer un nouveau quiz</button>
+
+        <section id="question-builder" style="display:none; margin-top: 30px;">
+            <h2>Questions</h2>
+            <button type="button" id="add-question">Ajouter une question</button>
+            <div id="questions-container"></div>
+        </section>
+
+        <button type="submit" style="margin-top: 20px;">Valider les infos du quiz</button>
+        {{ form_end(form) }}
+    </div>
+
+    <script src="{{ asset('js/create_quiz.js') }}"></script>
+{% endblock %}

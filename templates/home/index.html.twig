@@ -5,7 +5,7 @@
 {% block body %}
     <section class="hero">
         <div class="content">
-            <h2>Le défi éducatif qui fait grandir votre savoir !</h2>
+            <h2>Le défi éducatif qui fait grandir votre savoir ! 🧠</h2>
             <div class="buttons">
                 <a href="#" class="btn btn-inscrire">S'inscrire</a>
                 <a href="#" class="btn btn-connecter">Se connecter</a>
@@ -16,15 +16,20 @@
     <section class="new-quizzes">
         <h2>Nouveaux Quiz</h2>
         <div class="quiz-cards">
-            <div class="quiz-card">
-                <span class="category">Géographie</span>
-                <h3>Quiz ville de Paris</h3>
-                <span class="date">Publié le 01/01/2025</span>
-                {# <img src="{{ asset('images/paris.jpg') }}" alt="Paris"> #}
-            </div>
-
+            {% for quiz in quizzes %}
+                <a href="{{ path('app_play_quiz', { id: quiz.id }) }}" class="quiz-card-link">
+                    <div class="quiz-card">
+                        <span class="category">{{ quiz.category }}</span>
+                        <h3>{{ quiz.title }}</h3>
+                        <span class="date">Publié le {{ quiz.createdAt|date('d/m/Y') }}</span>
+                    </div>
+                </a>
+            {% else %}
+                <p>Aucun quiz pour le moment.</p>
+            {% endfor %}
         </div>
     </section>
+
 
     <section class="quiz-themes">
         <h2>Quiz par thématique</h2>
