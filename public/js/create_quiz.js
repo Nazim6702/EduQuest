@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     const validateButton = document.getElementById('validate-quiz-info');
     const quizSection = document.getElementById('question-builder');
@@ -83,8 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 correctSelect.dispatchEvent(new Event('change'));
-            }
-            else if (selectedType === 'QCM') {
+            } else if (selectedType === 'QCM') {
                 let html = '';
                 for (let i = 0; i < 4; i++) {
                     html += `

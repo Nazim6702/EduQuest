@@ -36,7 +36,7 @@ class CreateQuizController extends AbstractController
 
                     $question = new Question();
                     $question->setTexte($questionData['texte']);
-                    $question->setDuration((int) $questionData['duration']);
+                    $question->setDuration((int)$questionData['duration']);
                     $question->setQuiz($quiz);
 
                     $type = $questionData['type'];
@@ -49,20 +49,14 @@ class CreateQuizController extends AbstractController
                         $answer->setIsCorrect(true);
                         $em->persist($answer);
                         $question->addAnswer($answer);
-                    } elseif ($type === 'TrueFalse') {
-                        $correct = filter_var($questionData['answers'][1], FILTER_VALIDATE_BOOLEAN);
-
-                        $trueAnswer = new Answer();
-                        $trueAnswer->setTexte('True');
-                        $trueAnswer->setIsCorrect($correct);
-                        $em->persist($trueAnswer);
-                        $question->addAnswer($trueAnswer);
-
-                        $falseAnswer = new Answer();
-                        $falseAnswer->setTexte('False');
-                        $falseAnswer->setIsCorrect(!$correct);
-                        $em->persist($falseAnswer);
-                        $question->addAnswer($falseAnswer);
+                    } elseif ($type === 'True/False') {
+                        foreach ($questionData['answers'] as $answerData) {
+                            $answer = new Answer();
+                            $answer->setTexte($answerData['texte']);
+                            $answer->setIsCorrect(filter_var($answerData['isCorrect'], FILTER_VALIDATE_BOOLEAN));
+                            $em->persist($answer);
+                            $question->addAnswer($answer);
+                        }
                     } elseif ($type === 'QCM') {
                         $correctIndex = $questionData['answers']['correctIndex'] ?? null;
                         foreach ($questionData['answers'] as $index => $answerData) {
