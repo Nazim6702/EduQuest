@@ -3,6 +3,7 @@
 {% block title %}{{ quiz.title }} | EduQuest{% endblock %}
 
 {% block body %}
+    <link rel="stylesheet" href="{{ asset('css/game.css') }}">
     <section class="play-quiz-intro" style="text-align:center; padding:50px;">
         <h1>{{ quiz.title }}</h1>
         <p>{{ quiz.description }}</p>

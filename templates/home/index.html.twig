@@ -6,10 +6,13 @@
     <section class="hero">
         <div class="content">
             <h2>Le défi éducatif qui fait grandir votre savoir ! 🧠</h2>
-            <div class="buttons">
-                <a href="{{ path('app_register') }}" class="btn btn-inscrire">S'inscrire</a>
-                <a href="{{ path('app_login') }}" class="btn btn-connecter">Se connecter</a>
-            </div>
+            {% if not app.user %}
+                <div class="buttons">
+                    <a href="{{ path('app_register') }}" class="btn btn-inscrire">S'inscrire</a>
+                    <a href="{{ path('app_login') }}" class="btn btn-connecter">Se connecter</a>
+                </div>
+            {% endif %}
+
         </div>
     </section>
 
