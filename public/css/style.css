@@ -23,7 +23,6 @@ body {
     margin-right: 80px;
     text-shadow: 3px 2px 0px rgba(255, 152, 0, 0.7);
 }
-
 .logo-link {
     text-decoration: none;
     color: inherit;
@@ -75,6 +74,7 @@ body {
 }
 
 
+
 .search-bar {
     display: flex;
     align-items: center;
@@ -96,7 +96,6 @@ body {
     font-size: 30px;
     cursor: pointer;
 }
-
 /* SECTION HERO */
 .hero {
     display: flex;
@@ -321,6 +320,7 @@ body {
 }
 
 
+
 /* -----   Quiz Cards   ----- */
 
 .quiz-card-link {
@@ -351,7 +351,24 @@ body {
     font-weight: bold;
     color: #fbc02d;
     font-size: 14px;
+    border: 2px solid #0044cc;
+    border-radius: 8px;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 1);
 }
+
+html, body {
+    overflow-x: hidden;
+}
+.loupe-icon {
+    width: 24px;
+    height: 24px;
+    margin-left: 10px;
+    object-fit: contain;
+    display: inline-block;
+}
+
+
+
 
 .quiz-card h3 {
     margin: 12px 0 8px 0;
