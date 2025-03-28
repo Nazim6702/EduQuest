@@ -3,8 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Quiz;
-use App\Enum\QuestionType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -26,6 +26,22 @@ class QuizType extends AbstractType
             ])
             ->add('duration', IntegerType::class, [
                 'label' => 'Durée (minutes)',
+            ])
+            ->add('category', ChoiceType::class, [
+                'label' => 'Catégorie',
+                'choices' => [
+                    'Physique-Chimie' => 'Physique-Chimie',
+                    'Histoire' => 'Histoire',
+                    'Géographie' => 'Géographie',
+                    'Français' => 'Français',
+                    'Maths' => 'Maths',
+                    'Culture Générale' => 'Culture Générale',
+                    'Anglais' => 'Anglais',
+                    'S.V.T' => 'S.V.T',
+                    'Philosophie' => 'Philosophie',
+                    'Sports' => 'Sports',
+                ],
+                'placeholder' => '-- Choisir une catégorie --',
             ])
             ->add('questions', CollectionType::class, [
                 'entry_type' => QuestionForm::class,
