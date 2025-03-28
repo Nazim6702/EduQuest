@@ -72,10 +72,10 @@
 
         .info-box {
             background-color: #f9fafc;
-            padding: 20px;
+            padding: 20px 40px;
+            margin: 20px 20px 40px 20px;
             border-radius: 10px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 40px;
             width: 100%;
         }
 
@@ -89,8 +89,8 @@
         }
 
         .teacher-profile p {
+            margin: 20px 20px 40px 20px;
             font-size: 18px;
-            margin: 10px 0;
         }
 
         .teacher-profile p strong {
@@ -147,18 +147,14 @@
 
 {% block body %}
     <div class="teacher-profile">
-        <!-- Titre avec avatar -->
         <div class="welcome-header">
-            <img src="/images/avatar-etudiant.png" alt="avatar enseignant" class="welcome-image">
             <h1>Bienvenue, {{ app.user.name }}</h1>
         </div>
 
-        <!-- Lien modifier infos -->
         <div style="text-align: center; margin-bottom: 20px;">
             <a href="{{ path('app_profile_edit') }}" style="color: white; font-weight: bold;">Modifier mes informations</a>
         </div>
 
-        <!-- Informations personnelles -->
         <div class="info-box">
             <h3>Informations personnelles</h3>
             <div style="text-align: left;">
