@@ -2,15 +2,15 @@
 {% block title %}Modifier utilisateur{% endblock %}
 
 {% block body %}
-<h1>Modifier l’utilisateur : {{ user.pseudo }}</h1>
+    <h1>Modifier l’utilisateur : {{ user.pseudo }}</h1>
 
-{{ form_start(form) }}
+    {{ form_start(form) }}
     {{ form_row(form.name) }}
     {{ form_row(form.email) }}
     {{ form_row(form.pseudo) }}
     {{ form_row(form.password) }}
     <button type="submit">Enregistrer</button>
-{{ form_end(form) }}
+    {{ form_end(form) }}
 
-<a href="{{ path('admin_user_list') }}">← Retour à la liste</a>
+    <a href="{{ path('admin_user_list') }}">← Retour à la liste</a>
 {% endblock %}

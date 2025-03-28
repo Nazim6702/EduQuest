@@ -29,29 +29,29 @@ class Question
     private Collection $answers;
 
     public function __construct()
-{
-    $this->answers = new ArrayCollection();
-}
+    {
+        $this->answers = new ArrayCollection();
+    }
 
-public function getAnswers(): Collection
-{
-    return $this->answers;
-}
+    public function getAnswers(): Collection
+    {
+        return $this->answers;
+    }
 
     #[ORM\ManyToOne(targetEntity: Quiz::class, inversedBy: 'questions')]
-#[ORM\JoinColumn(nullable: false)]
-private ?Quiz $quiz = null;
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Quiz $quiz = null;
 
-public function getQuiz(): ?Quiz
-{
-    return $this->quiz;
-}
+    public function getQuiz(): ?Quiz
+    {
+        return $this->quiz;
+    }
 
-public function setQuiz(?Quiz $quiz): static
-{
-    $this->quiz = $quiz;
-    return $this;
-}
+    public function setQuiz(?Quiz $quiz): static
+    {
+        $this->quiz = $quiz;
+        return $this;
+    }
 
     public function getId(): ?int
     {

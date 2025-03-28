@@ -38,7 +38,7 @@ class RegistrationFormType extends AbstractType
                 ],
                 'expanded' => true,
                 'multiple' => false,
-                'mapped' => false, 
+                'mapped' => false,
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'S’inscrire',

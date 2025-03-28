@@ -14,7 +14,9 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted('ROLE_ADMIN')]
 class AdminUserListController extends AbstractController
 {
-    public function __construct(private EntityManagerInterface $em) {}
+    public function __construct(private EntityManagerInterface $em)
+    {
+    }
 
     #[Route('/', name: 'admin_user_list')]
     public function __invoke(Request $request): Response
@@ -25,7 +27,7 @@ class AdminUserListController extends AbstractController
 
         if ($search) {
             $qb->andWhere('u.name LIKE :s OR u.pseudo LIKE :s OR u.email LIKE :s')
-               ->setParameter('s', "%$search%");
+                ->setParameter('s', "%$search%");
         }
 
         return $this->render('admin/user_list.html.twig', [

@@ -138,7 +138,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return match (true) {
             $this instanceof Student => ['ROLE_USER', 'ROLE_STUDENT'],
             $this instanceof Teacher => ['ROLE_USER', 'ROLE_TEACHER'],
-            $this instanceof Admin   => ['ROLE_USER', 'ROLE_ADMIN'],
+            $this instanceof Admin => ['ROLE_USER', 'ROLE_ADMIN'],
             default => ['ROLE_USER'],
         };
     }
@@ -159,7 +159,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return match (true) {
             $this instanceof Student => 'student',
             $this instanceof Teacher => 'teacher',
-            $this instanceof Admin   => 'admin',
+            $this instanceof Admin => 'admin',
             default => 'user',
         };
     }

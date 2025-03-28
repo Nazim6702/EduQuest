@@ -17,9 +17,11 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class AdminUserEditController extends AbstractController
 {
     public function __construct(
-        private EntityManagerInterface $em,
+        private EntityManagerInterface      $em,
         private UserPasswordHasherInterface $passwordHasher
-    ) {}
+    )
+    {
+    }
 
     #[Route('/{id}/edit', name: 'admin_user_edit')]
     public function __invoke(User $user, Request $request): Response

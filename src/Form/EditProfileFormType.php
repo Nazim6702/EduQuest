@@ -20,7 +20,7 @@ class EditProfileFormType extends AbstractType
             ->add('pseudo', TextType::class, ['label' => 'Pseudo'])
             ->add('password', PasswordType::class, [
                 'label' => 'Nouveau mot de passe',
-                'required' => false, 
+                'required' => false,
                 'mapped' => false,
             ]);
     }

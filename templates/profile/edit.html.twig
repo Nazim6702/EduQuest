@@ -2,15 +2,15 @@
 {% block title %}Modifier mes infos{% endblock %}
 
 {% block body %}
-<h1>Modifier mes informations</h1>
+    <h1>Modifier mes informations</h1>
 
-{{ form_start(form) }}
+    {{ form_start(form) }}
     {{ form_row(form.name) }}
     {{ form_row(form.email) }}
     {{ form_row(form.pseudo) }}
     {{ form_row(form.password) }}
     <button class="btn">Enregistrer</button>
-{{ form_end(form) }}
+    {{ form_end(form) }}
 
-<a href="{{ path('app_profile') }}">Annuler</a>
+    <a href="{{ path('app_profile') }}">Annuler</a>
 {% endblock %}

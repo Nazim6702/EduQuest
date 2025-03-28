@@ -2,12 +2,13 @@
 {% block title %}Supprimer utilisateur{% endblock %}
 
 {% block body %}
-<h1>Supprimer l’utilisateur : {{ user.pseudo }}</h1>
+    <h1>Supprimer l’utilisateur : {{ user.pseudo }}</h1>
 
-<p>⚠️ Cette action est irréversible. Confirmez-vous la suppression du compte de <strong>{{ user.email }}</strong> ?</p>
+    <p>⚠️ Cette action est irréversible. Confirmez-vous la suppression du compte de <strong>{{ user.email }}</strong> ?
+    </p>
 
-<form method="post">
-    <button type="submit">Oui, supprimer</button>
-    <a href="{{ path('admin_user_list') }}">Non, annuler</a>
-</form>
+    <form method="post">
+        <button type="submit">Oui, supprimer</button>
+        <a href="{{ path('admin_user_list') }}">Non, annuler</a>
+    </form>
 {% endblock %}
