@@ -411,3 +411,16 @@ button:hover {
   border-radius: 8px;
   box-shadow: 4px 4px 0px rgba(0, 0, 0, 1);
 }
+
+html, body {
+  overflow-x: hidden;
+}
+.loupe-icon {
+  width: 24px;
+  height: 24px;
+  margin-left: 10px;
+  object-fit: contain;
+  display: inline-block;
+}
+
+
