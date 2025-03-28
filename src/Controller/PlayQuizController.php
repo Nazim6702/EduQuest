@@ -86,11 +86,17 @@ final class PlayQuizController extends AbstractController
 
         if ($question->getType() === QuestionType::QCM || $question->getType() === QuestionType::TRUE_FALSE) {
             $selectedId = $request->request->get('answer');
-            dump($request->request->all());
-            $selectedAnswer = $em->getRepository(Answer::class)->find($selectedId);
-            if ($selectedAnswer && $selectedAnswer->isCorrect()) {
-                $result = true;
+
+            if ($selectedId !== null) {
+                $selectedAnswer = $em->getRepository(Answer::class)->find($selectedId);
+                if ($selectedAnswer && $selectedAnswer->isCorrect()) {
+                    $result = true;
+                }
+            } else {
+                // Au cas ou le temps imparti est finito et que l'user n'a rien selectionné
+                $result = null;
             }
+
         } elseif ($question->getType() === QuestionType::OPEN) {
             $userInput = trim($request->request->get('answer_text'));
             foreach ($question->getAnswers() as $answer) {
@@ -103,11 +109,14 @@ final class PlayQuizController extends AbstractController
 
         $session = $request->getSession();
         $progress = $session->get('quiz_progress_'.$quiz->getId(), []);
-        $progress[$question->getId()] = $result ? 'correct' : 'wrong';
+        $progress[$question->getId()] = $result === true ? 'correct' : ($result === false ? 'wrong' : 'timeout');
         $session->set('quiz_progress_'.$quiz->getId(), $progress);
 
 
+        $status = $result === true ? 'correct' : ($result === false ? 'wrong' : 'timeout');
+
         return $this->render('play_quiz/result.html.twig', [
+            'status' => $status,
             'result' => $result,
             'nextStep' => $step + 1,
             'quizId' => $id,
