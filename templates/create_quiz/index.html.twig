@@ -1,10 +1,15 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/create_quiz.css') }}">
+{% endblock %}
+
 {% block title %}Créer un Quiz{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h1>Création d'un nouveau Quiz</h1>
+    <div class="create-quiz-container">
+        <h1>🎓 Créer un nouveau Quiz</h1>
 
         {{ form_start(form) }}
         <div class="form-section">
@@ -14,17 +19,18 @@
             {{ form_row(form.category) }}
         </div>
 
-        <button type="button" id="validate-quiz-info">Créer un nouveau quiz</button>
+        <button type="button" id="validate-quiz-info" class="btn-primary">Commencer à ajouter des questions</button>
 
-        <section id="question-builder" style="display:none; margin-top: 30px;">
-            <h2>Questions</h2>
-            <button type="button" id="add-question">Ajouter une question</button>
+        <section id="question-builder" style="display:none;">
+            <h2>📝 Questions</h2>
+            <button type="button" id="add-question" class="btn-secondary">➕ Ajouter une question</button>
             <div id="questions-container"></div>
         </section>
 
-        <button type="submit" style="margin-top: 20px;">Valider les infos du quiz</button>
+        <button type="submit" class="btn-primary" style="margin-top: 30px;">✅ Valider le quiz</button>
         {{ form_end(form) }}
     </div>
 
     <script src="{{ asset('js/create_quiz.js') }}"></script>
 {% endblock %}
+
