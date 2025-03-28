@@ -61,28 +61,40 @@
 
 
     <style>
-        .progress-bar {
+        .quiz-progress-wrapper {
             display: flex;
             justify-content: center;
+            padding: 20px 0;
+            overflow-x: auto;
+        }
+
+        .progress-bar {
+            display: flex;
             align-items: center;
-            margin: 60px auto;
+            background-color: #f1f1f1;
             border: 2px solid #ccc;
             border-radius: 12px;
-            overflow: hidden;
-            background-color: #f9f9f9;
             box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-            width: fit-content;
+            overflow: hidden;
         }
 
+        /* Chaque case */
         .progress-box {
-            flex: 0 0 40px; /* Largeur fixe pour chaque "case" */
+            width: 40px;
             height: 40px;
             background-color: #ccc;
-            transition: background-color 0.2s ease;
-            border-right: 1px solid #fff; /* Séparation visible entre les cases */
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            border-right: 1px solid #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            flex-shrink: 0; /* Ne pas rétrécir si overflow */
         }
 
-        /* Supprime le dernier trait à droite */
+        /* Supprimer la bordure du dernier */
         .progress-box:last-child {
             border-right: none;
         }
@@ -99,6 +111,12 @@
         .progress-box.pending {
             background-color: #9e9e9e;
         }
+
+        .progress-box:hover {
+            transform: scale(1.05);
+        }
+
+
 
 
 
