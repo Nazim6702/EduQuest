@@ -86,6 +86,7 @@ final class PlayQuizController extends AbstractController
 
         if ($question->getType() === QuestionType::QCM || $question->getType() === QuestionType::TRUE_FALSE) {
             $selectedId = $request->request->get('answer');
+            dump($request->request->all());
             $selectedAnswer = $em->getRepository(Answer::class)->find($selectedId);
             if ($selectedAnswer && $selectedAnswer->isCorrect()) {
                 $result = true;
