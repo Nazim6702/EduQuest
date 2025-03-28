@@ -29,7 +29,6 @@ class CreateQuizController extends AbstractController
         if ($form->isSubmitted()) {
             $submittedQuestions = $request->request->all('questions');
 
-           //dd($submittedQuestions);
 
             if ($submittedQuestions) {
                 foreach ($submittedQuestions as $qIndex => $questionData) {
