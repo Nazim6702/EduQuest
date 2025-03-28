@@ -31,7 +31,9 @@
 
         {% if quizzes|length > 4 %}
             <div style="text-align:center; margin-top: 20px;">
-                <a href="{{ path('app_all_quizzes') }}"style="background-color: #ffd858; color: #0044cc; padding: 10px 16px; text-decoration: none; border-radius: 6px;">🔎 Voir tous les quiz</a>
+                <a href="{{ path('app_all_quizzes') }}"
+                   style="background-color: #ffd858; color: #0044cc; padding: 10px 16px; text-decoration: none; border-radius: 6px;">🔎
+                    Voir tous les quiz</a>
 
             </div>
         {% endif %}
@@ -40,17 +42,27 @@
     <section class="quiz-themes">
         <h2>Quiz par thématique</h2>
         <div class="decorative-line"></div>
-            <div class="themes-grid">
-                <a href="{{ path('app_quiz_by_category', { category: 'Physique-Chimie' }) }}" class="theme"><span class="icon">🔬</span><span class="title">Physique-Chimie</span></a>
-                <a href="{{ path('app_quiz_by_category', { category: 'Histoire' }) }}" class="theme"><span class="icon">📚</span><span class="title">Histoire</span></a>
-                <a href="{{ path('app_quiz_by_category', { category: 'Géographie' }) }}" class="theme"><span class="icon">🌍</span><span class="title">Géographie</span></a>
-                <a href="{{ path('app_quiz_by_category', { category: 'Français' }) }}" class="theme"><span class="icon">📕</span><span class="title">Français</span></a>
-                <a href="{{ path('app_quiz_by_category', { category: 'Maths' }) }}" class="theme"><span class="icon">➗</span><span class="title">Maths</span></a>
-                <a href="{{ path('app_quiz_by_category', { category: 'Culture Générale' }) }}" class="theme"><span class="icon">🎭</span><span class="title">Culture Générale</span></a>
-                <a href="{{ path('app_quiz_by_category', { category: 'Anglais' }) }}" class="theme"><span class="icon">🇬🇧</span><span class="title">Anglais</span></a>
-                <a href="{{ path('app_quiz_by_category', { category: 'S.V.T' }) }}" class="theme"><span class="icon">🌳</span><span class="title">S.V.T</span></a>
-                <a href="{{ path('app_quiz_by_category', { category: 'Philosophie' }) }}" class="theme"><span class="icon">🧠</span><span class="title">Philosophie</span></a>
-                <a href="{{ path('app_quiz_by_category', { category: 'Sports' }) }}" class="theme"><span class="icon">⚽</span><span class="title">Sports</span></a>
-            </div>
+        <div class="themes-grid">
+            <a href="{{ path('app_quiz_by_category', { category: 'Physique-Chimie' }) }}" class="theme"><span
+                        class="icon">🔬</span><span class="title">Physique-Chimie</span></a>
+            <a href="{{ path('app_quiz_by_category', { category: 'Histoire' }) }}" class="theme"><span
+                        class="icon">📚</span><span class="title">Histoire</span></a>
+            <a href="{{ path('app_quiz_by_category', { category: 'Géographie' }) }}" class="theme"><span
+                        class="icon">🌍</span><span class="title">Géographie</span></a>
+            <a href="{{ path('app_quiz_by_category', { category: 'Français' }) }}" class="theme"><span
+                        class="icon">📕</span><span class="title">Français</span></a>
+            <a href="{{ path('app_quiz_by_category', { category: 'Maths' }) }}" class="theme"><span
+                        class="icon">➗</span><span class="title">Maths</span></a>
+            <a href="{{ path('app_quiz_by_category', { category: 'Culture Générale' }) }}" class="theme"><span
+                        class="icon">🎭</span><span class="title">Culture Générale</span></a>
+            <a href="{{ path('app_quiz_by_category', { category: 'Anglais' }) }}" class="theme"><span
+                        class="icon">🇬🇧</span><span class="title">Anglais</span></a>
+            <a href="{{ path('app_quiz_by_category', { category: 'S.V.T' }) }}" class="theme"><span
+                        class="icon">🌳</span><span class="title">S.V.T</span></a>
+            <a href="{{ path('app_quiz_by_category', { category: 'Philosophie' }) }}" class="theme"><span class="icon">🧠</span><span
+                        class="title">Philosophie</span></a>
+            <a href="{{ path('app_quiz_by_category', { category: 'Sports' }) }}" class="theme"><span
+                        class="icon">⚽</span><span class="title">Sports</span></a>
+        </div>
     </section>
 {% endblock %}

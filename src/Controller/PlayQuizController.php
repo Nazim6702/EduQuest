@@ -37,11 +37,11 @@ final class PlayQuizController extends AbstractController
 
         $session = $request->getSession();
 
-        if (!$session->has('quiz_start_time_'.$quiz->getId())) {
-            $session->set('quiz_start_time_'.$quiz->getId(), time());
+        if (!$session->has('quiz_start_time_' . $quiz->getId())) {
+            $session->set('quiz_start_time_' . $quiz->getId(), time());
         }
 
-        $startTime = $session->get('quiz_start_time_'.$quiz->getId());
+        $startTime = $session->get('quiz_start_time_' . $quiz->getId());
         $now = time();
         $elapsed = $now - $startTime;
         $totalTime = $quiz->getDuration() * 60; // en secondes
@@ -55,13 +55,13 @@ final class PlayQuizController extends AbstractController
 
         $question = $questions[$step];
 
-        $sessionKey = 'quiz_progress_'.$quiz->getId();
+        $sessionKey = 'quiz_progress_' . $quiz->getId();
 
         // Si on est à la première question, on supprime toutes les données de session lié au quizz
         //C'est quand on fait plusieurs fois le même quizz, pour que les résultats soient remis à 0
         if ($step === 0) {
             $session->remove($sessionKey);
-            $session->set('quiz_start_time_'.$quiz->getId(), time());
+            $session->set('quiz_start_time_' . $quiz->getId(), time());
         }
 
 
@@ -71,7 +71,7 @@ final class PlayQuizController extends AbstractController
             'step' => $step,
             'total' => count($questions),
             'globalRemaining' => $remainingTime,
-            'progress' => $session->get('quiz_progress_'.$quiz->getId(), [])
+            'progress' => $session->get('quiz_progress_' . $quiz->getId(), [])
         ]);
     }
 
@@ -108,9 +108,9 @@ final class PlayQuizController extends AbstractController
         }
 
         $session = $request->getSession();
-        $progress = $session->get('quiz_progress_'.$quiz->getId(), []);
+        $progress = $session->get('quiz_progress_' . $quiz->getId(), []);
         $progress[$question->getId()] = $result === true ? 'correct' : ($result === false ? 'wrong' : 'timeout');
-        $session->set('quiz_progress_'.$quiz->getId(), $progress);
+        $session->set('quiz_progress_' . $quiz->getId(), $progress);
 
 
         $status = $result === true ? 'correct' : ($result === false ? 'wrong' : 'timeout');
@@ -134,7 +134,7 @@ final class PlayQuizController extends AbstractController
         }
 
         $session = $request->getSession();
-        $progress = $session->get('quiz_progress_'.$quiz->getId(), []);
+        $progress = $session->get('quiz_progress_' . $quiz->getId(), []);
 
         return $this->render('play_quiz/results.html.twig', [
             'quiz' => $quiz,

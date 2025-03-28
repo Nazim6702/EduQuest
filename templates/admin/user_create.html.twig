@@ -3,16 +3,16 @@
 {% block title %}Créer un utilisateur{% endblock %}
 
 {% block body %}
-<h1>Créer un nouvel utilisateur</h1>
+    <h1>Créer un nouvel utilisateur</h1>
 
-{{ form_start(form) }}
+    {{ form_start(form) }}
     {{ form_row(form.name) }}
     {{ form_row(form.email) }}
     {{ form_row(form.pseudo) }}
     {{ form_row(form.password) }}
     {{ form_row(form.userType) }}
     <button type="submit">Créer</button>
-{{ form_end(form) }}
+    {{ form_end(form) }}
 
-<a href="{{ path('admin_user_list') }}">← Retour à la liste des utilisateurs</a>
+    <a href="{{ path('admin_user_list') }}">← Retour à la liste des utilisateurs</a>
 {% endblock %}

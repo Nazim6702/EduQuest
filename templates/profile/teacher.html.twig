@@ -3,19 +3,19 @@
 {% block title %}Profil Enseignant{% endblock %}
 
 {% block body %}
-<h1>Bienvenue, {{ app.user.name }}</h1>
+    <h1>Bienvenue, {{ app.user.name }}</h1>
 
-<p><strong>Email :</strong> {{ app.user.email }}</p>
-<p><strong>Pseudo :</strong> {{ app.user.pseudo }}</p>
+    <p><strong>Email :</strong> {{ app.user.email }}</p>
+    <p><strong>Pseudo :</strong> {{ app.user.pseudo }}</p>
 
-<a href="{{ path('app_profile_edit') }}">Modifier mes informations</a>
+    <a href="{{ path('app_profile_edit') }}">Modifier mes informations</a>
 
-<h2>Fonctionnalités Enseignant</h2>
-<ul>
-    <li><a href="/quiz/create">Créer des quiz</a></li>
-    <li><a href="#">Lancer un débat</a></li>
-    <li><a href="#">Consulter les résultats des étudiants</a></li>
-</ul>
+    <h2>Fonctionnalités Enseignant</h2>
+    <ul>
+        <li><a href="/quiz/create">Créer des quiz</a></li>
+        <li><a href="#">Lancer un débat</a></li>
+        <li><a href="#">Consulter les résultats des étudiants</a></li>
+    </ul>
 
-<a href="{{ path('app_logout') }}">Se déconnecter</a>
+    <a href="{{ path('app_logout') }}">Se déconnecter</a>
 {% endblock %}

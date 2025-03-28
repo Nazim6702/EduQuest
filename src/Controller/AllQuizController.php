@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Repository\QuizRepository;
@@ -18,7 +19,7 @@ class AllQuizController extends AbstractController
 
         $pagination = $paginator->paginate(
             $query,
-            $request->query->getInt('page', 1),6);
+            $request->query->getInt('page', 1), 6);
 
         return $this->render('quiz/all.html.twig', [
             'pagination' => $pagination,

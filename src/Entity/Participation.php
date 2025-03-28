@@ -7,7 +7,6 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ParticipationRepository::class)]
-
 class Participation
 {
     #[ORM\Id]
@@ -26,20 +25,20 @@ class Participation
         return $this->id;
     }
 
- #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'participations')]
-#[ORM\JoinColumn(nullable: false)]
-private ?User $user = null;
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'participations')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
-public function getUser(): ?User
-{
-    return $this->user;
-}
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
 
-public function setUser(?User $user): static
-{
-    $this->user = $user;
-    return $this;
-}
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+        return $this;
+    }
 
 
     public function getDateParticipation(): ?\DateTimeInterface

@@ -12,11 +12,12 @@ class CategoryQuizController extends AbstractController
 {
     #[Route('/quizzes/category/{category}', name: 'app_quiz_by_category')]
     public function showByCategory(
-        string $category,
-        QuizRepository $quizRepository,
+        string             $category,
+        QuizRepository     $quizRepository,
         PaginatorInterface $paginator,
-        Request $request
-    ) {
+        Request            $request
+    )
+    {
         $query = $quizRepository->createQueryBuilder('q')
             ->where('q.category = :category')
             ->setParameter('category', $category)
@@ -25,7 +26,7 @@ class CategoryQuizController extends AbstractController
 
         $pagination = $paginator->paginate(
             $query,
-            $request->query->getInt('page', 1), 6 );
+            $request->query->getInt('page', 1), 6);
 
         return $this->render('quiz/by_category.html.twig', [
             'pagination' => $pagination,

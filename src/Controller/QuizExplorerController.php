@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Repository\QuizRepository;
@@ -19,12 +20,12 @@ class QuizExplorerController extends AbstractController
 
         if ($search) {
             $qb->andWhere('q.title LIKE :search')
-               ->setParameter('search', '%' . $search . '%');
+                ->setParameter('search', '%' . $search . '%');
         }
 
         if ($category) {
             $qb->andWhere('q.category = :cat')
-               ->setParameter('cat', $category);
+                ->setParameter('cat', $category);
         }
 
         $qb->orderBy('q.createdAt', 'DESC');

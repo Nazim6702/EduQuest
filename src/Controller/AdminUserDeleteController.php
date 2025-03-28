@@ -14,7 +14,9 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted('ROLE_ADMIN')]
 class AdminUserDeleteController extends AbstractController
 {
-    public function __construct(private EntityManagerInterface $em) {}
+    public function __construct(private EntityManagerInterface $em)
+    {
+    }
 
     #[Route('/{id}/delete', name: 'admin_user_delete')]
     public function __invoke(User $user, Request $request): Response

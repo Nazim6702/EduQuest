@@ -18,9 +18,11 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class AdminUserCreateController extends AbstractController
 {
     public function __construct(
-        private EntityManagerInterface $em,
+        private EntityManagerInterface      $em,
         private UserPasswordHasherInterface $passwordHasher
-    ) {}
+    )
+    {
+    }
 
     #[Route('/create', name: 'admin_user_create')]
     public function __invoke(Request $request): Response
@@ -37,7 +39,7 @@ class AdminUserCreateController extends AbstractController
             $user = match ($userType) {
                 'student' => new Student(),
                 'teacher' => new Teacher(),
-                default   => throw new \LogicException('Type d\'utilisateur invalide.')
+                default => throw new \LogicException('Type d\'utilisateur invalide.')
             };
 
             $user->setName($data['name'])

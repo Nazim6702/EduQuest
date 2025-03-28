@@ -51,11 +51,12 @@ class ProfileController extends AbstractController
     #[Route('/profile/edit', name: 'app_profile_edit')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function edit(
-        Request $request,
-        UserInterface $user,
+        Request                     $request,
+        UserInterface               $user,
         UserPasswordHasherInterface $passwordHasher,
-        EntityManagerInterface $em
-    ): Response {
+        EntityManagerInterface      $em
+    ): Response
+    {
         $form = $this->createForm(EditProfileFormType::class, $user);
         $form->handleRequest($request);
 
