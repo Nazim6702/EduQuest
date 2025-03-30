@@ -52,9 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (selectedType === 'Open') {
                 answersContainer.innerHTML = `
-                <label>Réponse ouverte :</label>
-                <textarea name="questions[${currentIndex}][answers][0][texte]" required></textarea>
-                <input type="hidden" name="questions[${currentIndex}][answers][0][isCorrect]" value="true" />
+                    <label>Réponse ouverte :</label>
+                    <textarea name="questions[${currentIndex}][answers][0][texte]" required></textarea>
+                    <input type="hidden" name="questions[${currentIndex}][answers][0][isCorrect]" value="true" />
                 `;
             } else if (selectedType === 'True/False') {
                 answersContainer.innerHTML = `
@@ -63,10 +63,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         <option value="true">Vrai</option>
                         <option value="false">Faux</option>
                     </select>
-            
+
                     <input type="hidden" name="questions[${currentIndex}][answers][0][texte]" value="True" />
                     <input type="hidden" name="questions[${currentIndex}][answers][1][texte]" value="False" />
-            
+
                     <input type="hidden" name="questions[${currentIndex}][answers][0][isCorrect]" id="q${currentIndex}-true-is-correct" value="false" />
                     <input type="hidden" name="questions[${currentIndex}][answers][1][isCorrect]" id="q${currentIndex}-false-is-correct" value="false" />
                 `;
@@ -85,13 +85,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 let html = '';
                 for (let i = 0; i < 4; i++) {
                     html += `
-                <div>
-                    <label>Choix ${i + 1} :</label>
-                    <input type="text" name="questions[${currentIndex}][answers][${i}][texte]" required />
-                    <input type="radio" name="questions[${currentIndex}][answers][correctIndex]" value="${i}" required /> Bonne réponse ?
-                    <input type="hidden" name="questions[${currentIndex}][answers][${i}][isCorrect]" value="false" />
-                </div>
-            `;
+                    <div>
+                        <label>Choix ${i + 1} :</label>
+                        <input type="text" name="questions[${currentIndex}][answers][${i}][texte]" required />
+                        <input type="radio" name="questions[${currentIndex}][answers][correctIndex]" value="${i}" required /> Bonne réponse ?
+                        <input type="hidden" name="questions[${currentIndex}][answers][${i}][isCorrect]" value="false" />
+                    </div>
+                    `;
                 }
                 answersContainer.innerHTML = html;
 
@@ -106,8 +106,39 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         });
+
         questionDiv.querySelector('.remove-question').addEventListener('click', () => {
             questionsContainer.removeChild(questionDiv);
         });
+    });
+
+
+    document.querySelector('form').addEventListener('submit', function (e) {
+        const questionBlocks = document.querySelectorAll('.question-block');
+        if (questionBlocks.length === 0) {
+            e.preventDefault();
+            alert("❌ Vous devez ajouter au moins une question pour créer le quiz.");
+            return;
+        }
+
+        let hasValidQuestion = false;
+        questionBlocks.forEach(q => {
+            const texteInput = q.querySelector('input[name*="[texte]"]');
+            const durationInput = q.querySelector('input[name*="[duration]"]');
+            const typeSelect = q.querySelector('select[name*="[type]"]');
+
+            if (
+                texteInput && texteInput.value.trim() !== '' &&
+                durationInput && durationInput.value.trim() !== '' &&
+                typeSelect && typeSelect.value !== ''
+            ) {
+                hasValidQuestion = true;
+            }
+        });
+
+        if (!hasValidQuestion) {
+            e.preventDefault();
+            alert("❌ Veuillez remplir au moins une question avant de valider.");
+        }
     });
 });
