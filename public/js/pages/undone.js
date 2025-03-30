@@ -1,6 +1,3 @@
-// Script js qui va générer des gifs aléatoires et des citataions aléatoire
-// utile pour la page undone.html.twig, but : amadouer l'utilisateur pour qu'il pardonne le fait qu'on ai pas fini le site
-
 const gifs = [
     "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzhmbzRtdTNwNW5rYXZlN3E4bmx5NWx0YzUybWI1azljb2ZrZzQzOCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/jpbnoe3UIa8TU8LM13/giphy.gif",
     "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZHRyaGV0YnlkYWcyaDdjZmJkcGltZm1tdmxqYjYxYjhkbDBpNXAzMiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3o7aD2saalBwwftBIY/giphy.gif",

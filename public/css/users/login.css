@@ -1,0 +1,87 @@
+body {
+    background-color: #f0f0f0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.login-container {
+    max-width: 480px;
+    margin: 80px auto;
+    background: linear-gradient(to bottom right, #ffffff, #f9f9f9);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.login-title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 900;
+    color: #0044cc;
+    text-shadow: 1px 1px 0 #ffd858;
+    margin-bottom: 30px;
+}
+
+form label {
+    font-weight: bold;
+    color: #0044cc;
+    display: block;
+    margin-bottom: 6px;
+    font-size: 15px;
+}
+
+form input[type="email"],
+form input[type="password"] {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    margin-bottom: 20px;
+    box-shadow: 2px 2px 0px #00000033;
+}
+
+form input:focus {
+    outline: none;
+    border-color: #0044cc;
+    box-shadow: 0 0 6px rgba(0, 68, 204, 0.3);
+}
+
+button,
+.btn-primary {
+    display: block;
+    width: 100%;
+    background-color: #ffd858;
+    color: #0044cc;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.4);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover,
+.btn-primary:hover {
+    background-color: #fbc02d;
+    transform: scale(1.02);
+}
+
+.no-account {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 14px;
+}
+
+.no-account a {
+    color: #0044cc;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.no-account a:hover {
+    text-decoration: underline;
+    color: #003399;
+}

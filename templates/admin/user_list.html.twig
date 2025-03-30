@@ -1,11 +1,16 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}Gérer les utilisateurs{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/admin/user-list.css') }}">
+{% endblock %}
 
 {% block body %}
     <h1>Liste des utilisateurs</h1>
 
-    <input type="text" id="user-filter" placeholder="Filtrer par nom, pseudo ou email..."
-           style="margin-bottom: 10px; padding: 8px; width: 300px;">
+    <input type="text" id="user-filter" placeholder="Filtrer par nom, pseudo ou email...">
 
     <table>
         <thead>
@@ -22,9 +27,7 @@
         {% for user in users %}
             <tr>
                 <td>{{ user.id }}</td>
-                <td data-filter="{{ user.name ~ user.pseudo ~ user.email | lower }}">
-                    {{ user.name }}
-                </td>
+                <td data-filter="{{ user.name ~ user.pseudo ~ user.email | lower }}">{{ user.name }}</td>
                 <td>{{ user.pseudo }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.userType }}</td>
@@ -33,9 +36,7 @@
                     <form method="post" action="{{ path('admin_user_delete', {'id': user.id}) }}"
                           onsubmit="return confirm('⚠️ Êtes-vous sûr de vouloir supprimer {{ user.pseudo }} ?');"
                           style="display:inline">
-                        <button type="submit" style="background:none; border:none; color:crimson; cursor:pointer;">
-                            Supprimer
-                        </button>
+                        <button type="submit">Supprimer</button>
                     </form>
                 </td>
             </tr>
@@ -46,19 +47,11 @@
         {% endfor %}
         </tbody>
     </table>
-    <a href="{{ path('app_profile') }}">
-        ← Retour à mon profil
-    </a>
 
-    <script>
-        document.getElementById('user-filter').addEventListener('input', function () {
-            const value = this.value.toLowerCase();
-            const rows = document.querySelectorAll('#user-table-body tr');
+    <a href="{{ path('app_profile') }}">← Retour à mon profil</a>
+{% endblock %}
 
-            rows.forEach(row => {
-                const text = row.querySelector('[data-filter]').dataset.filter;
-                row.style.display = text.includes(value) ? '' : 'none';
-            });
-        });
-    </script>
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/admin/user-filter.js') }}"></script>
 {% endblock %}

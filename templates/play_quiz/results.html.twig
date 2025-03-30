@@ -1,8 +1,14 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}Résultat du Quiz{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/pages/results.css') }}">
+{% endblock %}
+
 {% block body %}
-    <section class="result-summary" style="text-align:center; padding:40px;">
+    <section class="result-summary">
         <h1>🎉 Fin du quiz : "{{ quiz.title }}"</h1>
         <p>Voici un récapitulatif de vos réponses :</p>
 
@@ -24,29 +30,4 @@
 
         <a href="{{ path('app_home') }}" class="btn">Retour à l'accueil</a>
     </section>
-
-    <style>
-        .recap-item {
-            margin: 10px auto;
-            padding: 10px;
-            border: 1px solid #ccc;
-            width: 80%;
-            border-radius: 8px;
-        }
-
-        .recap-item.correct {
-            border-color: #4caf50;
-            background: #e8f5e9;
-        }
-
-        .recap-item.wrong {
-            border-color: #f44336;
-            background: #ffebee;
-        }
-
-        .recap-item.pending {
-            border-color: #9e9e9e;
-            background: #eeeeee;
-        }
-    </style>
 {% endblock %}

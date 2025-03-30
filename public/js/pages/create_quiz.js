@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
         questionDiv.classList.add('question-block');
         questionDiv.dataset.index = currentIndex;
 
-        // On ajoute la partie généraliste question (sans spécificité)
         questionDiv.innerHTML = `
             <h3>Question #${currentIndex + 1}</h3>
             <input type="hidden" name="questions[${currentIndex}][debug]" value="q${currentIndex}" />

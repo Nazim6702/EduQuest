@@ -1,0 +1,74 @@
+body {
+    background-color: #fff4f4;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.delete-container {
+    max-width: 600px;
+    margin: 100px auto;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.delete-container h1 {
+    font-size: 26px;
+    color: #c62828;
+    margin-bottom: 20px;
+    font-weight: 900;
+    text-shadow: 1px 1px #ffcdd2;
+}
+
+.delete-container p {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+.delete-container strong {
+    color: #d32f2f;
+}
+
+.delete-container form {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.delete-container button {
+    background-color: #f44336;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.delete-container button:hover {
+    background-color: #d32f2f;
+    transform: scale(1.05);
+}
+
+.delete-container a {
+    background-color: #0044cc;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.delete-container a:hover {
+    background-color: #003399;
+    transform: scale(1.05);
+}

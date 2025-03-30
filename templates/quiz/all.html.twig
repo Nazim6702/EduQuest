@@ -2,67 +2,34 @@
 
 {% block title %}Tous les Quiz{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/components/quiz-card.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pages/all.css') }}">
+{% endblock %}
+
 {% block body %}
-    <section class="all-quizzes">
-        <div class="container">
-            <h2 style="text-align:center; margin-bottom:30px;">Tous les quiz disponibles</h2>
+<section class="all-quizzes">
+    <div class="container">
+        <h2>Tous les quiz disponibles</h2>
 
-            <div class="quiz-grid">
-                {% for quiz in pagination %}
-                    <a href="{{ path('app_play_quiz', { id: quiz.id }) }}" class="quiz-card-link">
-                        <div class="quiz-card">
-                            <span class="category">{{ quiz.category }}</span>
-                            <h3>{{ quiz.title }}</h3>
-                            <span class="date">Publié le {{ quiz.createdAt|date('d/m/Y') }}</span>
-                        </div>
-                    </a>
-                {% else %}
-                    <p>Aucun quiz trouvé.</p>
-                {% endfor %}
-            </div>
-
-            <div class="pagination" style="margin-top: 40px; text-align:center;">
-            </div>
+        <div class="quiz-grid">
+            {% for quiz in pagination %}
+                <a href="{{ path('app_play_quiz', { id: quiz.id }) }}" class="quiz-card-link">
+                    <div class="quiz-card">
+                        <span class="category">{{ quiz.category }}</span>
+                        <h3>{{ quiz.title }}</h3>
+                        <span class="date">Publié le {{ quiz.createdAt|date('d/m/Y') }}</span>
+                    </div>
+                </a>
+            {% else %}
+                <p>Aucun quiz trouvé.</p>
+            {% endfor %}
         </div>
-    </section>
 
-    <style>
-        .quiz-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .quiz-card-link {
-            text-decoration: none;
-        }
-
-        .quiz-card {
-            background-color: #f9f9f9;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-            text-align: center;
-            transition: transform 0.2s;
-        }
-
-        .quiz-card:hover {
-            transform: scale(1.03);
-        }
-
-        .quiz-card .category {
-            font-size: 14px;
-            color: #777;
-        }
-
-        .quiz-card h3 {
-            color: #0044cc;
-            margin: 10px 0;
-        }
-
-        .quiz-card .date {
-            font-size: 12px;
-            color: #999;
-        }
-    </style>
+        <div class="pagination">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </div>
+</section>
 {% endblock %}
