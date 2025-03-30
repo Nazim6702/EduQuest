@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 use App\Form\LoginFormType;
@@ -11,24 +10,15 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 final class LoginController extends AbstractController
 {
     #[Route('/login', name: 'app_login')]
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function __invoke(AuthenticationUtils $authUtils): Response
     {
-        $error = $authenticationUtils->getLastAuthenticationError();
-
-        $lastEmail = $authenticationUtils->getLastUsername();
-
         $form = $this->createForm(LoginFormType::class, [
-            'email' => $lastEmail,
+            'email' => $authUtils->getLastUsername(),
         ]);
 
         return $this->render('auth/login.html.twig', [
             'form' => $form->createView(),
-            'error' => $error,
+            'error' => $authUtils->getLastAuthenticationError(),
         ]);
-    }
-
-    #[Route('/logout', name: 'app_logout')]
-    public function logout(): void
-    {
     }
 }

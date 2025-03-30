@@ -15,6 +15,21 @@ class UserRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, User::class);
     }
+    
+    public function findAllExceptAdmins(?string $search = null): array
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->where('u NOT INSTANCE OF App\\Entity\\Admin');
+
+        if ($search) {
+            $qb->andWhere('u.name LIKE :s OR u.pseudo LIKE :s OR u.email LIKE :s')
+               ->setParameter('s', "%$search%");
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    
 
 //    /**
 //     * @return User[] Returns an array of User objects

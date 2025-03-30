@@ -12,18 +12,8 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(QuizRepository $quizRepository): Response
     {
-
-        $quizzes = $quizRepository->findBy([], ['createdAt' => 'DESC']);
-
         return $this->render('home/index.html.twig', [
-            'quizzes' => $quizzes
+            'quizzes' => $quizRepository->findBy([], ['createdAt' => 'DESC'])
         ]);
-
-    }
-
-    #[Route('/coming-soon', name: 'app_undone')]
-    public function undone(): Response
-    {
-        return $this->render('components/undone.html.twig');
     }
 }
