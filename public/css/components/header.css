@@ -7,34 +7,38 @@
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.logo {
+.header .logo {
     font-size: 35px;
     font-weight: 900;
     color: #0044cc;
     margin-right: 80px;
     text-shadow: 3px 2px 0px rgba(255, 152, 0, 0.7);
 }
-.logo-link {
+
+.header .logo-link {
     text-decoration: none;
     color: inherit;
 }
 
-.nav {
+.header .nav {
     display: flex;
     flex: 1;
     justify-content: center;
 }
-.nav ul {
+
+.header .nav ul {
     list-style: none;
     display: flex;
     gap: 40px;
 }
-.nav ul li {
+
+.header .nav ul li {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.nav ul li a {
+
+.header .nav ul li a {
     text-decoration: none;
     color: #ff9800;
     font-weight: 800;
@@ -43,22 +47,26 @@
     align-items: center;
     gap: 5px;
     text-align: center;
+    transition: transform 0.2s;
 }
-.nav ul li a svg {
+
+.header .nav ul li a svg {
     stroke: #0044cc;
 }
-.nav-link:hover {
+
+.header .nav-link:hover {
     color: #0044cc;
     transform: scale(1.2);
 }
 
-.search-bar {
+.header .search-bar {
     display: flex;
     align-items: center;
     margin-left: 40px;
     margin-right: auto;
 }
-.search-bar input {
+
+.header .search-bar input {
     padding: 13px;
     border: 1px solid #000;
     border-radius: 15px;
