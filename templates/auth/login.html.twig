@@ -28,30 +28,6 @@
             margin-bottom: 30px;
         }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            font-weight: bold;
-            color: #0044cc;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border-radius: 10px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-            box-shadow: 2px 2px 0px black;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: #0044cc;
-            box-shadow: 0 0 5px rgba(0, 68, 204, 0.5);
-        }
-
         button {
             background-color: #ff9800;
             color: white;
@@ -95,9 +71,6 @@
 
         {{ form_start(form) }}
         {{ form_widget(form) }}
-        <div class="form-group">
-            <button type="submit">Se connecter</button>
-        </div>
         {{ form_end(form) }}
 
         <p class="no-account">
