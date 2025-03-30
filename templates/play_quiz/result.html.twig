@@ -1,89 +1,36 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}Résultat{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/pages/result.css') }}">
+{% endblock %}
+
 {% block body %}
-    <section style="text-align:center; padding:40px;">
-        {% if result is same as(true) %}
-            <h2 style="color:#4caf50; font-size: 24px;">✅ Bonne réponse !</h2>
-        {% elseif result is same as(false) %}
-            <h2 style="color:#f44336; font-size: 24px;">❌ Mauvaise réponse</h2>
-        {% else %}
-            <h2 style="color:#ffa000; font-size: 24px;">⏰ Temps écoulé</h2>
-        {% endif %}
+<section class="result-section">
+    {% if result is same as(true) %}
+        <h2 class="correct">✅ Bonne réponse !</h2>
+    {% elseif result is same as(false) %}
+        <h2 class="incorrect">❌ Mauvaise réponse</h2>
+    {% else %}
+        <h2 class="timeout">⏰ Temps écoulé</h2>
+    {% endif %}
 
-        <div id="feedback-message" style="margin-top: 20px; font-size: 18px; font-style: italic; color: #3949ab;"></div>
+    <div id="feedback-message" data-result="{{ result }}"></div>
 
-        <div style="margin-top: 40px;">
-            {% if isLast %}
-                <a href="{{ path('app_quiz_results', { id: quizId }) }}" class="btn-next" style="
-                    background-color: #0044cc;
-                    color: white;
-                    font-size: 18px;
-                    padding: 15px 40px;
-                    border-radius: 12px;
-                    text-decoration: none;
-                ">
-                    📊 Voir les résultats
-                </a>
-            {% else %}
-                <div style="margin-top: 60px;">
-                    <a href="{{ path('app_quiz_play', { id: quizId, step: nextStep }) }}" class="btn-next" style="
-                    background-color: #fbc02d;
-                    color: #0044cc;
-                    font-size: 18px;
-                    padding: 15px 40px;
-                    border-radius: 12px;
-                    text-decoration: none;
-                    font-weight: bold;">
-                        ▶️ Question suivante
-                    </a>
-                </div>
-            {% endif %}
-        </div>
-    </section>
-    <script>
+    {% if isLast %}
+        <a href="{{ path('app_quiz_results', { id: quizId }) }}" class="btn-next results">
+            📊 Voir les résultats
+        </a>
+    {% else %}
+        <a href="{{ path('app_quiz_play', { id: quizId, step: nextStep }) }}" class="btn-next next">
+            ▶️ Question suivante
+        </a>
+    {% endif %}
+</section>
 
-        //
-        //      Partie qui sers à l'affichage des messages d'encouragement
-        //
-
-        const goodMessages = [
-            "Bravo ! 🎉",
-            "Excellente réponse ! ✅",
-            "Quel génie 😳",
-            "Je te tire mon chapeau",
-            "Digne des plus grands 👏"
-        ];
-
-        const badMessages = [
-            "Ouch... mauvaise réponse 😬",
-            "Paaas tout à fait ça... 😕",
-            "Essaie encore !",
-            "Tu feras mieux à la prochaine 👍",
-            "Lache pas les cours ! 💪"
-        ];
-
-        const timeoutMessages = [
-            "Le temps file... ⏳",
-            "Trop tard 😓",
-            "Soit plus rapide la prochaine fois 🏃‍♂️",
-            "Il faut cliquer sur le bouton hein",
-            "ça passe vite ! 🐢🐢🐢"
-        ];
-
-        const feedbackEl = document.getElementById('feedback-message');
-        let messages = [];
-
-        {% if result is same as(true) %}
-        messages = goodMessages;
-        {% elseif result is same as(false) %}
-        messages = badMessages;
-        {% else %}
-        messages = timeoutMessages;
-        {% endif %}
-
-        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-        feedbackEl.innerText = randomMessage;
-
-    </script>
+{% block javascripts %}
+    <script src="{{ asset('js/pages/result.js') }}"></script>
+{% endblock %}
 {% endblock %}

@@ -2,6 +2,11 @@
 
 {% block title %}Gestion des Quiz{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/admin/quiz-list.css') }}">
+{% endblock %}
+
 {% block body %}
     <h1>Gestion des Quiz</h1>
 
@@ -10,31 +15,28 @@
     {% else %}
         <table>
             <thead>
-            <tr>
-                <th>Titre</th>
-                <th>Catégorie</th>
-                <th>Créé le</th>
-                <th>Action</th>
-            </tr>
+                <tr>
+                    <th>Titre</th>
+                    <th>Catégorie</th>
+                    <th>Créé le</th>
+                    <th>Action</th>
+                </tr>
             </thead>
             <tbody>
-            {% for quiz in quizzes %}
-                <tr>
-                    <td>{{ quiz.title }}</td>
-                    <td>{{ quiz.category }}</td>
-                    <td>{{ quiz.createdAt|date('d/m/Y') }}</td>
-                    <td>
-                        <form method="post" action="{{ path('admin_quiz_delete', { id: quiz.id }) }}"
-                              onsubmit="return confirm('Confirmer la suppression du quiz ?');">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete_quiz_' ~ quiz.id) }}">
-                            <button type="submit"
-                                    style="color: white; background-color: red; border: none; padding: 5px 10px; border-radius: 5px;">
-                                Supprimer
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-            {% endfor %}
+                {% for quiz in quizzes %}
+                    <tr>
+                        <td>{{ quiz.title }}</td>
+                        <td>{{ quiz.category }}</td>
+                        <td>{{ quiz.createdAt|date('d/m/Y') }}</td>
+                        <td>
+                            <form method="post" action="{{ path('admin_quiz_delete', { id: quiz.id }) }}"
+                                  onsubmit="return confirm('Confirmer la suppression du quiz ?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete_quiz_' ~ quiz.id) }}">
+                                <button type="submit">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     {% endif %}

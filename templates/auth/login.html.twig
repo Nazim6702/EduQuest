@@ -4,65 +4,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <style>
-        body {
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
-        }
-
-        .login-container {
-            max-width: 500px;
-            margin: 80px auto;
-            background-color: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .login-title {
-            text-align: center;
-            font-size: 32px;
-            font-weight: 900;
-            color: #0044cc;
-            text-shadow: 2px 2px #ff9800;
-            margin-bottom: 30px;
-        }
-
-        button {
-            background-color: #ff9800;
-            color: white;
-            padding: 12px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 10px;
-            box-shadow: 4px 4px 0px black;
-            cursor: pointer;
-            transition: transform 0.2s;
-            margin-top: 10px;
-        }
-
-        button:hover {
-            background-color: #e68900;
-            transform: scale(1.05);
-        }
-
-        .no-account {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 14px;
-        }
-
-        .no-account a {
-            color: #0044cc;
-            font-weight: bold;
-            text-decoration: none;
-        }
-
-        .no-account a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/users/login.css') }}">
 {% endblock %}
 
 {% block body %}

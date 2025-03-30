@@ -1,16 +1,24 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}Modifier mes infos{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/pages/profile-edit.css') }}">
+{% endblock %}
+
 {% block body %}
-    <h1>Modifier mes informations</h1>
+    <div class="profile-edit-container">
+        <h1>Modifier mes informations</h1>
 
-    {{ form_start(form) }}
-    {{ form_row(form.name) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.pseudo) }}
-    {{ form_row(form.password) }}
-    <button class="btn">Enregistrer</button>
-    {{ form_end(form) }}
+        {{ form_start(form) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.pseudo) }}
+            {{ form_row(form.password) }}
+            <button class="btn">✅ Enregistrer</button>
+        {{ form_end(form) }}
 
-    <a href="{{ path('app_profile') }}">Annuler</a>
+        <a href="{{ path('app_profile') }}" class="cancel-link">↩️ Annuler</a>
+    </div>
 {% endblock %}

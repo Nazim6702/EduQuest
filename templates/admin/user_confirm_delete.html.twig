@@ -1,14 +1,23 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}Supprimer utilisateur{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/admin/user-confirm-delete.css') }}">
+{% endblock %}
+
 {% block body %}
-    <h1>Supprimer l’utilisateur : {{ user.pseudo }}</h1>
+    <div class="delete-container">
+        <h1>Supprimer l’utilisateur : {{ user.pseudo }}</h1>
 
-    <p>⚠️ Cette action est irréversible. Confirmez-vous la suppression du compte de <strong>{{ user.email }}</strong> ?
-    </p>
+        <p>⚠️ Cette action est irréversible. Confirmez-vous la suppression du compte de
+            <strong>{{ user.email }}</strong> ?
+        </p>
 
-    <form method="post">
-        <button type="submit">Oui, supprimer</button>
-        <a href="{{ path('admin_user_list') }}">Non, annuler</a>
-    </form>
+        <form method="post">
+            <button type="submit">Oui, supprimer</button>
+            <a href="{{ path('admin_user_list') }}">Non, annuler</a>
+        </form>
+    </div>
 {% endblock %}

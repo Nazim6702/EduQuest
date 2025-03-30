@@ -1,0 +1,83 @@
+body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+.profile-edit-container {
+    max-width: 600px;
+    margin: 80px auto;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.profile-edit-container h1 {
+    text-align: center;
+    font-size: 28px;
+    color: #0044cc;
+    margin-bottom: 30px;
+    font-weight: 900;
+    text-shadow: 1px 1px #ffd858;
+}
+
+form .form-row,
+form .form-group {
+    margin-bottom: 20px;
+}
+
+form label {
+    font-weight: bold;
+    color: #0044cc;
+    display: block;
+    margin-bottom: 8px;
+}
+
+form input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-shadow: 2px 2px 0px black;
+}
+
+form input:focus {
+    outline: none;
+    border-color: #0044cc;
+    box-shadow: 0 0 5px rgba(0, 68, 204, 0.4);
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #ffd858;
+    color: #0044cc;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background-color: #fbc02d;
+    transform: scale(1.03);
+}
+
+.cancel-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #0044cc;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.cancel-link:hover {
+    text-decoration: underline;
+}

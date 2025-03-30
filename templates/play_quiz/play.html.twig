@@ -2,100 +2,51 @@
 
 {% block title %}Question {{ step + 1 }} / {{ total }}{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/pages/game.css') }}">
+{% endblock %}
+
 {% block body %}
-    <link rel="stylesheet" href="{{ asset('css/game.css') }}">
-    <section class="question-container" style="
-    max-width: 700px;
-    margin: 80px auto 0 auto;  <!-- 🔥 Ajout ici -->
-    padding: 40px;
-    text-align: center;
-    background-color: #fff;
-    border-radius: 16px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-        <h2 style="color: #3949ab; font-size: 24px;">Question {{ step + 1 }} / {{ total }}</h2>
-        <p style="font-size: 20px; margin: 30px 0;">{{ question.texte }}</p>
+<section class="question-container">
+    <h2>Question {{ step + 1 }} / {{ total }}</h2>
+    <p>{{ question.texte }}</p>
 
-        <form method="post" action="{{ path('app_quiz_submit', {id: quiz.id, step: step}) }}">
-            <div style="margin-bottom: 30px;">
-                {% if question.type == constant('App\\Enum\\QuestionType::QCM') or question.type == constant('App\\Enum\\QuestionType::TRUE_FALSE') %}
-                    {% for answer in question.answers %}
-                        <label class="answer-option">
-                            <input type="radio" name="answer" value="{{ answer.id }}" required>
-                            {{ answer.texte }}
-                        </label>
-                    {% endfor %}
-
-                {% elseif question.type == constant('App\\Enum\\QuestionType::OPEN') %}
-                    <textarea name="answer_text" required rows="4" cols="50"
-                              style="padding: 10px; font-size: 16px; width: 100%; max-width: 500px; border-radius: 8px; border: 1px solid #ccc;"></textarea>
-                {% endif %}
-            </div>
-
-            <button type="submit" class="btn-submit" style="
-                background-color: #ffd858;
-                color: #0044cc;
-                font-size: 18px;
-                font-weight: bold;
-                padding: 15px 40px;
-                border: none;
-                border-radius: 12px;
-                cursor: pointer;
-                transition: background 0.3s;
-            ">
-                ✅ Valider
-            </button>
-        </form>
-
-        <div style="margin-top: 30px;">
-            <p id="timer" style="font-size: 16px;">Temps restant : <span id="countdown"></span> sec</p>
-            <p id="global-timer" style="font-size: 16px;">Temps global restant : <span id="global-countdown"></span></p>
+    <form method="post" action="{{ path('app_quiz_submit', {id: quiz.id, step: step}) }}">
+        <div>
+            {% if question.type == constant('App\\Enum\\QuestionType::QCM') or question.type == constant('App\\Enum\\QuestionType::TRUE_FALSE') %}
+                {% for answer in question.answers %}
+                    <label class="answer-option">
+                        <input type="radio" name="answer" value="{{ answer.id }}" required>
+                        {{ answer.texte }}
+                    </label>
+                {% endfor %}
+            {% elseif question.type == constant('App\\Enum\\QuestionType::OPEN') %}
+                <textarea name="answer_text" required rows="4" cols="50"></textarea>
+            {% endif %}
         </div>
-    </section>
-    <div class="quiz-progress-wrapper">
-        <div class="progress-bar">
-            {% for q in quiz.questions %}
-                {% set status = app.session.get('quiz_progress_' ~ quiz.id)[q.id] ?? 'pending' %}
-                <div class="progress-box {{ status }}"></div>
-            {% endfor %}
-        </div>
+
+        <button type="submit" class="btn-submit">✅ Valider</button>
+    </form>
+
+    <div>
+        <p id="timer">Temps restant : <span id="countdown"></span> sec</p>
+        <p id="global-timer">Temps global restant : <span id="global-countdown"></span></p>
     </div>
+</section>
 
-    <script>
-
-        //
-        //      Partie qui sers à l'affichage des timers
-        //
-
-        function formatTime(seconds) {
-            const m = Math.floor(seconds / 60).toString().padStart(2, '0');
-            const s = (seconds % 60).toString().padStart(2, '0');
-            return `${m}:${s}`;
-        }
-
-        let timeLeft = {{ question.duration|default(30) }};
-        let countdown = document.getElementById('countdown');
-        countdown.innerText = timeLeft;
-        let timer = setInterval(() => {
-            timeLeft--;
-            countdown.innerText = timeLeft;
-            if (timeLeft <= 0) {
-                clearInterval(timer);
-                document.querySelector('form').submit();
-            }
-        }, 1000);
-
-        let globalTimeLeft = {{ globalRemaining }};
-        let globalCountdown = document.getElementById('global-countdown');
-        globalCountdown.innerText = formatTime(globalTimeLeft);
-        let globalTimer = setInterval(() => {
-            globalTimeLeft--;
-            globalCountdown.innerText = formatTime(globalTimeLeft);
-            if (globalTimeLeft <= 0) {
-                clearInterval(globalTimer);
-                alert("Temps global écoulé !");
-                window.location.href = "{{ path('app_quiz_results', { id: quiz.id }) }}";
-            }
-        }, 1000);
-
-    </script>
+<div class="quiz-progress-wrapper">
+    <div class="progress-bar">
+        {% for q in quiz.questions %}
+            {% set status = app.session.get('quiz_progress_' ~ quiz.id)[q.id] ?? 'pending' %}
+            <div class="progress-box {{ status }}"></div>
+        {% endfor %}
+    </div>
+</div>
+<script>
+    window.quizTimeLeft = {{ question.duration|default(30) }};
+    window.globalRemaining = {{ globalRemaining }};
+    window.quizResultsUrl = "{{ path('app_quiz_results', { id: quiz.id }) }}";
+</script>
+<script src="{{ asset('js/pages/game.js') }}"></script>
 {% endblock %}

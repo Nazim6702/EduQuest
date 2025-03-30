@@ -1,14 +1,21 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}Explorer les Quiz{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/components/quiz-card.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pages/explorer.css') }}">
+{% endblock %}
 
 {% block body %}
 <section class="quiz-explorer">
     <div class="container">
-        <h2 style="text-align:center; margin-bottom:20px;">Explorer les Quiz</h2>
+        <h2>Explorer les Quiz</h2>
 
-        <form method="get" style="margin-bottom: 30px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
-            <input type="text" name="search" placeholder="Rechercher un titre..." value="{{ search }}" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
-            <select name="category" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+        <form method="get" class="search-form">
+            <input type="text" name="search" placeholder="Rechercher un titre..." value="{{ search }}">
+            <select name="category">
                 <option value="">Toutes les catégories</option>
                 {% set categories = [
                     'Physique-Chimie', 'Histoire', 'Géographie', 'Français', 'Maths',
@@ -18,9 +25,7 @@
                     <option value="{{ cat }}" {% if category == cat %}selected{% endif %}>{{ cat }}</option>
                 {% endfor %}
             </select>
-            <button type="submit" style="background-color:#ffd858; color:#0044cc; padding: 8px 16px; border:none; border-radius: 5px;">
-                🔍 Rechercher
-            </button>
+            <button type="submit">🔍 Rechercher</button>
         </form>
 
         <div class="quiz-grid">
@@ -37,31 +42,9 @@
             {% endfor %}
         </div>
 
-        <div class="pagination" style="margin-top: 30px; text-align:center;">
+        <div class="pagination">
             {{ knp_pagination_render(pagination) }}
         </div>
     </div>
 </section>
-
-<style>
-.quiz-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-}
-.quiz-card {
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    text-align: center;
-    transition: transform 0.2s;
-}
-.quiz-card:hover {
-    transform: scale(1.03);
-}
-.quiz-card h3 {
-    color: #0044cc;
-}
-</style>
 {% endblock %}

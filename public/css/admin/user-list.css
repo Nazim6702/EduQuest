@@ -1,0 +1,101 @@
+body {
+    background-color: #f4f7fb;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    color: #0044cc;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    font-size: 30px;
+    font-weight: 900;
+    text-shadow: 1px 1px #ffd858;
+}
+
+#user-filter {
+    display: block;
+    margin: 0 auto 30px auto;
+    padding: 12px;
+    width: 320px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-shadow: 2px 2px 0px #00000022;
+}
+
+#user-filter:focus {
+    outline: none;
+    border-color: #0044cc;
+    box-shadow: 0 0 6px rgba(0, 68, 204, 0.3);
+}
+
+table {
+    width: 95%;
+    max-width: 1200px;
+    margin: 0 auto 60px auto;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+thead {
+    background-color: #0044cc;
+    color: white;
+}
+
+thead th {
+    padding: 14px 20px;
+    text-align: left;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+tbody td {
+    padding: 14px 20px;
+    border-bottom: 1px solid #eee;
+    font-size: 15px;
+    color: #333;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+    background-color: #f1f5ff;
+}
+
+a {
+    color: #0044cc;
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button {
+    background-color: transparent;
+    color: crimson;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    text-decoration: underline;
+}
+
+a[href*="profile"] {
+    display: block;
+    text-align: center;
+    margin-top: 30px;
+    font-weight: bold;
+    color: #0044cc;
+}

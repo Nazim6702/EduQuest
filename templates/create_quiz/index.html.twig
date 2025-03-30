@@ -2,7 +2,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/create_quiz.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pages/create_quiz.css') }}">
 {% endblock %}
 
 {% block title %}Créer un Quiz{% endblock %}
@@ -31,6 +31,6 @@
         {{ form_end(form) }}
     </div>
 
-    <script src="{{ asset('js/create_quiz.js') }}"></script>
+    <script src="{{ asset('js/pages/create_quiz.js') }}"></script>
 {% endblock %}
 
