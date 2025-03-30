@@ -10,22 +10,28 @@ html, body {
 
 .hero {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     background-color: #0044cc;
     padding: 50px;
     color: white;
+    flex-wrap: wrap;
 }
+
 .content {
     max-width: 50%;
 }
+
 .hero h2 {
     font-size: 32px;
     font-weight: bold;
 }
+
 .buttons {
     margin-top: 20px;
 }
+
 .btn {
     padding: 10px 20px;
     text-decoration: none;
@@ -33,19 +39,43 @@ html, body {
     border-radius: 5px;
     font-weight: bold;
 }
+
 .btn-inscrire {
     background-color: #ffd858;
     color: white;
     margin-right: 10px;
 }
+
 .btn-connecter {
     background-color: #ffd858;
     color: white;
     border: 2px solid #0044cc;
 }
+
+.illustration {
+    flex: 1;
+    text-align: center;
+}
+
 .illustration img {
-    width: 300px;
+    max-width: 100%;
     height: auto;
+    max-height: 350px;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+
+    .content {
+        max-width: 100%;
+    }
+
+    .illustration {
+        margin-bottom: 30px;
+    }
 }
 
 .new-quizzes {
