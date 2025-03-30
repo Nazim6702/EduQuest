@@ -13,8 +13,10 @@
             <h1>Bienvenue, {{ app.user.name }}</h1>
         </div>
 
-        <div class="profile-edit-link">
-            <a href="{{ path('app_profile_edit') }}">Modifier mes informations</a>
+        <div style="text-align: center; margin-bottom: 30px;">
+            <a href="{{ path('app_profile_edit') }}" class="profile-action-button">
+                ✏️ Modifier mes informations
+            </a>
         </div>
 
         <div class="info-box">
@@ -29,9 +31,9 @@
         <div class="features-box">
             <h3>Fonctionnalités Enseignant</h3>
             <ul>
-                <li><a href="/quiz/create">Créer des quiz</a></li>
-                <li><a href="#">Lancer un débat</a></li>
-                <li><a href="#">Consulter les résultats des étudiants</a></li>
+                <li><a href="{{ path('app_create_quiz') }}">Créer des quiz</a></li>
+                <li><a href="#" class="coming-soon">Lancer un débat</a></li>
+                <li><a href="#" class="coming-soon">Consulter les résultats des étudiants</a></li>
             </ul>
         </div>
 

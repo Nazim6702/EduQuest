@@ -1,21 +1,28 @@
-.footer {
-    background-color: #3949ab;
-    padding: 50px;
-    color: white;
+body {
+    margin: 0;
+    padding: 0;
 }
 
-.footer-content {
+.footer {
+    background-color: #3949ab;
+    padding: 50px 20px 0;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.footer .footer-content {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.footer-content h3 {
+.footer .footer-content h3 {
     font-size: 24px;
     margin-bottom: 20px;
+    color: white;
 }
 
-.footer-content ul {
+.footer .footer-content ul {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -25,25 +32,39 @@
     gap: 10px;
 }
 
-.footer-content ul li a,
-.social-icons a {
+.footer .footer-content ul li a,
+.footer .social-icons a {
     text-decoration: none;
     color: white;
+    font-weight: bold;
 }
 
-.social-icons {
+.footer .social-icons {
     margin-top: 20px;
     display: flex;
     gap: 10px;
     font-size: 24px;
 }
 
-.legal {
+.footer .legal {
     background-color: black;
     color: white;
     padding: 10px 50px;
+    font-size: 12px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 12px;
+    margin-top: 40px;
+    box-sizing: border-box;
+}
+
+.footer .legal a {
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.footer .legal a:hover {
+    text-decoration: underline;
 }

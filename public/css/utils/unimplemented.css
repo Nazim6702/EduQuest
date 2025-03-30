@@ -1,0 +1,19 @@
+.profile-container a.coming-soon {
+    background-color: #e53935 !important; 
+    color: white !important;
+    pointer-events: auto;
+    cursor: pointer;
+    text-align: center;
+    padding: 12px 20px;
+    font-weight: bold;
+    border-radius: 30px;
+    box-shadow: 4px 4px 0px black;
+    transition: transform 0.2s, background-color 0.2s;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.profile-container a.coming-soon:hover {
+    background-color: #c62828 !important; 
+    transform: scale(1.05);
+}

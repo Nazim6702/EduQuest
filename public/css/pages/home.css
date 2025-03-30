@@ -86,10 +86,9 @@ html, body {
 }
 
 
-.theme a {
+.theme {
     text-decoration: none;
 }
-
 
 .theme:hover {
     transform: scale(1.05);
@@ -127,3 +126,4 @@ html, body {
         grid-template-columns: repeat(5, 1fr);
     }
 }
+
