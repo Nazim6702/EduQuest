@@ -12,16 +12,29 @@
     <section class="hero">
         <div class="content">
             <h2>Le défi éducatif qui fait grandir votre savoir ! 🧠</h2>
-            {% if not app.user %}
-                <div class="buttons">
+            <p class="subtitle">Des quiz interactifs, un apprentissage fun et stimulant 📘✨</p>
+
+            <ul class="benefits">
+                <li>✅ 100+ quiz variés</li>
+                <li>🎯 Suivi de progression</li>
+                <li>🆓 Gratuit & sans pub</li>
+            </ul>
+
+            <div class="buttons">
+                {% if not app.user %}
                     <a href="{{ path('app_register') }}" class="btn btn-inscrire">S'inscrire</a>
                     <a href="{{ path('app_login') }}" class="btn btn-connecter">Se connecter</a>
-                </div>
-            {% endif %}
+                {% else %}
+                    <a href="{{ path('app_quiz_explorer') }}" class="btn btn-inscrire">🎮 Explorer les Quiz</a>
+                {% endif %}
+            </div>
+        </div>
 
+        <div class="illustration">
+            <img src="{{ asset('images/hero-quiz.svg') }}" alt="Quiz illustration" class="img-fluid">
         </div>
     </section>
-
+    
     <section class="new-quizzes">
         <h2>Nouveaux Quiz</h2>
         <div class="quiz-cards">
