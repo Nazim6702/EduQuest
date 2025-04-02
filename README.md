@@ -41,7 +41,7 @@
 | PHP Symfony 7   | Backend principal                |
 | Twig            | Templating frontend              |
 | Doctrine ORM    | Mapping base de données          |
-| Adminer         | Interface BDD légère             |
+| Adminer         | Interface BDD              |
 | JavaScript      | Interactions dynamiques          |
 | CSS / Bootstrap | Style et responsive              |
 | Docker          | Conteneurisation de l’app        |
