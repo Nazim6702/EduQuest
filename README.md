@@ -15,7 +15,7 @@
 
 ---
 
-## 👥 Rôles utilisateurs
+##  Rôles utilisateurs
 
 -  **Élève** : réalise les quiz, consulte sa progression, participe au forum
 -  **Enseignant** : crée/modifie/supprime des quiz, participe au forum
@@ -27,14 +27,14 @@
 
 -  Inscription et connexion sécurisée avec rôle attribué
 -  Quiz par thématique (Histoire, Maths, etc.)
--  **Question du jour** : une nouvelle question chaque jour
+-  Question du jour : une nouvelle question chaque jour
 -  Forum intégré avec système de réponse & likes
 -  Suivi de la progression des utilisateurs
 - ⚙ Interface admin via **Adminer**
 
 ---
 
-## 🛠️ Stack technique
+##  Stack technique
 
 | Technologie     | Usage                           |
 |----------------|----------------------------------|
