@@ -1,20 +1,67 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DebateController!{% endblock %}
+{% block title %}Espace Débat{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/pages/debate.css') }}">
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<h1>💬 Espace Débat</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+{# -- Formulaire de publication -- #}
+{% if app.user %}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-primary">Envoyer</button>
+    {{ form_end(form) }}
+{% else %}
+    <p style="background: #ffe0e0; padding: 15px; border-radius: 8px;">
+        🔒 Tu dois <a href="{{ path('app_login') }}">te connecter</a> pour participer à la discussion.
+    </p>
+{% endif %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/dev/EduQuest/src/Controller/DebateController.php</code></li>
-        <li>Your template at <code>C:/dev/EduQuest/templates/debate/index.html.twig</code></li>
-    </ul>
-</div>
+<hr>
+
+{# -- Messages racine -- #}
+{% for msg in messages %}
+    <div class="message">
+        <p class="author">
+            {{ msg.author.email }}
+            <span class="role-badge">
+                {{ msg.author.roles[0]|replace({'ROLE_': ''})|lower|capitalize }}
+            </span>
+        </p>
+
+        <p>{{ msg.content }}</p>
+
+        <p class="meta">
+            {{ msg.createdAt|date('d/m/Y H:i') }}
+            <a href="{{ path('app_debate_like', { id: msg.id }) }}" style="text-decoration: none; margin-left: 10px;">❤️ {{ msg.likes }}</a>
+            {% if app.user %}
+                <a href="{{ path('app_debate', { replyTo: msg.id }) }}" style="text-decoration: none; margin-left: 10px;">💬 Répondre</a>
+            {% endif %}
+        </p>
+
+        {# -- Affichage des réponses -- #}
+        {% for reply in msg.replies %}
+            <div class="message" style="margin-left: 30px; background: #f8f8f8;">
+                <p class="author">
+                    {{ reply.author.email }}
+                    <span class="role-badge">
+                        {{ reply.author.roles[0]|replace({'ROLE_': ''})|lower|capitalize }}
+                    </span>
+                </p>
+                <p>{{ reply.content }}</p>
+                <p class="meta">
+                    {{ reply.createdAt|date('d/m/Y H:i') }}
+                    <a href="{{ path('app_debate_like', { id: reply.id }) }}" style="text-decoration: none; margin-left: 10px;">❤️ {{ reply.likes }}</a>
+                </p>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>Aucun message pour le moment.</p>
+{% endfor %}
 {% endblock %}

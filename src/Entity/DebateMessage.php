@@ -6,6 +6,10 @@ use App\Repository\DebateMessageRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
+
 #[ORM\Entity(repositoryClass: DebateMessageRepository::class)]
 class DebateMessage
 {
@@ -93,4 +97,24 @@ class DebateMessage
 
         return $this;
     }
+
+    public function like(): void
+{
+    $this->likes++;
+}
+
+#[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
+private Collection $replies;
+
+public function __construct()
+{
+    $this->replies = new ArrayCollection();
+}
+
+public function getReplies(): Collection
+{
+    return $this->replies;
+}
+
+
 }
