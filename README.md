@@ -1,6 +1,6 @@
 #  EduQuest - Plateforme de quiz éducatifs interactifs
 
-![Diagramme de classes](assets/images/class-diagram.png)
+![Diagramme de classes](public/images/diagramme_classe.png)
 
 **EduQuest** est une plateforme de quiz pédagogique développée avec **Symfony 7**, permettant aux élèves, enseignants et administrateurs de s’impliquer dans l’apprentissage à travers des quiz variés, des outils de suivi et un espace d’échange en ligne.
 
