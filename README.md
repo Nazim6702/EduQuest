@@ -30,7 +30,7 @@
 -  Question du jour : une nouvelle question chaque jour
 -  Forum intégré avec système de réponse & likes
 -  Suivi de la progression des utilisateurs
-- ⚙ Interface admin via **Adminer**
+-  Interface admin via **Adminer**
 
 ---
 
