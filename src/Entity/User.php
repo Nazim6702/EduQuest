@@ -44,9 +44,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Participation::class, cascade: ['persist', 'remove'])]
     private Collection $participations;
 
+    /**
+     * @var Collection<int, DebateMessage>
+     */
+    #[ORM\OneToMany(targetEntity: DebateMessage::class, mappedBy: 'author')]
+    private Collection $debateMessages;
+
     public function __construct()
     {
         $this->participations = new ArrayCollection();
+        $this->debateMessages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -162,5 +169,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $this instanceof Admin => 'admin',
             default => 'user',
         };
+    }
+
+    /**
+     * @return Collection<int, DebateMessage>
+     */
+    public function getDebateMessages(): Collection
+    {
+        return $this->debateMessages;
+    }
+
+    public function addDebateMessage(DebateMessage $debateMessage): static
+    {
+        if (!$this->debateMessages->contains($debateMessage)) {
+            $this->debateMessages->add($debateMessage);
+            $debateMessage->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDebateMessage(DebateMessage $debateMessage): static
+    {
+        if ($this->debateMessages->removeElement($debateMessage)) {
+            // set the owning side to null (unless already changed)
+            if ($debateMessage->getAuthor() === $this) {
+                $debateMessage->setAuthor(null);
+            }
+        }
+
+        return $this;
     }
 }
