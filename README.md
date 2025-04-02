@@ -17,9 +17,9 @@
 
 ## 👥 Rôles utilisateurs
 
-- 👨‍🎓 **Élève** : réalise les quiz, consulte sa progression, participe au forum
-- 👩‍🏫 **Enseignant** : crée/modifie/supprime des quiz, participe au forum
-- 🛡️ **Administrateur** : gestion avancée, visibilité sur tout le contenu
+-  **Élève** : réalise les quiz, consulte sa progression, participe au forum
+-  **Enseignant** : crée/modifie/supprime des quiz, participe au forum
+-  **Administrateur** : gestion avancée, visibilité sur tout le contenu
 
 ---
 
