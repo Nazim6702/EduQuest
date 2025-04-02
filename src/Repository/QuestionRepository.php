@@ -40,4 +40,25 @@ class QuestionRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findQuestionOfTheDay(): ?Question
+{
+    $count = $this->createQueryBuilder('q') // ici on acrée une requete perso sur entité question
+        ->select('COUNT(q.id)')
+        ->getQuery()
+        ->getSingleScalarResult();
+
+    if ($count == 0) {
+        return null;
+    }
+
+    $index = ((int)(new \DateTime())->format('z')) % $count;
+
+    return $this->createQueryBuilder('q')
+        ->setFirstResult($index)
+        ->setMaxResults(1)
+        ->getQuery()
+        ->getOneOrNullResult();
+}
+
 }
