@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Question du jour{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/pages/question.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="question-container">
+        <h1>Question du jour</h1>
+
+        {% if question %}
+            <p><strong>{{ question.texte }}</strong></p>
+
+            <button id="show-answer">Afficher la réponse</button>
+
+            <div id="answer" style="display:none;">
+                <strong>Bonne(s) réponse(s) :</strong>
+                <ul>
+                    {% for answer in question.answers %}
+                        {% if answer.isCorrect %}
+                            <li>{{ answer.texte }}</li>
+                        {% endif %}
+                    {% else %}
+                        <li>Aucune réponse définie pour cette question</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <script>
+                document.getElementById('show-answer').addEventListener('click', function() {
+                    document.getElementById('answer').style.display = 'block';
+                    this.style.display = 'none';
+                });
+            </script>
+        {% else %}
+            <p>Aucune question disponible pour le moment.</p>
+        {% endif %}
+    </div>
+{% endblock %}
