@@ -18,8 +18,8 @@
 ##  Rôles utilisateurs
 
 -  **Élève** : réalise les quiz, consulte sa progression, participe au forum
--  **Enseignant** : crée/modifie/supprime des quiz, participe au forum
--  **Administrateur** : gestion avancée, visibilité sur tout le contenu
+-  **Enseignant** : crée/modifie des quiz, participe au forum
+-  **Administrateur** : visibilité sur tout le contenu, gestion des utilisateurs et des quiz
 
 ---
 
