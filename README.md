@@ -65,16 +65,16 @@
 git clone  https://github.com/Nazim6702/EduQuest.git
 
 
-# 3. Lancer les services Docker
+# 2. Lancer les services Docker
 docker compose up -d --build
 
-# 4. Installer les dépendances PHP
+# 3. Installer les dépendances PHP
 docker exec -it eduquest_php bash
 composer install
 php bin/console doctrine:migrations:migrate
 exit
 
-#5 Modifier le fichier host
+# 4. Modifier le fichier host
 127.0.0.1 eduquest.local
 accès à la plateforme via eduquest.local
 
