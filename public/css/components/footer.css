@@ -47,17 +47,18 @@ body {
 }
 
 .footer .legal {
-    background-color: black;
-    color: white;
-    padding: 10px 50px;
+    background-color: black; 
+    color: white; 
+    padding: 10px 50px; 
     font-size: 12px;
-    width: 100%;
+    width: 100%; 
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center; 
+    align-items: center; 
     margin-top: 40px;
     box-sizing: border-box;
 }
+
 
 .footer .legal a {
     color: white;
