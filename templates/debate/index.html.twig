@@ -8,7 +8,11 @@
 {% endblock %}
 
 {% block body %}
-<h1>💬 Espace Débat</h1>
+<h1>
+    <img src="{{ asset('images/bulle.jpeg') }}" alt="Bulle de discussion" class="bubble-icon">
+    Espace Débat
+</h1>
+
 
 {# -- Formulaire de publication -- #}
 {% if app.user %}
@@ -17,9 +21,11 @@
         <button class="btn btn-primary">Envoyer</button>
     {{ form_end(form) }}
 {% else %}
-    <p style="background: #ffe0e0; padding: 15px; border-radius: 8px;">
-        🔒 Tu dois <a href="{{ path('app_login') }}">te connecter</a> pour participer à la discussion.
-    </p>
+  <p class="login-alert">
+    <img src="{{ asset('images/cadenas.jpeg') }}" alt="Cadenas" class="lock-icon">
+    Tu dois <a href="{{ path('app_login') }}" class="login-link">te connecter</a> pour participer à la discussion.
+</p>
+
 {% endif %}
 
 <hr>
