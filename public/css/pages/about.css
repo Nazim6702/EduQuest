@@ -1,0 +1,125 @@
+/* Section Hero */
+.about-hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px;
+    background-color: #0044cc;
+    color: white;
+    flex-wrap: wrap;
+}
+
+.about-hero .content {
+    max-width: 50%;
+}
+
+.about-hero .content h2 {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.about-hero .content p {
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.about-hero .illustration {
+    flex: 1;
+    text-align: center;
+}
+
+.about-hero .illustration img {
+    max-width: 100%;
+    height: auto;
+    max-height: 350px;
+}
+
+/* Mission Section */
+.our-mission {
+    background-color: #3949ab;
+    padding: 50px;
+    color: white;
+    text-align: center;
+}
+
+.our-mission h2 {
+    font-size: 28px;
+}
+
+/* How it Works Section */
+.how-it-works {
+    background-color: #f0f0f0;
+    padding: 50px;
+    color: #333;
+    text-align: center;
+}
+
+.steps {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+.step {
+    max-width: 30%;
+}
+
+.step h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.step p {
+    font-size: 16px;
+}
+
+/* Meet the Team Section */
+.meet-team {
+    padding: 50px;
+    background-color: #0044cc;
+    color: white;
+    text-align: center;
+}
+
+.team-members {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+.member {
+    max-width: 30%;
+}
+
+.member img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.member h3 {
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.member p {
+    font-size: 16px;
+}
+
+/* Contact Section */
+.get-in-touch {
+    padding: 50px;
+    text-align: center;
+    background-color: #3949ab;
+    color: white;
+}
+
+.get-in-touch a {
+    margin-top: 20px;
+    display: inline-block;
+    background-color: #ffd858;
+    color: #0044cc;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 5px;
+}

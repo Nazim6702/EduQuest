@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EduQuest - À propos{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/pages/about.css') }}">
+{% endblock %}
+
+{% block body %}
+    <section class="about-hero">
+        <div class="content">
+            <h2>Bienvenue sur EduQuest</h2>
+            <p>Le défi éducatif qui vous aide à grandir tout en vous amusant. Explorez nos quiz interactifs pour apprendre, tester vos connaissances et progresser à votre rythme !</p>
+        </div>
+        <div class="illustration">
+            <img src="{{ asset('images/about-hero.svg') }}" alt="Illustration à propos de EduQuest" class="img-fluid">
+        </div>
+    </section>
+
+    <section class="our-mission">
+        <h2>Notre Mission</h2>
+        <p>EduQuest est une plateforme dédiée à l'apprentissage interactif et ludique. Notre mission est d'offrir une méthode d'apprentissage innovante et accessible à tous. Grâce à nos quiz, vous pouvez tester vos connaissances, suivre votre progression et vous challenger tout en apprenant.</p>
+    </section>
+
+    <section class="how-it-works">
+        <h2>Comment ça marche ?</h2>
+        <div class="steps">
+            <div class="step">
+                <h3>1. Inscription</h3>
+                <p>Créez votre compte gratuitement pour avoir accès à tous nos quiz et suivre vos progrès.</p>
+            </div>
+            <div class="step">
+                <h3>2. Choisissez un Quiz</h3>
+                <p>Sélectionnez un quiz par thématique, niveau ou popularité et commencez à apprendre tout en vous amusant !</p>
+            </div>
+            <div class="step">
+                <h3>3. Progressez et Apprenez</h3>
+                <p>Suivez vos scores, améliorez vos résultats, et continuez à explorer de nouveaux quiz pour élargir vos connaissances.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="meet-team">
+        <h2>Rencontrez l'Équipe</h2>
+        <p>Nous sommes une équipe passionnée par l'éducation, la technologie et l'innovation. Voici quelques membres clés de notre équipe :</p>
+        <div class="team-members">
+            <div class="member">
+                <img src="{{ asset('images/team-member-1.jpg') }}" alt="Membre de l'équipe" class="img-fluid">
+                <h3>Jean Dupont</h3>
+                <p>Fondateur & CEO</p>
+            </div>
+            <div class="member">
+                <img src="{{ asset('images/team-member-2.jpg') }}" alt="Membre de l'équipe" class="img-fluid">
+                <h3>Marie Durand</h3>
+                <p>Responsable de la communauté</p>
+            </div>
+            <div class="member">
+                <img src="{{ asset('images/team-member-3.jpg') }}" alt="Membre de l'équipe" class="img-fluid">
+                <h3>Luc Martin</h3>
+                <p>Développeur Front-End</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="get-in-touch">
+        <h2>Nous Contacter</h2>
+        <p>Des questions ? Suggestions ? N'hésitez pas à nous contacter. Nous serons ravis de vous aider !</p>
+        <a href="{{ path('app_contact') }}" class="btn btn-inscrire">Nous Contacter</a>
+    </section>
+{% endblock %}
