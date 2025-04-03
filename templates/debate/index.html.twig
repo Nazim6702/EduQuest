@@ -14,7 +14,9 @@
 </h1>
 
 
+
 {# -- Formulaire de publication -- #}
+
 {% if app.user %}
     {{ form_start(form) }}
         {{ form_widget(form) }}
@@ -30,15 +32,36 @@
 
 <hr>
 
-{# -- Messages racine -- #}
+
+
 {% for msg in messages %}
     <div class="message">
-        <p class="author">
-            {{ msg.author.email }}
-            <span class="role-badge">
-                {{ msg.author.roles[0]|replace({'ROLE_': ''})|lower|capitalize }}
-            </span>
-        </p>
+       <p class="author">
+    {{ msg.author.email }}
+    <span class="role-badge 
+        {% if 'ROLE_ADMIN' in msg.author.roles %}
+            admin
+        {% elseif 'ROLE_TEACHER' in msg.author.roles %}
+            teacher
+        {% elseif 'ROLE_STUDENT' in msg.author.roles %}
+            student
+        {% else %}
+            user
+        {% endif %}
+    ">
+        {% if 'ROLE_ADMIN' in msg.author.roles %}
+            Administrateur
+        {% elseif 'ROLE_TEACHER' in msg.author.roles %}
+            Enseignant
+        {% elseif 'ROLE_STUDENT' in msg.author.roles %}
+            Étudiant
+        {% else %}
+            Utilisateur
+        {% endif %}
+    </span>
+</p>
+
+
 
         <p>{{ msg.content }}</p>
 
@@ -50,22 +73,42 @@
             {% endif %}
         </p>
 
-        {# -- Affichage des réponses -- #}
+
         {% for reply in msg.replies %}
-            <div class="message" style="margin-left: 30px; background: #f8f8f8;">
-                <p class="author">
-                    {{ reply.author.email }}
-                    <span class="role-badge">
-                        {{ reply.author.roles[0]|replace({'ROLE_': ''})|lower|capitalize }}
-                    </span>
-                </p>
-                <p>{{ reply.content }}</p>
-                <p class="meta">
-                    {{ reply.createdAt|date('d/m/Y H:i') }}
-                    <a href="{{ path('app_debate_like', { id: reply.id }) }}" style="text-decoration: none; margin-left: 10px;">❤️ {{ reply.likes }}</a>
-                </p>
-            </div>
-        {% endfor %}
+    <div class="message" style="margin-left: 30px; background: #f8f8f8;">
+       <p class="author">
+    {{ msg.author.email }}
+    <span class="role-badge 
+        {% if 'ROLE_ADMIN' in msg.author.roles %}
+            admin
+        {% elseif 'ROLE_TEACHER' in msg.author.roles %}
+            teacher
+        {% elseif 'ROLE_STUDENT' in msg.author.roles %}
+            student
+        {% else %}
+            user
+        {% endif %}
+    ">
+        {% if 'ROLE_ADMIN' in msg.author.roles %}
+            Administrateur
+        {% elseif 'ROLE_TEACHER' in msg.author.roles %}
+            Enseignant
+        {% elseif 'ROLE_STUDENT' in msg.author.roles %}
+            Étudiant
+        {% else %}
+            Utilisateur
+        {% endif %}
+    </span>
+</p>
+
+        <p>{{ reply.content }}</p>
+        <p class="meta">
+            {{ reply.createdAt|date('d/m/Y H:i') }}
+            <a href="{{ path('app_debate_like', { id: reply.id }) }}" style="text-decoration: none; margin-left: 10px;">❤️ {{ reply.likes }}</a>
+        </p>
+    </div>
+{% endfor %}
+
     </div>
 {% else %}
     <p>Aucun message pour le moment.</p>
