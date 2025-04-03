@@ -62,11 +62,8 @@
 
 ```bash
 # 1. Cloner le projet
-git clone https://github.com/votre-utilisateur/eduquest.git
-cd eduquest
+git clone  https://github.com/Nazim6702/EduQuest.git
 
-# 2. Copier les fichiers d’environnement
-cp .env.example .env
 
 # 3. Lancer les services Docker
 docker compose up -d --build
