@@ -34,7 +34,7 @@
                 <td>
                     <a href="{{ path('admin_user_edit', {'id': user.id}) }}">Modifier</a>
                     <form method="post" action="{{ path('admin_user_delete', {'id': user.id}) }}"
-                          onsubmit="return confirm('⚠️ Êtes-vous sûr de vouloir supprimer {{ user.pseudo }} ?');"
+                          onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer {{ user.pseudo }} ?');"
                           style="display:inline">
                         <button type="submit">Supprimer</button>
                     </form>
