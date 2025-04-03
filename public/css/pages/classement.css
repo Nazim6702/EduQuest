@@ -1,0 +1,40 @@
+.classement-section {
+    background-color: #f4f4f4;
+    padding: 50px;
+    font-family: Arial, sans-serif;
+}
+
+.classement-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.classement-container h2 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+.classement-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.classement-table th, .classement-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.classement-table th {
+    background-color: #3949ab;
+    color: white;
+}
+
+.classement-table tr:hover {
+    background-color: #f1f1f1;
+}

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EduQuest - Classement Général{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/pages/classement.css') }}">
+{% endblock %}
+
+{% block body %}
+    <section class="classement-section">
+        <div class="classement-container">
+            <h2>Classement Général</h2>
+
+            <table class="classement-table">
+                <thead>
+                    <tr>
+                        <th>Rang</th>
+                        <th>Nom</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for classement in classements %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ classement.nom }}</td>
+                            <td>{{ classement.score }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+{% endblock %}
