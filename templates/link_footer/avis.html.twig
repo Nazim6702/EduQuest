@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EduQuest - Laisser un avis{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/pages/avis.css') }}">
+{% endblock %}
+
+{% block body %}
+    <section class="avis-section">
+        <div class="avis-container">
+            <h2>Laissez un avis</h2>
+
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label for="name">Nom</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="rating">Note</label>
+                    <select id="rating" name="rating" required>
+                        <option value="1">1 - Très mauvais</option>
+                        <option value="2">2 - Mauvais</option>
+                        <option value="3">3 - Moyenne</option>
+                        <option value="4">4 - Bon</option>
+                        <option value="5">5 - Excellent</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Commentaire</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Envoyer</button>
+            </form>
+        </div>
+    </section>
+{% endblock %}
