@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EduQuest - F.A.Q{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/pages/faq.css') }}">
+{% endblock %}
+
+{% block body %}
+    <section class="faq-section">
+        <div class="faq-container">
+            <h2>Foire aux questions</h2>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Comment puis-je m'inscrire ?</h3>
+                <p class="faq-answer">Pour vous inscrire, cliquez sur "S'inscrire" en haut de la page d'accueil, puis remplissez le formulaire avec vos informations.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Les quiz sont-ils gratuits ?</h3>
+                <p class="faq-answer">Oui, tous nos quiz sont gratuits et accessibles à tous les utilisateurs.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Comment suivre ma progression ?</h3>
+                <p class="faq-answer">Vous pouvez suivre votre progression dans votre profil, où vous verrez les quiz que vous avez complétés ainsi que vos scores.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Puis-je suggérer un quiz ?</h3>
+                <p class="faq-answer">Oui, nous serions heureux de recevoir vos suggestions pour de nouveaux quiz. Vous pouvez nous contacter via la page "Nous contacter".</p>
+            </div>
+        </div>
+    </section>
+{% endblock %}
