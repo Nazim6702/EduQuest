@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Espace Débat{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/pages/debate.css') }}">
+{% endblock %}
+
+{% block body %}
+<h1>💬 Espace Débat</h1>
+
+{# -- Formulaire de publication -- #}
+{% if app.user %}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-primary">Envoyer</button>
+    {{ form_end(form) }}
+{% else %}
+    <p style="background: #ffe0e0; padding: 15px; border-radius: 8px;">
+        🔒 Tu dois <a href="{{ path('app_login') }}">te connecter</a> pour participer à la discussion.
+    </p>
+{% endif %}
+
+<hr>
+
+{# -- Messages racine -- #}
+{% for msg in messages %}
+    <div class="message">
+        <p class="author">
+            {{ msg.author.email }}
+            <span class="role-badge">
+                {{ msg.author.roles[0]|replace({'ROLE_': ''})|lower|capitalize }}
+            </span>
+        </p>
+
+        <p>{{ msg.content }}</p>
+
+        <p class="meta">
+            {{ msg.createdAt|date('d/m/Y H:i') }}
+            <a href="{{ path('app_debate_like', { id: msg.id }) }}" style="text-decoration: none; margin-left: 10px;">❤️ {{ msg.likes }}</a>
+            {% if app.user %}
+                <a href="{{ path('app_debate', { replyTo: msg.id }) }}" style="text-decoration: none; margin-left: 10px;">💬 Répondre</a>
+            {% endif %}
+        </p>
+
+        {# -- Affichage des réponses -- #}
+        {% for reply in msg.replies %}
+            <div class="message" style="margin-left: 30px; background: #f8f8f8;">
+                <p class="author">
+                    {{ reply.author.email }}
+                    <span class="role-badge">
+                        {{ reply.author.roles[0]|replace({'ROLE_': ''})|lower|capitalize }}
+                    </span>
+                </p>
+                <p>{{ reply.content }}</p>
+                <p class="meta">
+                    {{ reply.createdAt|date('d/m/Y H:i') }}
+                    <a href="{{ path('app_debate_like', { id: reply.id }) }}" style="text-decoration: none; margin-left: 10px;">❤️ {{ reply.likes }}</a>
+                </p>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>Aucun message pour le moment.</p>
+{% endfor %}
+{% endblock %}
