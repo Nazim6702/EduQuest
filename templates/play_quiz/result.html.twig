@@ -10,22 +10,22 @@
 {% block body %}
 <section class="result-section">
     {% if result is same as(true) %}
-        <h2 class="correct">✅ Bonne réponse !</h2>
+        <h2 class="correct"> Bonne réponse !</h2>
     {% elseif result is same as(false) %}
-        <h2 class="incorrect">❌ Mauvaise réponse</h2>
+        <h2 class="incorrect">Mauvaise réponse</h2>
     {% else %}
-        <h2 class="timeout">⏰ Temps écoulé</h2>
+        <h2 class="timeout"> Temps écoulé</h2>
     {% endif %}
 
     <div id="feedback-message" data-result="{{ result }}"></div>
 
     {% if isLast %}
         <a href="{{ path('app_quiz_results', { id: quizId }) }}" class="btn-next results">
-            📊 Voir les résultats
+             Voir les résultats
         </a>
     {% else %}
         <a href="{{ path('app_quiz_play', { id: quizId, step: nextStep }) }}" class="btn-next next">
-            ▶️ Question suivante
+             Question suivante
         </a>
     {% endif %}
 </section>
