@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EduQuest - Blog{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/pages/blog.css') }}">
+{% endblock %}
+
+{% block body %}
+    <section class="blog-section">
+        <div class="blog-container">
+            <h2>Blog</h2>
+
+            <div class="blog-posts">
+                {% for article in articles %}
+                    <div class="blog-post">
+                        <h3>{{ article.titre }}</h3>
+                        <p class="meta">Publié le {{ article.date }} par {{ article.auteur }}</p>
+                        <p class="excerpt">{{ article.contenu|slice(0, 150) }}...</p>
+                        <a href="#" class="read-more">Lire la suite</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
