@@ -76,7 +76,7 @@ button.btn:hover {
 }
 
 .login-alert {
-    background-color: #fff4c2; /* jaune pâle, plus doux */
+    background-color: #fff4c2; 
     padding: 15px;
     border-radius: 8px;
     font-size: 15px;
@@ -107,4 +107,31 @@ button.btn:hover {
     width: 28px;
     vertical-align: middle;
     margin-right: 8px;
+}
+.role-badge {
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+.role-badge.admin {
+    background-color: red;
+    color: white;
+}
+
+.role-badge.teacher {
+    background-color: green;
+    color: white;
+}
+
+.role-badge.student {
+    background-color: blue;
+    color: white;
+}
+
+.role-badge.user {
+    background-color: gray;
+    color: white;
 }

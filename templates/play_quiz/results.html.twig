@@ -9,7 +9,7 @@
 
 {% block body %}
     <section class="result-summary">
-        <h1>🎉 Fin du quiz : "{{ quiz.title }}"</h1>
+        <h1> Fin du quiz : "{{ quiz.title }}"</h1>
         <p>Voici un récapitulatif de vos réponses :</p>
 
         <div class="recap">
@@ -18,11 +18,11 @@
                 <div class="recap-item {{ status }}">
                     <p><strong>Q{{ loop.index }} : {{ question.texte }}</strong></p>
                     {% if status == 'correct' %}
-                        ✅ Bonne réponse
+                         Bonne réponse
                     {% elseif status == 'wrong' %}
-                        ❌ Mauvaise réponse
+                         Mauvaise réponse
                     {% else %}
-                        ⏳ Non répondu
+                         Non répondu
                     {% endif %}
                 </div>
             {% endfor %}
