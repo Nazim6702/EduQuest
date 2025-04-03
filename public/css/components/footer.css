@@ -3,17 +3,11 @@ body {
     padding: 0;
 }
 
-.footer {
-    background-color: #3949ab;
-    padding: 50px 20px 0;
-    color: white;
-    font-family: Arial, sans-serif;
-}
-
 .footer .footer-content {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;  /* Ajouté pour que le conteneur prenne toute la largeur */
 }
 
 .footer .footer-content h3 {
@@ -46,19 +40,46 @@ body {
     font-size: 24px;
 }
 
-.footer .legal {
-    background-color: black; 
-    color: white; 
-    padding: 10px 50px; 
-    font-size: 12px;
-    width: 100%; 
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    margin-top: 40px;
-    box-sizing: border-box;
+.footer {
+    background-color: #3949ab;
+    padding: 50px 20px 0;
+    color: white;
+    font-family: Arial, sans-serif;
+    width: 100%;
+    box-sizing: border-box;  /* Ajouté pour éviter des problèmes de largeur avec padding */
 }
 
+.footer .legal {
+    background-color: black;
+    color: white;
+    padding: 10px 50px;
+    font-size: 12px;
+    width: 100vw;   /* Utilisation de 100% de la largeur de la fenêtre */
+    margin: 0;      /* Assure qu'il n'y a pas de marges supplémentaires */
+    box-sizing: border-box;  /* Inclut les bordures et le padding dans la largeur */
+    position: relative;   /* Assure que la barre est positionnée correctement */
+    left: 0;
+    right: 0;
+    display: flex; /* Utilisation de Flexbox pour la mise en page */
+    justify-content: space-between; /* Espace entre les éléments */
+    align-items: center; /* Aligner verticalement les éléments */
+}
+
+.footer .legal span {
+    font-weight: bold; /* Met en gras "EduQuest" */
+}
+
+.footer .legal .left {
+    text-align: left; /* Aligner à gauche */
+}
+
+.footer .legal .center {
+    text-align: center; /* Aligner au centre */
+}
+
+.footer .legal .right {
+    text-align: right; /* Aligner à droite */
+}
 
 .footer .legal a {
     color: white;
