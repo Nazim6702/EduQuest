@@ -2,9 +2,14 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Answer;
-use App\Entity\Question;
+use App\Entity\Student;
+use App\Entity\Teacher;
+use App\Entity\Admin;
+use App\Entity\User;
 use App\Entity\Quiz;
+use App\Entity\Participation;
+use App\Entity\Question;
+use App\Entity\Answer;
 use App\Enum\QuestionType;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -14,45 +19,58 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $faker = Factory::create('fr_FR');
+        $faker = Factory::create();
 
-        $themes = ['Histoire', 'Sports', 'Physique-Chimie'];
+        $students = [];
+        for ($i = 0; $i < 10; $i++) {
+            $user = new Student(); =
+            $user->setName($faker->name)
+                ->setEmail($faker->email)
+                ->setPassword($faker->password)
+                ->setPseudo($faker->userName)
+                ->setCreatedAt(new \DateTime());
+            $manager->persist($user);
+            $students[] = $user;
+        }
 
-        foreach ($themes as $theme) {
+        $quizzes = [];
+        for ($i = 0; $i < 5; $i++) {
             $quiz = new Quiz();
-            $quiz->setTitle($theme);
-            $quiz->setDescription($faker->sentence());
-            $quiz->setCreatedAt(new \DateTime());
-            $quiz->setDuration($faker->numberBetween(10, 30));
+            $quiz->setTitle($faker->sentence)
+                ->setDescription($faker->paragraph)
+                ->setDuration(60)
+                ->setCreatedAt(new \DateTime())
+                ->setCategory($faker->word);
+            $manager->persist($quiz);
+            $quizzes[] = $quiz;
 
-            for ($i = 0; $i < 5; $i++) {
+            for ($j = 0; $j < 3; $j++) {
                 $question = new Question();
-                $question->setQuiz($quiz);
-                $question->setTexte($faker->sentence());
-                $question->setType($faker->randomElement([QuestionType::QCM, QuestionType::OPEN]));
-                $question->setDuration($faker->numberBetween(30, 120));
+                $question->setTexte($faker->sentence)
+                    ->setQuiz($quiz)
+                    ->setDuration(30)
+                    ->setType(QuestionType::from($faker->randomElement(['Open', 'True/False', 'QCM'])));
+                $manager->persist($question);
 
-                if ($question->getType() === 'QCM') {
-                    for ($j = 0; $j < 4; $j++) {
-                        $answer = new Answer();
-                        $answer->setQuestion($question);
-                        $answer->setTexte($faker->word());
-                        // La première réponse est toujours correcte ici (flemme de faire des trucs random)
-                        $answer->setIsCorrect($j === 0);
-                        $manager->persist($answer);
-                    }
-                } else {
+                for ($k = 0; $k < 4; $k++) {
                     $answer = new Answer();
-                    $answer->setQuestion($question);
-                    $answer->setTexte($faker->word());
-                    $answer->setIsCorrect(true);
+                    $answer->setTexte($faker->word)
+                        ->setIsCorrect($k === 0)  
+                        ->setQuestion($question);
                     $manager->persist($answer);
                 }
-
-                $manager->persist($question);
             }
+        }
 
-            $manager->persist($quiz);
+        foreach ($students as $student) {
+            foreach ($quizzes as $quiz) {
+                $participation = new Participation();
+                $participation->setUser($student)
+                    ->setQuiz($quiz)
+                    ->setDateParticipation($faker->dateTimeThisYear)
+                    ->setScore($faker->numberBetween(0, 100));
+                $manager->persist($participation);
+            }
         }
 
         $manager->flush();
