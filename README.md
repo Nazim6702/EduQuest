@@ -74,4 +74,7 @@ composer install
 php bin/console doctrine:migrations:migrate
 exit
 
+#5 Modifier le fichier host
+127.0.0.1 eduquest.local
+accès à la plateforme via eduquest.local
 
