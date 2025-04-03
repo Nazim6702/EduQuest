@@ -15,7 +15,9 @@
 
         <div class="quiz-grid">
             {% for quiz in pagination %}
-                <a href="{{ path('app_play_quiz', { id: quiz.id }) }}" class="quiz-card-link">
+                <a href="{{ path('app_play_quiz', { id: quiz.id }) }}"
+                   class="quiz-card-link"
+                   data-check="student-only">
                     <div class="quiz-card">
                         <span class="category">{{ quiz.category }}</span>
                         <h3>{{ quiz.title }}</h3>

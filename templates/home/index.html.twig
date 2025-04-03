@@ -9,82 +9,69 @@
 {% endblock %}
 
 {% block body %}
-    <section class="hero">
-        <div class="content">
-            <h2>Le défi éducatif qui fait grandir votre savoir ! 🧠</h2>
-            <p class="subtitle">Des quiz interactifs, un apprentissage fun et stimulant 📘✨</p>
+<section class="hero">
+    <div class="content">
+        <h2>Le défi éducatif qui fait grandir votre savoir ! 🧠</h2>
+        <p class="subtitle">Des quiz interactifs, un apprentissage fun et stimulant 📘✨</p>
 
-            <ul class="benefits">
-                <li>✅ 100+ quiz variés</li>
-                <li>🎯 Suivi de progression</li>
-                <li>🆓 Gratuit & sans pub</li>
-            </ul>
+        <ul class="benefits">
+            <li>✅ 100+ quiz variés</li>
+            <li>🎯 Suivi de progression</li>
+            <li>🆓 Gratuit & sans pub</li>
+        </ul>
 
-            <div class="buttons">
-                {% if not app.user %}
-                    <a href="{{ path('app_register') }}" class="btn btn-inscrire">S'inscrire</a>
-                    <a href="{{ path('app_login') }}" class="btn btn-connecter">Se connecter</a>
-                {% else %}
-                    <a href="{{ path('app_quiz_explorer') }}" class="btn btn-inscrire">🎮 Explorer les Quiz</a>
-                {% endif %}
-            </div>
-        </div>
-
-        <div class="illustration">
-            <img src="{{ asset('images/hero-quiz.svg') }}" alt="Quiz illustration" class="img-fluid">
-        </div>
-    </section>
-    
-    <section class="new-quizzes">
-        <h2>Nouveaux Quiz</h2>
-        <div class="quiz-cards">
-            {% for quiz in quizzes|slice(0, 4) %}
-                <a href="{{ path('app_play_quiz', { id: quiz.id }) }}" class="quiz-card-link">
-                    <div class="quiz-card">
-                        <span class="category">{{ quiz.category }}</span>
-                        <h3>{{ quiz.title }}</h3>
-                        <span class="date">Publié le {{ quiz.createdAt|date('d/m/Y') }}</span>
-                    </div>
-                </a>
+        <div class="buttons">
+            {% if not app.user %}
+                <a href="{{ path('app_register') }}" class="btn btn-inscrire">S'inscrire</a>
+                <a href="{{ path('app_login') }}" class="btn btn-connecter">Se connecter</a>
             {% else %}
-                <p>Aucun quiz pour le moment.</p>
-            {% endfor %}
+                <a href="{{ path('app_quiz_explorer') }}" class="btn btn-inscrire">🎮 Explorer les Quiz</a>
+            {% endif %}
         </div>
+    </div>
 
-        {% if quizzes|length > 4 %}
-            <div style="text-align:center; margin-top: 20px;">
-                <a href="{{ path('app_all_quizzes') }}"
-                   style="background-color: #ffd858; color: #0044cc; padding: 10px 16px; text-decoration: none; border-radius: 6px;">🔎
-                    Voir tous les quiz</a>
+    <div class="illustration">
+        <img src="{{ asset('images/hero-quiz.svg') }}" alt="Quiz illustration" class="img-fluid">
+    </div>
+</section>
 
-            </div>
-        {% endif %}
-    </section>
+<section class="new-quizzes">
+    <h2>Nouveaux Quiz</h2>
+    <div class="quiz-cards">
+        {% for quiz in quizzes|slice(0, 4) %}
+            <a href="{{ path('app_play_quiz', { id: quiz.id }) }}"
+               class="quiz-card-link"
+               data-check="student-only">
+                <div class="quiz-card">
+                    <span class="category">{{ quiz.category }}</span>
+                    <h3>{{ quiz.title }}</h3>
+                    <span class="date">Publié le {{ quiz.createdAt|date('d/m/Y') }}</span>
+                </div>
+            </a>
+        {% else %}
+            <p>Aucun quiz pour le moment.</p>
+        {% endfor %}
+    </div>
 
-    <section class="quiz-themes">
-        <h2>Quiz par thématique</h2>
-        <div class="decorative-line"></div>
-        <div class="themes-grid">
-            <a href="{{ path('app_quiz_by_category', { category: 'Physique-Chimie' }) }}" class="theme"><span
-                        class="icon">🔬</span><span class="title">Physique-Chimie</span></a>
-            <a href="{{ path('app_quiz_by_category', { category: 'Histoire' }) }}" class="theme"><span
-                        class="icon">📚</span><span class="title">Histoire</span></a>
-            <a href="{{ path('app_quiz_by_category', { category: 'Géographie' }) }}" class="theme"><span
-                        class="icon">🌍</span><span class="title">Géographie</span></a>
-            <a href="{{ path('app_quiz_by_category', { category: 'Français' }) }}" class="theme"><span
-                        class="icon">📕</span><span class="title">Français</span></a>
-            <a href="{{ path('app_quiz_by_category', { category: 'Maths' }) }}" class="theme"><span
-                        class="icon">➗</span><span class="title">Maths</span></a>
-            <a href="{{ path('app_quiz_by_category', { category: 'Culture Générale' }) }}" class="theme"><span
-                        class="icon">🎭</span><span class="title">Culture Générale</span></a>
-            <a href="{{ path('app_quiz_by_category', { category: 'Anglais' }) }}" class="theme"><span
-                        class="icon">🇬🇧</span><span class="title">Anglais</span></a>
-            <a href="{{ path('app_quiz_by_category', { category: 'S.V.T' }) }}" class="theme"><span
-                        class="icon">🌳</span><span class="title">S.V.T</span></a>
-            <a href="{{ path('app_quiz_by_category', { category: 'Philosophie' }) }}" class="theme"><span class="icon">🧠</span><span
-                        class="title">Philosophie</span></a>
-            <a href="{{ path('app_quiz_by_category', { category: 'Sports' }) }}" class="theme"><span
-                        class="icon">⚽</span><span class="title">Sports</span></a>
+    {% if quizzes|length > 4 %}
+        <div style="text-align:center; margin-top: 20px;">
+            <a href="{{ path('app_all_quizzes') }}"
+               style="background-color: #ffd858; color: #0044cc; padding: 10px 16px; text-decoration: none; border-radius: 6px;">
+                🔎 Voir tous les quiz
+            </a>
         </div>
-    </section>
+    {% endif %}
+</section>
+
+<section class="quiz-themes">
+    <h2>Quiz par thématique</h2>
+    <div class="decorative-line"></div>
+    <div class="themes-grid">
+        {% for cat in ['Physique-Chimie','Histoire','Géographie','Français','Maths','Culture Générale','Anglais','S.V.T','Philosophie','Sports'] %}
+            <a href="{{ path('app_quiz_by_category', { category: cat }) }}" class="theme">
+                <span class="icon">🎓</span><span class="title">{{ cat }}</span>
+            </a>
+        {% endfor %}
+    </div>
+</section>
 {% endblock %}

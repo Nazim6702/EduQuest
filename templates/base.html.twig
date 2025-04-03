@@ -23,6 +23,12 @@
 
     {% block javascripts %}
         <script src="{{ asset('js/utils/unimplemented.js') }}"></script>
+
+        <script>
+            window.USER_TYPE = "{{ app.user ? app.user.userType : 'guest' }}";
+        </script>
+
+        <script src="{{ asset('js/utils/access-guard.js') }}"></script>
     {% endblock %}
 
 </body>
