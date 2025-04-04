@@ -14,9 +14,9 @@ if (!\class_exists(App_KernelDevDebugContainer::class, false)) {
     \class_alias(\ContainerEyELIfD\App_KernelDevDebugContainer::class, App_KernelDevDebugContainer::class, false);
 }
 
-return new \ContainerEyELIfD\App_KernelDevDebugContainer([
-    'container.build_hash' => 'EyELIfD',
-    'container.build_id' => 'cbfb15d8',
-    'container.build_time' => 1743762296,
+return new \Container83GpxEF\App_KernelDevDebugContainer([
+    'container.build_hash' => '83GpxEF',
+    'container.build_id' => '0de39c36',
+    'container.build_time' => 1743759683,
     'container.runtime_mode' => \in_array(\PHP_SAPI, ['cli', 'phpdbg', 'embed'], true) ? 'web=0' : 'web=1',
 ], __DIR__.\DIRECTORY_SEPARATOR.'ContainerEyELIfD');
