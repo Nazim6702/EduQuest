@@ -1,31 +1,27 @@
 <?php
 
-
 declare(strict_types=1);
 
-
 namespace DoctrineMigrations;
-
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20250403093651 extends AbstractMigration
+final class Version20250404101243 extends AbstractMigration
 {
     public function getDescription(): string
     {
         return '';
     }
 
-
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE answer (id INT AUTO_INCREMENT NOT NULL, question_id INT NOT NULL, texte VARCHAR(255) DEFAULT NULL, is_correct TINYINT(1) NOT NULL, INDEX IDX_DADD4A251E27F6BF (question_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE avis (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, rating INT NOT NULL, message LONGTEXT NOT NULL, created_at DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE debate_message (id INT AUTO_INCREMENT NOT NULL, author_id INT DEFAULT NULL, parent_id INT DEFAULT NULL, content LONGTEXT NOT NULL, created_at DATETIME NOT NULL COMMENT \'(DC2Type:datetime_immutable)\', likes INT NOT NULL, INDEX IDX_4CA444B5F675F31B (author_id), INDEX IDX_4CA444B5727ACA70 (parent_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE likes (id INT AUTO_INCREMENT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE participation (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, date_participation DATETIME NOT NULL, score DOUBLE PRECISION NOT NULL, INDEX IDX_AB55E24FA76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -42,7 +38,6 @@ final class Version20250403093651 extends AbstractMigration
         $this->addSql('ALTER TABLE user_answer ADD CONSTRAINT FK_BF8F51181E27F6BF FOREIGN KEY (question_id) REFERENCES question (id)');
     }
 
-
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
@@ -53,6 +48,7 @@ final class Version20250403093651 extends AbstractMigration
         $this->addSql('ALTER TABLE question DROP FOREIGN KEY FK_B6F7494E853CD175');
         $this->addSql('ALTER TABLE user_answer DROP FOREIGN KEY FK_BF8F51181E27F6BF');
         $this->addSql('DROP TABLE answer');
+        $this->addSql('DROP TABLE avis');
         $this->addSql('DROP TABLE debate_message');
         $this->addSql('DROP TABLE likes');
         $this->addSql('DROP TABLE participation');
@@ -63,6 +59,3 @@ final class Version20250403093651 extends AbstractMigration
         $this->addSql('DROP TABLE messenger_messages');
     }
 }
-
-
-

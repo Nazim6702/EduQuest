@@ -12,35 +12,46 @@
         <div class="avis-container">
             <h2>Laissez un avis</h2>
 
-            <form action="#" method="post">
-                <div class="form-group">
-                    <label for="name">Nom</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
+            {# Formulaire de publication #}
+            <form action="{{ path('app_avis') }}" method="post">
+                {{ form_start(form) }}
+                    <div class="form-group">
+                        <label for="name">Nom</label>
+                        {{ form_widget(form.name) }}
+                    </div>
 
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        {{ form_widget(form.email) }}
+                    </div>
 
-                <div class="form-group">
-                    <label for="rating">Note</label>
-                    <select id="rating" name="rating" required>
-                        <option value="1">1 - Très mauvais</option>
-                        <option value="2">2 - Mauvais</option>
-                        <option value="3">3 - Moyenne</option>
-                        <option value="4">4 - Bon</option>
-                        <option value="5">5 - Excellent</option>
-                    </select>
-                </div>
+                    <div class="form-group">
+                        <label for="rating">Note</label>
+                        {{ form_widget(form.rating) }}
+                    </div>
 
-                <div class="form-group">
-                    <label for="message">Commentaire</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-                </div>
+                    <div class="form-group">
+                        <label for="message">Commentaire</label>
+                        {{ form_widget(form.message) }}
+                    </div>
 
-                <button type="submit" class="btn-submit">Envoyer</button>
+                    <button type="submit" class="btn-submit">Envoyer</button>
+                {{ form_end(form) }}
             </form>
+        </div>
+
+        {# Affichage des avis laissés #}
+        <div class="avis-list">
+            <h3>Les avis laissés par nos utilisateurs :</h3>
+            {% for avis in messages %}
+                <div class="avis-item">
+                    <p><strong>{{ avis.name }}</strong> - Note : {{ avis.rating }}/5</p>
+                    <p>{{ avis.message }}</p>
+                    <p class="meta">{{ avis.createdAt|date('d/m/Y H:i') }}</p>
+                </div>
+            {% else %}
+                <p>Aucun avis pour le moment.</p>
+            {% endfor %}
         </div>
     </section>
 {% endblock %}
