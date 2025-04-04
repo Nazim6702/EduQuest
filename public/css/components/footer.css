@@ -7,7 +7,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;  /* Ajouté pour que le conteneur prenne toute la largeur */
+    width: 100%;  
 }
 
 .footer .footer-content h3 {
