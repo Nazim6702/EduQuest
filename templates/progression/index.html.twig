@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ma Progression{% endblock %}
+
+{% block body %}
+    <section class="progression">
+        <div class="container">
+            <h2>Mes résultats</h2>
+
+            {% if participations is not empty %}
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>Nom du Quiz</th>
+                            <th>Date de Participation</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for participation in participations %}
+                            <tr>
+                                <td>{{ participation.quiz.title }}</td>
+                                <td>{{ participation.dateParticipation|date('d/m/Y') }}</td>
+                                <td>{{ participation.score }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Aucune participation pour le moment.</p>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}
