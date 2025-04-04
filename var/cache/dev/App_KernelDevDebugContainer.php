@@ -16,7 +16,7 @@ if (!\class_exists(App_KernelDevDebugContainer::class, false)) {
 
 return new \ContainerEyELIfD\App_KernelDevDebugContainer([
     'container.build_hash' => 'EyELIfD',
-    'container.build_id' => '5364a159',
-    'container.build_time' => 1743755802,
+    'container.build_id' => 'cbfb15d8',
+    'container.build_time' => 1743762296,
     'container.runtime_mode' => \in_array(\PHP_SAPI, ['cli', 'phpdbg', 'embed'], true) ? 'web=0' : 'web=1',
 ], __DIR__.\DIRECTORY_SEPARATOR.'ContainerEyELIfD');

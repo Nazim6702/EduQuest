@@ -16,23 +16,25 @@ class QuizSubmitController extends AbstractController
     public function __invoke(Quiz $quiz, int $step, Request $request, AnswerCheckerService $checker, ParticipationService $participationService): Response
     {
         $user = $this->getUser();
-        $question = $quiz->getQuestions()[$step];
-        $result = $checker->check($question, $request);
+        $correctAnswersCount = 0;
 
-        $score = $result ? 1 : 0; // 1 si correct, 0 sinon
+        foreach ($quiz->getQuestions() as $question) {
+            $result = $checker->check($question, $request);
+            if ($result) {
+                $correctAnswersCount++;
+            }
+        }
 
-        // Enregistre la participation si elle n'existe pas encore
-        $participationService->recordParticipation($quiz, $user, $score);
-
-        // Mise à jour du score dans la session
+        $participationService->recordParticipation($quiz, $user, $correctAnswersCount);
+        
         $session = $request->getSession();
         $progress = $session->get('quiz_progress_' . $quiz->getId(), []);
-        $progress[$question->getId()] = $result === true ? 'correct' : ($result === false ? 'wrong' : 'timeout');
+        $progress[$quiz->getId()] = $correctAnswersCount;
         $session->set('quiz_progress_' . $quiz->getId(), $progress);
 
         return $this->render('play_quiz/result.html.twig', [
-            'status' => $progress[$question->getId()],
-            'result' => $result,
+            'status' => 'completed',
+            'result' => $correctAnswersCount,
             'nextStep' => $step + 1,
             'quizId' => $quiz->getId(),
             'isLast' => !isset($quiz->getQuestions()[$step + 1])

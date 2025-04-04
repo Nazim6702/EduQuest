@@ -23,8 +23,7 @@ class ProgressionController extends AbstractController
     {
         $user = $this->getUser();
 
-        // Utilisation de l'EntityManager pour récupérer les participations de l'étudiant
-        $participations = $this->em->getRepository(Participation::class)->findBy(['user' => $user]);
+        $participations = $this->em->getRepository(Participation::class)->findBy(['user' => $user], ['dateParticipation' => 'DESC']);
 
         return $this->render('progression/index.html.twig', [
             'participations' => $participations,

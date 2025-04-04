@@ -13,7 +13,7 @@ class ParticipationService
         private EntityManagerInterface $em
     ) {}
 
-    public function recordParticipation(Quiz $quiz, User $user, float $score): void
+    public function recordParticipation(Quiz $quiz, User $user, int $score): void
     {
         $existingParticipation = $this->em->getRepository(Participation::class)->findOneBy([
             'quiz' => $quiz,
@@ -25,7 +25,7 @@ class ParticipationService
             $participation->setUser($user);
             $participation->setQuiz($quiz);
             $participation->setDateParticipation(new \DateTime());
-            $participation->setScore($score);
+            $participation->setScore($score);  
 
             $this->em->persist($participation);
             $this->em->flush();

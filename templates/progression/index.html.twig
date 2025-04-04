@@ -2,6 +2,11 @@
 
 {% block title %}Ma Progression{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/pages/progression.css') }}">
+{% endblock %}
+
 {% block body %}
     <section class="progression">
         <div class="container">
