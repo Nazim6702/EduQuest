@@ -2,33 +2,72 @@
 
 {% block title %}Ma Progression{% endblock %}
 
-{% block body %}
-    <section class="progression">
-        <div class="container">
-            <h2>Mes résultats</h2>
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/pages/progression.css') }}">
+{% endblock %}
 
-            {% if participations is not empty %}
-                <table class="results-table">
-                    <thead>
-                        <tr>
-                            <th>Nom du Quiz</th>
-                            <th>Date de Participation</th>
-                            <th>Score</th>
+{% block body %}
+<section class="progression">
+    <div class="container">
+        <h2>Mes résultats</h2>
+
+        {% if participations is not empty %}
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th>Nom du Quiz</th>
+                        <th>Date de Participation</th>
+                        <th>Score</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for participation in participations %}
+                        <tr class="already-done">
+                            <td>{{ participation.quiz.title }}</td>
+                            <td>{{ participation.date|date('d/m/Y') }}</td>
+                            <td>{{ participation.score }} / {{ participation.totalQuestions }}</td>
+                            <td>
+                                <a href="{{ path('app_quiz_play', { id: participation.quiz.id, step: 0 }) }}"
+                                   class="btn-replay">
+                                    Rejouer
+                                </a>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {% for participation in participations %}
-                            <tr>
-                                <td>{{ participation.quiz.title }}</td>
-                                <td>{{ participation.dateParticipation|date('d/m/Y') }}</td>
-                                <td>{{ participation.score }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            {% else %}
-                <p>Aucune participation pour le moment.</p>
-            {% endif %}
-        </div>
-    </section>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Aucune participation pour le moment.</p>
+        {% endif %}
+
+        <hr style="margin: 40px 0;">
+
+        <h3>Statistiques par catégorie</h3>
+
+        {% if categoryStats is not empty %}
+            <table class="stats-table">
+                <thead>
+                    <tr>
+                        <th>Catégorie</th>
+                        <th>Quiz joués</th>
+                        <th>Moyenne des bonnes réponses (/10)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for category, stats in categoryStats %}
+                        <tr>
+                            <td>{{ category }}</td>
+                            <td>{{ stats.count }}</td>
+                            <td>{{ stats.average }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Aucune statistique disponible pour l’instant.</p>
+        {% endif %}
+    </div>
+</section>
 {% endblock %}

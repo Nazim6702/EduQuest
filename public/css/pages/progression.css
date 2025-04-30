@@ -1,0 +1,72 @@
+.progression {
+    padding: 40px;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2, h3 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+tr.already-done {
+    opacity: 0.7;
+    font-style: italic;
+    background-color: #f8f8f8;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: #ccc;
+    margin: 40px 0;
+}
+
+.btn-replay {
+    display: inline-block;
+    background-color: #ffd858;
+    color: #0044cc;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
+    transition: transform 0.1s ease;
+}
+
+.btn-replay:hover {
+    transform: scale(1.05);
+    background-color: #ffcc00;
+}

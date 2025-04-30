@@ -15,9 +15,9 @@ const badMessages = [
 ];
 
 const timeoutMessages = [
-    "Le temps file... ⏳",
+    "Le temps file...",
     "Trop tard",
-    "Soit plus rapide la prochaine fois 🏃‍♂️",
+    "Soit plus rapide la prochaine fois",
     "Il faut cliquer sur le bouton hein",
     "Ça passe vite !"
 ];
