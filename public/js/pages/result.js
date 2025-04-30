@@ -1,25 +1,25 @@
 const goodMessages = [
-    "Bravo ! 🎉",
-    "Excellente réponse ! ✅",
-    "Quel génie 😳",
+    "Bravo !",
+    "Excellente réponse !",
+    "Quel génie",
     "Je te tire mon chapeau",
-    "Digne des plus grands 👏"
+    "Digne des plus grands"
 ];
 
 const badMessages = [
-    "Ouch... mauvaise réponse 😬",
-    "Paaas tout à fait ça... 😕",
+    "Ouch... mauvaise réponse",
+    "Paaas tout à fait ça...",
     "Essaie encore !",
-    "Tu feras mieux à la prochaine 👍",
-    "Lâche pas les cours ! 💪"
+    "Tu feras mieux à la prochaine",
+    "Lâche pas les cours !"
 ];
 
 const timeoutMessages = [
     "Le temps file... ⏳",
-    "Trop tard 😓",
+    "Trop tard",
     "Soit plus rapide la prochaine fois 🏃‍♂️",
     "Il faut cliquer sur le bouton hein",
-    "Ça passe vite ! 🐢🐢🐢"
+    "Ça passe vite !"
 ];
 
 const feedbackEl = document.getElementById('feedback-message');

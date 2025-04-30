@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!hasValidQuestion) {
             e.preventDefault();
-            alert("❌ Veuillez remplir au moins une question avant de valider.");
+            alert("Veuillez remplir au moins une question avant de valider.");
         }
     });
 });
