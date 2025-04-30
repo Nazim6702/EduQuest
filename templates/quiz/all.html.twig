@@ -9,27 +9,33 @@
 {% endblock %}
 
 {% block body %}
-<section class="all-quizzes">
-    <div class="container">
-        <h2>Tous les quiz disponibles</h2>
+    <section class="all-quizzes" data-check="student-only">
+        <div class="container">
+            {% if app.user is not null and app.user.getUserType() == 'student' %}
+                <h2>Tous les quiz disponibles</h2>
 
-        <div class="quiz-grid">
-            {% for quiz in pagination %}
-                <a href="{{ path('app_play_quiz', { id: quiz.id }) }}" class="quiz-card-link">
-                    <div class="quiz-card">
-                        <span class="category">{{ quiz.category }}</span>
-                        <h3>{{ quiz.title }}</h3>
-                        <span class="date">Publié le {{ quiz.createdAt|date('d/m/Y') }}</span>
-                    </div>
-                </a>
+                <div class="quiz-grid">
+                    {% for quiz in pagination %}
+                        <a href="{{ path('app_play_quiz', { id: quiz.id }) }}" class="quiz-card-link">
+                            <div class="quiz-card">
+                                <span class="category">{{ quiz.category }}</span>
+                                <h3>{{ quiz.title }}</h3>
+                                <span class="date">Publié le {{ quiz.createdAt|date('d/m/Y') }}</span>
+                            </div>
+                        </a>
+                    {% else %}
+                        <p>Aucun quiz trouvé.</p>
+                    {% endfor %}
+                </div>
+
+                <div class="pagination">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
             {% else %}
-                <p>Aucun quiz trouvé.</p>
-            {% endfor %}
+                <div class="alert alert-danger">
+                    <p>Vous devez être un étudiant connecté pour accéder à cette page.</p>
+                </div>
+            {% endif %}
         </div>
-
-        <div class="pagination">
-            {{ knp_pagination_render(pagination) }}
-        </div>
-    </div>
-</section>
+    </section>
 {% endblock %}

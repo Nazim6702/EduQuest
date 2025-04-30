@@ -20,14 +20,29 @@ class Participation
     #[ORM\Column]
     private ?float $score = null;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'participations')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
+    #[ORM\ManyToOne(targetEntity: Quiz::class, inversedBy: 'participations')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Quiz $quiz = null;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'participations')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
+    public function getQuiz(): ?Quiz
+    {
+        return $this->quiz;
+    }
+
+    public function setQuiz(?Quiz $quiz): static
+    {
+        $this->quiz = $quiz;
+        return $this;
+    }
 
     public function getUser(): ?User
     {
@@ -40,7 +55,6 @@ class Participation
         return $this;
     }
 
-
     public function getDateParticipation(): ?\DateTimeInterface
     {
         return $this->dateParticipation;
@@ -49,7 +63,6 @@ class Participation
     public function setDateParticipation(\DateTimeInterface $dateParticipation): static
     {
         $this->dateParticipation = $dateParticipation;
-
         return $this;
     }
 
@@ -61,7 +74,6 @@ class Participation
     public function setScore(float $score): static
     {
         $this->score = $score;
-
         return $this;
     }
 }
