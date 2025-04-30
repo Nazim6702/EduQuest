@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const isStudent = document.body.dataset.userType === 'student';
             if (!isStudent) {
                 e.preventDefault();
-                alert('❌ Seuls les étudiants peuvent jouer aux quiz.');
+                alert(' Seuls les étudiants peuvent y avoir accès.');
             }
         });
     });
