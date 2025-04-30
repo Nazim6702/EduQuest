@@ -78,4 +78,4 @@ exit
 127.0.0.1 eduquest.local
 accès à la plateforme via eduquest.local
 
-# 5. Importer le fichier eduquest.sql dans adminer pour avec des quiz
+# 5. Importer le fichier eduquest.sql dans adminer pour les quiz
